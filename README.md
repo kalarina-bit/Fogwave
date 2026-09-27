@@ -8,6 +8,22 @@
   <a href="releases/Fogwawe-v1.0.8.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
 </p>
 
+**A calm, open-source internet radio app for Android.**
+
+Listen to Lithuania's favorite stations in one tap — with background playback, a built-in equalizer, and a clean, distraction-free design.
+
+## Features
+
+- 📻 **10 Lithuanian stations** — ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, Gold FM and more
+- 🎧 **Background playback** with lock-screen, notification, headphone and Bluetooth controls
+- 🚗 **Android Auto** support
+- 🔄 **Auto-reconnect** when the stream drops or the network comes back
+- 🎚️ **Equalizer** with presets, loudness boost and dynamics processing — settings are saved
+- ❤️ **Favorites, recently played and similar stations** matched by genre
+- 🗂️ **Four layouts** — list, table, tiles or icons, with adjustable size
+- 🌙 **Clean, elegant UI** in a dark theme
+- 🌍 Available in English, Russian, German, Japanese, Lithuanian, and Chinese
+- 🔓 **100% open source** — no ads, no tracking, no accounts
 
 ## Installation
 
