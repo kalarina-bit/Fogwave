@@ -5,7 +5,7 @@
 <h1 align="center">Fogwawe</h1>
 
 <p align="center">
-  <a href="releases/Fogwawe-v1.0.8.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+  <a href="releases/Fogwawe-v1.0.9.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
 </p>
 
 **A calm, open-source internet radio app for Android.**
@@ -36,7 +36,7 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 Or via `adb`:
 
 ```sh
-adb install releases/Fogwawe-v1.0.8.apk
+adb install releases/Fogwawe-v1.0.9.apk
 ```
 
 ## Verifying a download
@@ -46,7 +46,7 @@ adb install releases/Fogwawe-v1.0.8.apk
 Compare the SHA-256 checksum against the value listed in [CHANGELOG.md](CHANGELOG.md):
 
 ```sh
-sha256sum releases/Fogwawe-v1.0.8.apk
+sha256sum releases/Fogwawe-v1.0.9.apk
 ```
 
 ## Repository structure
