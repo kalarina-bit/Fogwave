@@ -1,4 +1,12 @@
-# Fogwawe
+<p align="center">
+  <img src="assets/icon.png" width="128" alt="Fogwawe icon">
+</p>
+
+<h1 align="center">Fogwawe</h1>
+
+<p align="center">
+  <a href="releases/Fogwawe-v1.0.8.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+</p>
 
 
 ## Installation
