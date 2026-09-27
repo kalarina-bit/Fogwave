@@ -46,5 +46,10 @@ sha256sum releases/Fogwawe-v1.0.8.apk
 .
 ├── releases/           # Versioned APK builds (Fogwawe-vX.Y.Z.apk)
 ├── CHANGELOG.md         # Per-version sizes and checksums
+├── LICENSE              # GNU GPLv3
 └── README.md
 ```
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0** — see the [LICENSE](LICENSE) file for details.
