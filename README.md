@@ -8,6 +8,10 @@
   <a href="releases/Fogwawe-v1.0.9.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
 </p>
 
+<p align="center">
+  <img src="https://hits.sh/github.com/kalarina-bit/Fogwawe.svg?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
+</p>
+
 **A calm, open-source internet radio app for Android.**
 
 Listen to Lithuania's favorite stations in one tap — with background playback, a built-in equalizer, and a clean, distraction-free design.
