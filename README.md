@@ -1,24 +1,5 @@
 # Fogwawe
 
-Android APK builds for **Fogwawe**, organized as sequential, incrementally versioned releases (`v1.0.0` → `v1.0.8`).
-
-> **Note:** none of these builds have a recoverable build timestamp (reproducible Android builds normalize internal file dates), so versions are numbered in the order the APKs were provided. `v1.0.8` is the latest.
-
-## Releases
-
-| Version | APK |
-|---|---|
-| **v1.0.8** (latest) | [`releases/Fogwawe-v1.0.8.apk`](releases/Fogwawe-v1.0.8.apk) |
-| v1.0.7 | [`releases/Fogwawe-v1.0.7.apk`](releases/Fogwawe-v1.0.7.apk) |
-| v1.0.6 | [`releases/Fogwawe-v1.0.6.apk`](releases/Fogwawe-v1.0.6.apk) |
-| v1.0.5 | [`releases/Fogwawe-v1.0.5.apk`](releases/Fogwawe-v1.0.5.apk) |
-| v1.0.4 | [`releases/Fogwawe-v1.0.4.apk`](releases/Fogwawe-v1.0.4.apk) |
-| v1.0.3 | [`releases/Fogwawe-v1.0.3.apk`](releases/Fogwawe-v1.0.3.apk) |
-| v1.0.2 | [`releases/Fogwawe-v1.0.2.apk`](releases/Fogwawe-v1.0.2.apk) |
-| v1.0.1 | [`releases/Fogwawe-v1.0.1.apk`](releases/Fogwawe-v1.0.1.apk) |
-| v1.0.0 | [`releases/Fogwawe-v1.0.0.apk`](releases/Fogwawe-v1.0.0.apk) |
-
-Full history and checksums: see [CHANGELOG.md](CHANGELOG.md).
 
 ## Installation
 
