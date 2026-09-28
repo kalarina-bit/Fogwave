@@ -27,6 +27,16 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 - 🌍 Available in English, Russian, German, Japanese, Lithuanian, and Chinese
 - 🔓 **100% open source** — no ads, no tracking, no accounts
 
+## Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/1-find-play-love.png" width="200" alt="Find it. Play it. Love it.">
+  <img src="assets/screenshots/2-stay-awhile.png" width="200" alt="Stay awhile">
+  <img src="assets/screenshots/3-favorites.png" width="200" alt="Your favorites">
+  <img src="assets/screenshots/4-stations.png" width="200" alt="Browse all stations">
+  <img src="assets/screenshots/5-feel-closer.png" width="200" alt="Feel closer to Lithuania">
+</p>
+
 ## Installation
 
 <img src="assets/icon-install.png" width="36" align="left">
@@ -59,6 +69,7 @@ sha256sum releases/Fogwawe-v1.0.9.apk
 .
 ├── releases/           # Versioned APK builds (Fogwawe-vX.Y.Z.apk)
 ├── assets/              # Icon images
+│   └── screenshots/     # App screenshots
 ├── CHANGELOG.md         # Per-version sizes and checksums
 ├── LICENSE              # GNU GPLv3
 └── README.md
