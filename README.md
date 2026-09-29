@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon.jpg" width="128" alt="Fogwawe icon">
+  <img src="assets/banner.jpg" width="100%" alt="Fogwawe — Tune into Lithuania. Choose a station and take it with you.">
 </p>
 
 <h1 align="center">Fogwawe</h1>
