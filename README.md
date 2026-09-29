@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.jpg" width="100%" alt="Fogwawe — Tune into Lithuania. Choose a station and take it with you.">
+  <img src="assets/icon.jpg" width="128" alt="Fogwawe icon">
 </p>
 
 <h1 align="center">Fogwawe</h1>
@@ -8,11 +8,13 @@
   <a href="releases/Fogwawe-v1.0.9.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
 </p>
 
-
-
 **A calm, open-source internet radio app for Android.**
 
 Listen to Lithuania's favorite stations in one tap — with background playback, a built-in equalizer, and a clean, distraction-free design.
+
+<p align="center">
+  <img src="assets/banner.jpg" width="100%" alt="Fogwawe — Tune into Lithuania. Choose a station and take it with you.">
+</p>
 
 ## Features
 
