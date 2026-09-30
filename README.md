@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon.jpg" width="128" alt="Fogwawe icon">
+  <img src="assets/icon-rounded.png" width="128" alt="Fogwawe icon">
 </p>
 
 <h1 align="center">Fogwawe</h1>
