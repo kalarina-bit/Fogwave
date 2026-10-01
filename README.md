@@ -13,7 +13,7 @@
 Listen to Lithuania's favorite stations in one tap — with background playback, a built-in equalizer, and a clean, distraction-free design.
 
 <p align="center">
-  <img src="assets/banner.jpg" width="100%" alt="Fogwawe — Tune into Lithuania. Choose a station and take it with you.">
+  <img src="assets/banner.png" width="100%" alt="Fogwawe — Tune into Lithuania. Choose a station and take it with you.">
 </p>
 
 ## Features
