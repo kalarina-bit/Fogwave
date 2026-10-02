@@ -12,10 +12,6 @@
 
 Listen to Lithuania's favorite stations in one tap — with background playback, a built-in equalizer, and a clean, distraction-free design.
 
-<p align="center">
-  <img src="assets/banner.png" width="100%" alt="Fogwawe — Tune into Lithuania. Choose a station and take it with you.">
-</p>
-
 ## Features
 
 - 📻 **10 Lithuanian stations** — ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, Gold FM and more
@@ -32,9 +28,9 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 ## Screenshots
 
 <p align="center">
-  <img src="assets/screenshots/1-find-play-love.png" width="200" alt="Find it. Play it. Love it.">
-  <img src="assets/screenshots/2-stay-awhile.png" width="200" alt="Stay awhile">
-  <img src="assets/screenshots/3-favorites.png" width="200" alt="Your favorites">
+  <img src="assets/screenshots/1-find-station.png" width="200" alt="Find a station, then settle in">
+  <img src="assets/screenshots/2-your-style.png" width="200" alt="Just your style">
+  <img src="assets/screenshots/3-soundtrack.png" width="200" alt="Your soundtrack">
   <img src="assets/screenshots/4-stations.png" width="200" alt="Browse all stations">
   <img src="assets/screenshots/5-feel-closer.png" width="200" alt="Feel closer to Lithuania">
 </p>
