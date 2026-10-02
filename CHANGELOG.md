@@ -1,9 +1,10 @@
 # Changelog
 
-All notable builds of Fogwawe are tracked here. None of these builds have a recoverable build timestamp (reproducible Android builds normalize internal file dates), so versions are numbered in the order they were provided; `v1.0.9` is the current, official latest build.
+All notable builds of Fogwawe are tracked here. None of these builds have a recoverable build timestamp (reproducible Android builds normalize internal file dates), so versions are numbered in the order they were provided; `v1.0.10` is the current, official latest build.
 
 | Version | APK | Size | SHA-256 |
 |---|---|---|---|
+| v1.0.10 | `Fogwawe-v1.0.10.apk` | 2.90 MB | `0e5d8daa71b3b3224192e8d8fc9687bcf4d28c62269c698d0921a2c9a44ed89d` |
 | v1.0.9 | `Fogwawe-v1.0.9.apk` | 2.85 MB | `dc0e96e13a322b702d673e1c1a0a44c5db6fbb7ac49de69fe60a48d3005fad9b` |
 | v1.0.8 | `Fogwawe-v1.0.8.apk` | 2.85 MB | `1baca54152ae1fc46f6b6894f798f3eff3f122fdadb22b22a604c90ae457c840` |
 | v1.0.7 | `Fogwawe-v1.0.7.apk` | 4.09 MB | `8f6dea613968f3c11bc8ea345b2fc62c79d34fc14129bec2757a00065b17f545` |
