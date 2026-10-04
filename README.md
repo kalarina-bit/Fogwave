@@ -5,7 +5,11 @@
 <h1 align="center">Fogwawe</h1>
 
 <p align="center">
-  <a href="releases/Fogwawe-v1.0.10.apk"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+  <a href="https://github.com/kalarina-bit/Fogwawe/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwawe/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
 </p>
 
 **A calm, open-source internet radio app for Android.**
@@ -39,14 +43,14 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 
 <img src="assets/icon-install.png" width="36" align="left">
 
-1. Download the APK for the version you want from [`releases/`](releases/).
+1. Download the APK for the version you want from the [Releases page](https://github.com/kalarina-bit/Fogwawe/releases).
 2. On your Android device, allow installs from unknown sources for the app you use to open the file (Settings → Apps → Special access → Install unknown apps).
 3. Open the downloaded `.apk` file and confirm the install.
 
-Or via `adb`:
+Or via `adb` (after downloading):
 
 ```sh
-adb install releases/Fogwawe-v1.0.10.apk
+adb install Fogwawe-v1.0.10.apk
 ```
 
 ## Verifying a download
@@ -56,7 +60,7 @@ adb install releases/Fogwawe-v1.0.10.apk
 Compare the SHA-256 checksum against the value listed in [CHANGELOG.md](CHANGELOG.md):
 
 ```sh
-sha256sum releases/Fogwawe-v1.0.10.apk
+sha256sum Fogwawe-v1.0.10.apk
 ```
 
 ## Repository structure
@@ -65,13 +69,14 @@ sha256sum releases/Fogwawe-v1.0.10.apk
 
 ```
 .
-├── releases/           # Versioned APK builds (Fogwawe-vX.Y.Z.apk)
 ├── assets/              # Icon images
 │   └── screenshots/     # App screenshots
-├── CHANGELOG.md         # Per-version sizes and checksums
+├── CHANGELOG.md         # Per-version sizes and checksums (links to GitHub Releases)
 ├── LICENSE              # GNU GPLv3
 └── README.md
 ```
+
+APK builds themselves are published as assets on the [Releases page](https://github.com/kalarina-bit/Fogwawe/releases), not stored in this repository.
 
 ## License
 
