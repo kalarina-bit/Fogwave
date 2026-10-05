@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwave/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
+  <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwave/latest/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
 </p>
 
 **A calm, open-source internet radio app for Android.**
