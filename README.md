@@ -32,11 +32,11 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 ## Screenshots
 
 <p align="center">
+  <img src="assets/screenshots/5-feel-closer.png" width="200" alt="Feel closer to Lithuania">
+  <img src="assets/screenshots/4-stations.png" width="200" alt="Browse all stations">
   <img src="assets/screenshots/1-find-station.png" width="200" alt="Find a station, then settle in">
   <img src="assets/screenshots/2-your-style.png" width="200" alt="Just your style">
   <img src="assets/screenshots/3-soundtrack.png" width="200" alt="Your soundtrack">
-  <img src="assets/screenshots/4-stations.png" width="200" alt="Browse all stations">
-  <img src="assets/screenshots/5-feel-closer.png" width="200" alt="Feel closer to Lithuania">
 </p>
 
 ## Installation
