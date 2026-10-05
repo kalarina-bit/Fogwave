@@ -5,7 +5,7 @@
 <h1 align="center">Fogwawe</h1>
 
 <p align="center">
-  <a href="https://github.com/kalarina-bit/Fogwawe/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+  <a href="https://git.skysparkle.cc/kalarina/Fogwawe/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
 </p>
 
 <p align="center">
