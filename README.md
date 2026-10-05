@@ -2,14 +2,14 @@
   <img src="assets/icon-rounded.png" width="128" alt="Fogwawe icon">
 </p>
 
-<h1 align="center">Fogwawe</h1>
+<h1 align="center">Fogwave/h1>
 
 <p align="center">
-  <a href="https://git.skysparkle.cc/kalarina/Fogwawe/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+  <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwawe/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
+  <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwave/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
 </p>
 
 **A calm, open-source internet radio app for Android.**
@@ -43,7 +43,7 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 
 <img src="assets/icon-install.png" width="36" align="left">
 
-1. Download the APK for the version you want from the [Releases page](https://github.com/kalarina-bit/Fogwawe/releases).
+1. Download the APK for the version you want from the [Releases page](https://github.com/kalarina-bit/Fogwave/releases).
 2. On your Android device, allow installs from unknown sources for the app you use to open the file (Settings → Apps → Special access → Install unknown apps).
 3. Open the downloaded `.apk` file and confirm the install.
 
