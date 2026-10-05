@@ -2,7 +2,7 @@
   <img src="assets/icon-rounded.png" width="128" alt="Fogwawe icon">
 </p>
 
-<h1 align="center">Fogwave>
+<h1 align="center">Fogwave
 
 <p align="center">
   <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
