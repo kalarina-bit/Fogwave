@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/icon-rounded.png" width="128" alt="Fogwawe icon">
+  <img src="assets/icon-rounded.png" width="128" alt="Fogwave icon">
 </p>
 
-<h1 align="center">Fogwave
+<h1 align="center">Fogwave</h1>
 
 <p align="center">
   <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
@@ -76,7 +76,7 @@ sha256sum Fogwawe-v1.0.10.apk
 └── README.md
 ```
 
-APK builds themselves are published as assets on the [Releases page](https://github.com/kalarina-bit/Fogwawe/releases), not stored in this repository.
+APK builds themselves are published as assets on the [Releases page](https://github.com/kalarina-bit/Fogwave/releases), not stored in this repository.
 
 ## License
 
