@@ -1,0 +1,20 @@
+Fogwave is a minimal, ad-free internet radio player for Lithuanian stations.
+
+<b>Stations</b>
+ZIP FM, Power Hit Radio, Power Hit Radio Gold, Rock FM, Relax FM, Lietus, M-1, M-1 Plius, Gold FM and RC.
+
+<b>Features</b>
+<ul>
+<li>Background playback with notification, lock-screen, headset and Bluetooth controls</li>
+<li>Android Auto support</li>
+<li>Automatic reconnection when the stream drops or the network comes back</li>
+<li>Equalizer with presets and per-band control, loudness enhancer and dynamics processing</li>
+<li>Favorites, recently played and similar stations</li>
+<li>Four layouts — list, table, tiles and icons — with adjustable size</li>
+<li>English, Russian, German, Lithuanian, Japanese and Chinese</li>
+</ul>
+
+<b>Privacy</b>
+No accounts, no ads, no analytics. Audio is streamed directly from each broadcaster; Fogwave does not host or redistribute it.
+
+Station names and logos belong to their respective owners.

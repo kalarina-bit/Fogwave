@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Fogwave</string>
+    <string name="app_subtitle">Interneto radijas</string>
+
+    <string name="about_version">Versija %1$s</string>
+    <string name="about_description">Greitas ir elegantiškas interneto radijo grotuvas su švariu garsu ir darniu geometriniu dizainu.</string>
+    <string name="about_my_repository">Mano saugykla</string>
+    <string name="about_open_in_browser">Atidaryti naršyklėje</string>
+    <string name="fogwave_logo_content_desc">Fogwave logotipas</string>
+
+    <string name="player_connecting">Jungiamasi…</string>
+    <string name="player_on_air">Eteryje</string>
+    <string name="player_stopped">Sustabdyta</string>
+    <string name="now_playing_live">Dabar skamba • tiesiogiai</string>
+    <string name="now_playing_label">DABAR SKAMBA</string>
+    <string name="close_content_desc">Uždaryti</string>
+    <string name="equalizer_content_desc">Ekvalaizeris</string>
+    <string name="equalizer_title">Ekvalaizeris</string>
+    <string name="equalizer_on">ĮJ.</string>
+    <string name="equalizer_off">IŠJ.</string>
+    <string name="equalizer_sound_section">Garsas</string>
+    <string name="equalizer_custom_preset">Pasirinktinis</string>
+    <string name="equalizer_unavailable">Ekvalaizeris šiame įrenginyje nepasiekiamas.</string>
+    <string name="equalizer_reset">Atstatyti</string>
+    <string name="loudness_row_label">Garsumo stiprinimas</string>
+    <string name="dynamics_row_label">Dinamikos apdorojimas</string>
+    <string name="back_content_desc">Atgal</string>
+    <string name="previous_station_content_desc">Ankstesnė stotis</string>
+    <string name="next_station_content_desc">Kita stotis</string>
+    <string name="play_content_desc">Leisti</string>
+    <string name="pause_content_desc">Pristabdyti</string>
+    <string name="remove_from_favorites">Šalinti iš mėgstamų</string>
+    <string name="add_to_favorites">Pridėti prie mėgstamų</string>
+    <string name="recent_empty">Čia atsiras stotys, kurių klausėtės.</string>
+    <string name="similar_empty">Panašių stočių nerasta.</string>
+    <string name="info_station">Stotis</string>
+    <string name="info_description">Aprašymas</string>
+    <string name="info_genre">Žanras</string>
+    <string name="info_quality">Kokybė</string>
+    <string name="info_status">Būsena</string>
+    <string name="status_live">Eteryje • tiesioginė transliacija</string>
+
+    <string name="view_mode_content_desc">Rodymo būdas</string>
+    <string name="display_mode_label">RODYMO BŪDAS</string>
+    <string name="view_mode_list">Sąrašas</string>
+    <string name="view_mode_table">Lentelė</string>
+    <string name="view_mode_tiles">Plytelės</string>
+    <string name="view_mode_icons">Piktogramos</string>
+    <string name="size_label">DYDIS</string>
+
+    <string name="favorites_empty_title">Mėgstamų kol kas nėra</string>
+    <string name="favorites_empty_subtitle">Atverkite bet kurios stoties grotuvą ir bakstelėkite širdelę, kad pridėtumėte ją prie mėgstamų.</string>
+
+    <string name="stations_title">Stotys</string>
+    <string name="favorite_stations_title">Mėgstamos stotys</string>
+
+    <string name="tab_radio">Radijas</string>
+    <string name="tab_favorites">Mėgstami</string>
+    <string name="tab_about">Apie</string>
+
+    <string name="extra_tab_recent">Neseniai klausytos</string>
+    <string name="extra_tab_similar">Panašios</string>
+    <string name="extra_tab_info">Info</string>
+    <string name="stream_unavailable">Srautas laikinai nepasiekiamas</string>
+    <string name="battery_opt_title">Stabilesnis grojimas fone</string>
+    <string name="battery_opt_message">Kai kurie telefonai sustabdo fone veikiančias programas praėjus kelioms minutėms po ekrano išjungimo. Atidarykite baterijos nustatymus ir pasirinkite „Fogwave“, kad stotis grotų be pertrūkių.</string>
+    <string name="battery_opt_confirm">Atidaryti nustatymus</string>
+    <string name="battery_opt_dismiss">Ne dabar</string>
+    <string name="licenses_title">Licencijos</string>
+    <string name="licenses_subtitle">Bibliotekos, piktogramos, nuotrauka ir radijo stotys</string>
+    <string name="licenses_intro">„Fogwave“ sukurta iš žemiau išvardytų atvirojo kodo komponentų, taip pat piktogramų rinkinio, fono nuotraukos ir radijo stočių, kurių transliacijas groja programa. Palieskite elementą, kad atidarytumėte jo puslapį.</string>
+    <string name="licenses_group_libraries">Bibliotekos</string>
+    <string name="licenses_group_assets">Piktogramos ir nuotrauka</string>
+    <string name="licenses_group_stations">Radijo stotys</string>
+    <string name="licenses_stations_hint">Stotys transliuojamos tiesiai iš transliuotojų serverių; „Fogwave“ jų garso turinio nesaugo, neplatina ir neturi jam teisių.</string>
+    <string name="browse_stations">Naršyti stotis</string>
+    <string name="privacy_title">Privatumo politika</string>
+    <string name="privacy_subtitle">Kaip „Fogwave“ tvarko jūsų duomenis</string>
+
+    <string name="network_unavailable">Nėra interneto ryšio</string>
+    <string name="station_desc_zip">Hitai • Lietuva</string>
+    <string name="station_desc_powerhit">Šokių • Pop • Populiariausi hitai</string>
+    <string name="station_desc_powerhitgold">Auksiniai hitai • Šokių klasika</string>
+    <string name="station_desc_rock">Roko muzika • Lietuva</string>
+    <string name="station_desc_relax">Rami, atpalaiduojanti muzika</string>
+    <string name="station_desc_lietus">Lietuviška muzika</string>
+    <string name="station_desc_m1">Populiari muzika</string>
+    <string name="station_desc_plus">Muzika ir klasikiniai hitai</string>
+    <string name="station_desc_goldfm">Auksiniai hitai</string>
+    <string name="station_desc_rc">Radiocentras • Lietuva</string>
+    <string name="genre_hits">Hitai</string>
+    <string name="genre_pop">Pop</string>
+    <string name="genre_dance">Šokių</string>
+    <string name="genre_oldies">Senieji hitai</string>
+    <string name="genre_rock">Rokas</string>
+    <string name="genre_easy_listening">Lengvoji muzika</string>
+    <string name="genre_lithuanian">Lietuviška muzika</string>
+
+    <string name="eq_preset_normal">Įprastas</string>
+    <string name="eq_preset_classical">Klasika</string>
+    <string name="eq_preset_dance">Šokių</string>
+    <string name="eq_preset_flat">Lygus</string>
+    <string name="eq_preset_folk">Folk</string>
+    <string name="eq_preset_heavy_metal">Sunkusis metalas</string>
+    <string name="eq_preset_hip_hop">Hip hopas</string>
+    <string name="eq_preset_jazz">Džiazas</string>
+    <string name="eq_preset_pop">Pop</string>
+    <string name="eq_preset_rock">Rokas</string>
+</resources>

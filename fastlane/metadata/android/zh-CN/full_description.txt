@@ -1,0 +1,20 @@
+Fogwave 是一款简洁、无广告的网络电台播放器，收录立陶宛电台。
+
+<b>电台</b>
+ZIP FM、Power Hit Radio、Power Hit Radio Gold、Rock FM、Relax FM、Lietus、M-1、M-1 Plius、Gold FM 和 RC。
+
+<b>功能</b>
+<ul>
+<li>后台播放，可通过通知、锁屏、耳机和蓝牙控制</li>
+<li>支持 Android Auto</li>
+<li>音频流中断或网络恢复时自动重新连接</li>
+<li>带预设和分频段调节的均衡器、响度增强和动态处理</li>
+<li>收藏、最近播放和相似电台</li>
+<li>列表、表格、卡片和图标四种视图，尺寸可调</li>
+<li>支持英语、俄语、德语、立陶宛语、日语和中文</li>
+</ul>
+
+<b>隐私</b>
+无需账号，无广告，无统计分析。音频直接来自各电台服务器，Fogwave 不存储也不转发。
+
+电台名称和标志归其各自所有者所有。

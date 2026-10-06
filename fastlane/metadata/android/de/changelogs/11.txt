@@ -1,0 +1,6 @@
+• Stabile Stream-Adressen für Power Hit Radio und Power Hit Radio Gold
+• Senderbeschreibungen, Genres und Equalizer-Voreinstellungen sind übersetzt
+• Ein Tippen auf die Benachrichtigung öffnet die App; nach einer langen Pause geht es live weiter
+• Neuverbindungsversuche enden nach einigen Minuten und schonen den Akku
+• Der Player lässt sich überall nach unten wischen, um ihn zu schließen
+• Verbesserte Barrierefreiheit und Darstellung auf kleinen Bildschirmen

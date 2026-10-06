@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Fogwave</string>
+    <string name="app_subtitle">インターネットラジオ</string>
+
+    <string name="about_version">バージョン %1$s</string>
+    <string name="about_description">クリアなサウンドと調和のとれた幾何学的デザインを備えた、高速でエレガントなインターネットラジオプレーヤー。</string>
+    <string name="about_my_repository">マイリポジトリ</string>
+    <string name="about_open_in_browser">ブラウザで開く</string>
+    <string name="fogwave_logo_content_desc">Fogwave ロゴ</string>
+
+    <string name="player_connecting">接続中…</string>
+    <string name="player_on_air">オンエア中</string>
+    <string name="player_stopped">停止中</string>
+    <string name="now_playing_live">再生中 • ライブ</string>
+    <string name="now_playing_label">再生中</string>
+    <string name="close_content_desc">閉じる</string>
+    <string name="equalizer_content_desc">イコライザー</string>
+    <string name="equalizer_title">イコライザー</string>
+    <string name="equalizer_on">オン</string>
+    <string name="equalizer_off">オフ</string>
+    <string name="equalizer_sound_section">サウンド</string>
+    <string name="equalizer_custom_preset">カスタム</string>
+    <string name="equalizer_unavailable">このデバイスではイコライザーを使用できません。</string>
+    <string name="equalizer_reset">リセット</string>
+    <string name="loudness_row_label">音量ブースト</string>
+    <string name="dynamics_row_label">ダイナミクス処理</string>
+    <string name="back_content_desc">戻る</string>
+    <string name="previous_station_content_desc">前の局</string>
+    <string name="next_station_content_desc">次の局</string>
+    <string name="play_content_desc">再生</string>
+    <string name="pause_content_desc">一時停止</string>
+    <string name="remove_from_favorites">お気に入りから削除</string>
+    <string name="add_to_favorites">お気に入りに追加</string>
+    <string name="recent_empty">これまでに聴いた局がここに表示されます。</string>
+    <string name="similar_empty">類似の局は見つかりませんでした。</string>
+    <string name="info_station">局名</string>
+    <string name="info_description">説明</string>
+    <string name="info_genre">ジャンル</string>
+    <string name="info_quality">音質</string>
+    <string name="info_status">状態</string>
+    <string name="status_live">オンエア中 • ライブストリーム</string>
+
+    <string name="view_mode_content_desc">表示モード</string>
+    <string name="display_mode_label">表示モード</string>
+    <string name="view_mode_list">リスト</string>
+    <string name="view_mode_table">テーブル</string>
+    <string name="view_mode_tiles">タイル</string>
+    <string name="view_mode_icons">アイコン</string>
+    <string name="size_label">サイズ</string>
+
+    <string name="favorites_empty_title">お気に入りはまだありません</string>
+    <string name="favorites_empty_subtitle">好きな局のプレーヤーを開き、ハートをタップしてお気に入りに追加してください。</string>
+
+    <string name="stations_title">ラジオ局</string>
+    <string name="favorite_stations_title">お気に入りの局</string>
+
+    <string name="tab_radio">ラジオ</string>
+    <string name="tab_favorites">お気に入り</string>
+    <string name="tab_about">アプリについて</string>
+
+    <string name="extra_tab_recent">最近の再生</string>
+    <string name="extra_tab_similar">類似</string>
+    <string name="extra_tab_info">情報</string>
+    <string name="stream_unavailable">ストリームは一時的に利用できません</string>
+    <string name="battery_opt_title">バックグラウンド再生を安定させる</string>
+    <string name="battery_opt_message">一部のスマホは画面オフから数分でバックグラウンドアプリを停止します。バッテリー設定を開いてFogwaveを選ぶと、再生が途切れにくくなります。</string>
+    <string name="battery_opt_confirm">設定を開く</string>
+    <string name="battery_opt_dismiss">後で</string>
+    <string name="licenses_title">ライセンス</string>
+    <string name="licenses_subtitle">ライブラリ、アイコン、写真、ラジオ局</string>
+    <string name="licenses_intro">Fogwaveは以下のオープンソースのコンポーネントに加え、アイコンセット、背景写真、そして再生しているラジオ局をもとに作られています。項目をタップするとページが開きます。</string>
+    <string name="licenses_group_libraries">ライブラリ</string>
+    <string name="licenses_group_assets">アイコンと写真</string>
+    <string name="licenses_group_stations">ラジオ局</string>
+    <string name="licenses_stations_hint">各局のストリームは放送局から直接再生しており、Fogwaveはその音声を保存・再配布せず、権利も保有していません。</string>
+    <string name="browse_stations">ラジオ局を見る</string>
+    <string name="privacy_title">プライバシーポリシー</string>
+    <string name="privacy_subtitle">Fogwave でのデータの取り扱いについて</string>
+
+    <string name="network_unavailable">インターネットに接続されていません</string>
+    <string name="station_desc_zip">ヒット曲 • リトアニア</string>
+    <string name="station_desc_powerhit">ダンス • ポップ • トップヒット</string>
+    <string name="station_desc_powerhitgold">ゴールドヒット • ダンスクラシック</string>
+    <string name="station_desc_rock">ロック • リトアニア</string>
+    <string name="station_desc_relax">くつろげるイージーリスニング</string>
+    <string name="station_desc_lietus">リトアニアの音楽</string>
+    <string name="station_desc_m1">人気の音楽</string>
+    <string name="station_desc_plus">音楽と往年のヒット曲</string>
+    <string name="station_desc_goldfm">ゴールデンヒット</string>
+    <string name="station_desc_rc">Radiocentras • リトアニア</string>
+    <string name="genre_hits">ヒット曲</string>
+    <string name="genre_pop">ポップ</string>
+    <string name="genre_dance">ダンス</string>
+    <string name="genre_oldies">オールディーズ</string>
+    <string name="genre_rock">ロック</string>
+    <string name="genre_easy_listening">イージーリスニング</string>
+    <string name="genre_lithuanian">リトアニア音楽</string>
+
+    <string name="eq_preset_normal">ノーマル</string>
+    <string name="eq_preset_classical">クラシック</string>
+    <string name="eq_preset_dance">ダンス</string>
+    <string name="eq_preset_flat">フラット</string>
+    <string name="eq_preset_folk">フォーク</string>
+    <string name="eq_preset_heavy_metal">ヘヴィメタル</string>
+    <string name="eq_preset_hip_hop">ヒップホップ</string>
+    <string name="eq_preset_jazz">ジャズ</string>
+    <string name="eq_preset_pop">ポップ</string>
+    <string name="eq_preset_rock">ロック</string>
+</resources>

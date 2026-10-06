@@ -1,0 +1,6 @@
+• Stable stream addresses for Power Hit Radio and Power Hit Radio Gold
+• Station descriptions, genres and equalizer presets are now translated
+• Tapping the notification opens the app; resuming after a long pause jumps back to live
+• Reconnection stops after a few minutes instead of draining the battery
+• Swipe down anywhere on the player to close it
+• Accessibility fixes and better layout on small screens

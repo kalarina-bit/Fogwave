@@ -63,14 +63,30 @@ Compare the SHA-256 checksum against the value listed in [CHANGELOG.md](CHANGELO
 sha256sum Fogwawe-v1.0.10.apk
 ```
 
+## Building from source
+
+Requires JDK 17+ and Android Studio with Android SDK 37.
+
+```sh
+./gradlew assembleDebug
+```
+
+Release builds are signed only when a keystore is supplied through the `KEYSTORE_PATH`, `STORE_PASSWORD`, `KEY_ALIAS` and `KEY_PASSWORD` environment variables. Without them the release build is unsigned, which is what F-Droid expects. Keystores are excluded by `.gitignore` — never commit them.
+
+For every release: bump `versionCode` and `versionName` in `app/build.gradle.kts`, add `fastlane/metadata/android/<locale>/changelogs/<versionCode>.txt`, and tag the commit as `v<versionName>` (for example `v1.0.11`).
+
 ## Repository structure
 
 <img src="assets/icon-structure.png" width="36" align="left">
 
 ```
 .
-├── assets/              # Icon images
+├── app/                 # Android app source (Kotlin, Jetpack Compose)
+├── assets/              # README images and logos
 │   └── screenshots/     # App screenshots
+├── fastlane/            # F-Droid store listing, screenshots and changelogs
+├── fdroid/              # Build recipe for fdroiddata
+├── gradle/              # Gradle wrapper and version catalog
 ├── CHANGELOG.md         # Per-version sizes and checksums (links to GitHub Releases)
 ├── LICENSE              # GNU GPLv3
 └── README.md

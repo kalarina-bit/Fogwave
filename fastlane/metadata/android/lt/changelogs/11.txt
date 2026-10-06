@@ -1,0 +1,6 @@
+• Stabilūs Power Hit Radio ir Power Hit Radio Gold srautų adresai
+• Išversti stočių aprašymai, žanrai ir ekvalaizerio nustatymai
+• Paspaudus pranešimą atsidaro programa; po ilgos pauzės grįžtama į tiesioginį eterį
+• Prisijungimo bandymai po kelių minučių sustoja ir neeikvoja baterijos
+• Grotuvą galima uždaryti braukiant žemyn bet kurioje vietoje
+• Geresnis prieinamumas ir išdėstymas mažuose ekranuose

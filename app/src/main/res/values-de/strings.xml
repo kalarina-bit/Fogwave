@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Fogwave</string>
+    <string name="app_subtitle">Internetradio</string>
+
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">Ein schneller, eleganter Internetradio-Player mit klarem Klang und ausgewogenem geometrischem Design.</string>
+    <string name="about_my_repository">Mein Repository</string>
+    <string name="about_open_in_browser">Im Browser öffnen</string>
+    <string name="fogwave_logo_content_desc">Fogwave-Logo</string>
+
+    <string name="player_connecting">Verbindung wird hergestellt…</string>
+    <string name="player_on_air">Auf Sendung</string>
+    <string name="player_stopped">Gestoppt</string>
+    <string name="now_playing_live">Läuft gerade • LIVE</string>
+    <string name="now_playing_label">LÄUFT GERADE</string>
+    <string name="close_content_desc">Schließen</string>
+    <string name="equalizer_content_desc">Equalizer</string>
+    <string name="equalizer_title">Equalizer</string>
+    <string name="equalizer_on">AN</string>
+    <string name="equalizer_off">AUS</string>
+    <string name="equalizer_sound_section">Klang</string>
+    <string name="equalizer_custom_preset">Benutzerdefiniert</string>
+    <string name="equalizer_unavailable">Equalizer ist auf diesem Gerät nicht verfügbar.</string>
+    <string name="equalizer_reset">Zurücksetzen</string>
+    <string name="loudness_row_label">Lautstärkeverstärkung</string>
+    <string name="dynamics_row_label">Dynamikverarbeitung</string>
+    <string name="back_content_desc">Zurück</string>
+    <string name="previous_station_content_desc">Vorheriger Sender</string>
+    <string name="next_station_content_desc">Nächster Sender</string>
+    <string name="play_content_desc">Abspielen</string>
+    <string name="pause_content_desc">Pause</string>
+    <string name="remove_from_favorites">Aus Favoriten entfernen</string>
+    <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
+    <string name="recent_empty">Sender, die du gehört hast, erscheinen hier.</string>
+    <string name="similar_empty">Keine ähnlichen Sender gefunden.</string>
+    <string name="info_station">Sender</string>
+    <string name="info_description">Beschreibung</string>
+    <string name="info_genre">Genre</string>
+    <string name="info_quality">Qualität</string>
+    <string name="info_status">Status</string>
+    <string name="status_live">Auf Sendung • Livestream</string>
+
+    <string name="view_mode_content_desc">Anzeigemodus</string>
+    <string name="display_mode_label">ANZEIGEMODUS</string>
+    <string name="view_mode_list">Liste</string>
+    <string name="view_mode_table">Tabelle</string>
+    <string name="view_mode_tiles">Kacheln</string>
+    <string name="view_mode_icons">Symbole</string>
+    <string name="size_label">GRÖSSE</string>
+
+    <string name="favorites_empty_title">Noch keine Favoriten</string>
+    <string name="favorites_empty_subtitle">Öffne den Player eines beliebigen Senders und tippe auf das Herz, um ihn zu den Favoriten hinzuzufügen.</string>
+
+    <string name="stations_title">Sender</string>
+    <string name="favorite_stations_title">Lieblingssender</string>
+
+    <string name="tab_radio">Radio</string>
+    <string name="tab_favorites">Favoriten</string>
+    <string name="tab_about">Info</string>
+
+    <string name="extra_tab_recent">Zuletzt gehört</string>
+    <string name="extra_tab_similar">Ähnlich</string>
+    <string name="extra_tab_info">Info</string>
+    <string name="stream_unavailable">Stream vorübergehend nicht verfügbar</string>
+    <string name="battery_opt_title">Wiedergabe im Hintergrund stabil halten</string>
+    <string name="battery_opt_message">Manche Handys pausieren Hintergrund-Apps wenige Minuten nach dem Ausschalten des Bildschirms. Öffne die Akku-Einstellungen und wähle Fogwave aus, damit dein Sender ohne Unterbrechung weiterläuft.</string>
+    <string name="battery_opt_confirm">Einstellungen öffnen</string>
+    <string name="battery_opt_dismiss">Jetzt nicht</string>
+    <string name="licenses_title">Lizenzen</string>
+    <string name="licenses_subtitle">Bibliotheken, Icons, Foto &amp; Radiosender</string>
+    <string name="licenses_intro">Fogwave basiert auf den unten aufgeführten Open-Source-Komponenten sowie dem Icon-Set, dem Hintergrundfoto und den Radiosendern, deren Streams die App abspielt. Tippe auf einen Eintrag, um die Seite zu öffnen.</string>
+    <string name="licenses_group_libraries">Bibliotheken</string>
+    <string name="licenses_group_assets">Icons &amp; Foto</string>
+    <string name="licenses_group_stations">Radiosender</string>
+    <string name="licenses_stations_hint">Die Sender werden direkt vom jeweiligen Sendeunternehmen gestreamt. Fogwave speichert und verbreitet deren Audio nicht und besitzt keine Rechte daran.</string>
+    <string name="browse_stations">Sender durchsuchen</string>
+    <string name="privacy_title">Datenschutzerklärung</string>
+    <string name="privacy_subtitle">Wie Fogwave mit deinen Daten umgeht</string>
+
+    <string name="network_unavailable">Keine Internetverbindung</string>
+    <string name="station_desc_zip">Hits • Litauen</string>
+    <string name="station_desc_powerhit">Dance • Pop • Top-Hits</string>
+    <string name="station_desc_powerhitgold">Gold-Hits • Dance-Klassiker</string>
+    <string name="station_desc_rock">Rockmusik • Litauen</string>
+    <string name="station_desc_relax">Entspannte Musik zum Zurücklehnen</string>
+    <string name="station_desc_lietus">Litauische Musik</string>
+    <string name="station_desc_m1">Populäre Musik</string>
+    <string name="station_desc_plus">Musik &amp; Hit-Klassiker</string>
+    <string name="station_desc_goldfm">Goldene Hits</string>
+    <string name="station_desc_rc">Radiocentras • Litauen</string>
+    <string name="genre_hits">Hits</string>
+    <string name="genre_pop">Pop</string>
+    <string name="genre_dance">Dance</string>
+    <string name="genre_oldies">Oldies</string>
+    <string name="genre_rock">Rock</string>
+    <string name="genre_easy_listening">Easy Listening</string>
+    <string name="genre_lithuanian">Litauische Musik</string>
+
+    <string name="eq_preset_normal">Normal</string>
+    <string name="eq_preset_classical">Klassik</string>
+    <string name="eq_preset_dance">Dance</string>
+    <string name="eq_preset_flat">Linear</string>
+    <string name="eq_preset_folk">Folk</string>
+    <string name="eq_preset_heavy_metal">Heavy Metal</string>
+    <string name="eq_preset_hip_hop">Hip-Hop</string>
+    <string name="eq_preset_jazz">Jazz</string>
+    <string name="eq_preset_pop">Pop</string>
+    <string name="eq_preset_rock">Rock</string>
+</resources>

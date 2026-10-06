@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Fogwave</string>
+    <string name="app_subtitle">Интернет-радио</string>
+
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_description">Быстрый и элегантный плеер интернет-радио с чистым звуком и гармоничным геометрическим дизайном.</string>
+    <string name="about_my_repository">Мой репозиторий</string>
+    <string name="about_open_in_browser">Открыть в браузере</string>
+    <string name="fogwave_logo_content_desc">Логотип Fogwave</string>
+
+    <string name="player_connecting">Подключение…</string>
+    <string name="player_on_air">В эфире</string>
+    <string name="player_stopped">Остановлено</string>
+    <string name="now_playing_live">Сейчас играет • прямой эфир</string>
+    <string name="now_playing_label">СЕЙЧАС ИГРАЕТ</string>
+    <string name="close_content_desc">Закрыть</string>
+    <string name="equalizer_content_desc">Эквалайзер</string>
+    <string name="equalizer_title">Эквалайзер</string>
+    <string name="equalizer_on">ВКЛ</string>
+    <string name="equalizer_off">ВЫКЛ</string>
+    <string name="equalizer_sound_section">Звук</string>
+    <string name="equalizer_custom_preset">Пользовательский</string>
+    <string name="equalizer_unavailable">Эквалайзер недоступен на этом устройстве.</string>
+    <string name="equalizer_reset">Сбросить</string>
+    <string name="loudness_row_label">Усиление громкости</string>
+    <string name="dynamics_row_label">Обработка динамики</string>
+    <string name="back_content_desc">Назад</string>
+    <string name="previous_station_content_desc">Предыдущая станция</string>
+    <string name="next_station_content_desc">Следующая станция</string>
+    <string name="play_content_desc">Воспроизвести</string>
+    <string name="pause_content_desc">Пауза</string>
+    <string name="remove_from_favorites">Удалить из любимых</string>
+    <string name="add_to_favorites">Добавить в любимые</string>
+    <string name="recent_empty">Здесь появятся станции, которые вы слушали.</string>
+    <string name="similar_empty">Похожие станции не найдены.</string>
+    <string name="info_station">Станция</string>
+    <string name="info_description">Описание</string>
+    <string name="info_genre">Жанр</string>
+    <string name="info_quality">Качество</string>
+    <string name="info_status">Статус</string>
+    <string name="status_live">В эфире • прямая трансляция</string>
+
+    <string name="view_mode_content_desc">Вид отображения</string>
+    <string name="display_mode_label">РЕЖИМ ОТОБРАЖЕНИЯ</string>
+    <string name="view_mode_list">Список</string>
+    <string name="view_mode_table">Таблица</string>
+    <string name="view_mode_tiles">Плитки</string>
+    <string name="view_mode_icons">Значки</string>
+    <string name="size_label">РАЗМЕР</string>
+
+    <string name="favorites_empty_title">В любимых пока ничего нет</string>
+    <string name="favorites_empty_subtitle">Откройте плеер любой станции и нажмите на сердечко, чтобы добавить её в список любимых.</string>
+
+    <string name="stations_title">Станции</string>
+    <string name="favorite_stations_title">Любимые станции</string>
+
+    <string name="tab_radio">Радио</string>
+    <string name="tab_favorites">Любимые</string>
+    <string name="tab_about">О программе</string>
+
+    <string name="extra_tab_recent">Недавние</string>
+    <string name="extra_tab_similar">Похожие</string>
+    <string name="extra_tab_info">Инфо</string>
+    <string name="stream_unavailable">Поток временно недоступен</string>
+    <string name="battery_opt_title">Стабильное воспроизведение в фоне</string>
+    <string name="battery_opt_message">На некоторых телефонах фоновые приложения останавливаются через пару минут после выключения экрана. Откройте настройки батареи и выберите Fogwave, чтобы станция играла без перерывов.</string>
+    <string name="battery_opt_confirm">Открыть настройки</string>
+    <string name="battery_opt_dismiss">Не сейчас</string>
+    <string name="licenses_title">Лицензии</string>
+    <string name="licenses_subtitle">Библиотеки, значки, фото и радиостанции</string>
+    <string name="licenses_intro">Fogwave построен на открытых компонентах ниже, а также на наборе значков, фоновой фотографии и радиостанциях, чьи потоки он воспроизводит. Нажмите на пункт, чтобы открыть его страницу.</string>
+    <string name="licenses_group_libraries">Библиотеки</string>
+    <string name="licenses_group_assets">Значки и фото</string>
+    <string name="licenses_group_stations">Радиостанции</string>
+    <string name="licenses_stations_hint">Станции воспроизводятся напрямую с серверов вещателей; Fogwave не хранит, не распространяет и не имеет прав на их эфир.</string>
+    <string name="browse_stations">К станциям</string>
+    <string name="privacy_title">Политика конфиденциальности</string>
+    <string name="privacy_subtitle">Как Fogwave обращается с вашими данными</string>
+
+    <string name="network_unavailable">Нет подключения к интернету</string>
+    <string name="station_desc_zip">Хиты • Литва</string>
+    <string name="station_desc_powerhit">Танцевальная • Поп • Топ-хиты</string>
+    <string name="station_desc_powerhitgold">Золотые хиты • Танцевальная классика</string>
+    <string name="station_desc_rock">Рок-музыка • Литва</string>
+    <string name="station_desc_relax">Спокойная лёгкая музыка</string>
+    <string name="station_desc_lietus">Литовская музыка</string>
+    <string name="station_desc_m1">Популярная музыка</string>
+    <string name="station_desc_plus">Музыка и хиты прошлых лет</string>
+    <string name="station_desc_goldfm">Золотые хиты</string>
+    <string name="station_desc_rc">Radiocentras • Литва</string>
+    <string name="genre_hits">Хиты</string>
+    <string name="genre_pop">Поп</string>
+    <string name="genre_dance">Танцевальная</string>
+    <string name="genre_oldies">Хиты прошлых лет</string>
+    <string name="genre_rock">Рок</string>
+    <string name="genre_easy_listening">Лёгкая музыка</string>
+    <string name="genre_lithuanian">Литовская музыка</string>
+
+    <string name="eq_preset_normal">Обычный</string>
+    <string name="eq_preset_classical">Классика</string>
+    <string name="eq_preset_dance">Танцевальный</string>
+    <string name="eq_preset_flat">Ровный</string>
+    <string name="eq_preset_folk">Фолк</string>
+    <string name="eq_preset_heavy_metal">Хэви-метал</string>
+    <string name="eq_preset_hip_hop">Хип-хоп</string>
+    <string name="eq_preset_jazz">Джаз</string>
+    <string name="eq_preset_pop">Поп</string>
+    <string name="eq_preset_rock">Рок</string>
+</resources>

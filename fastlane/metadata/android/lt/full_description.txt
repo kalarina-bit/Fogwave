@@ -1,0 +1,20 @@
+Fogwave – paprastas internetinio radijo grotuvas be reklamų, skirtas Lietuvos radijo stotims.
+
+<b>Stotys</b>
+ZIP FM, Power Hit Radio, Power Hit Radio Gold, Rock FM, Relax FM, Lietus, M-1, M-1 Plius, Gold FM ir RC.
+
+<b>Galimybės</b>
+<ul>
+<li>Grojimas fone su valdymu iš pranešimo, užrakinto ekrano, ausinių ir per Bluetooth</li>
+<li>Android Auto palaikymas</li>
+<li>Automatinis prisijungimas iš naujo, kai srautas nutrūksta arba grįžta ryšys</li>
+<li>Ekvalaizeris su nustatymais ir juostų valdymu, garsumo stiprintuvas ir dinamikos apdorojimas</li>
+<li>Mėgstamos, neseniai klausytos ir panašios stotys</li>
+<li>Keturi vaizdai – sąrašas, lentelė, plytelės ir piktogramos – su keičiamu dydžiu</li>
+<li>Anglų, rusų, vokiečių, lietuvių, japonų ir kinų kalbos</li>
+</ul>
+
+<b>Privatumas</b>
+Jokių paskyrų, reklamų ar analitikos. Garsas transliuojamas tiesiai iš radijo stočių serverių; Fogwave jo nesaugo ir neplatina.
+
+Stočių pavadinimai ir logotipai priklauso jų savininkams.

@@ -1,0 +1,30 @@
+# Build recipe for the F-Droid main repository.
+# Submit it as metadata/cc.skysparkle.fogwave.yml in a merge request to
+# https://gitlab.com/fdroid/fdroiddata. Descriptions, screenshots and changelogs are read from
+# fastlane/metadata/android in this repository, so they are not repeated here.
+
+Categories:
+  - Multimedia
+License: GPL-3.0-only
+SourceCode: https://git.skysparkle.cc/kalarina/Fogwave
+IssueTracker: https://git.skysparkle.cc/kalarina/Fogwave/issues
+
+AntiFeatures:
+  NonFreeAssets:
+    en-US: Station logos are trademarks of their broadcasters and the background photo is under the Unsplash License.
+
+RepoType: git
+Repo: https://git.skysparkle.cc/kalarina/Fogwave.git
+
+Builds:
+  - versionName: 1.0.11
+    versionCode: 11
+    commit: v1.0.11
+    subdir: app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 1.0.11
+CurrentVersionCode: 11
