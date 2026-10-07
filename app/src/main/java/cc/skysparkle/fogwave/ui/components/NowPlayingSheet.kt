@@ -169,41 +169,17 @@ fun NowPlayingSheet(
                         .background(LocalGeoColors.current.outlineVariant)
                 )
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp, vertical = 10.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = stringResource(R.string.now_playing_label),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 11.5.sp,
-                            letterSpacing = 1.2.sp,
-                            color = LocalGeoColors.current.primary
-                        )
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .size(36.dp)
-                            .clip(CircleShape)
-                            .background(LocalGeoColors.current.surfaceContainer)
-                            .border(1.dp, LocalGeoColors.current.outlineVariant, CircleShape)
-                            .clickable { onClose() }
-                            .testTag("np_close_btn"),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        AppIcon(
-                            resId = R.drawable.ic_close,
-                            contentDescription = stringResource(R.string.close_content_desc),
-                            tint = LocalGeoColors.current.deepPurple,
-                            size = 18.dp
-                        )
-                    }
-                }
+                // The sheet closes by swiping down, tapping outside it or pressing Back.
+                Text(
+                    text = stringResource(R.string.now_playing_label),
+                    style = MaterialTheme.typography.labelSmall.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.5.sp,
+                        letterSpacing = 1.2.sp,
+                        color = LocalGeoColors.current.primary
+                    ),
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp)
+                )
 
                 Box(
                     modifier = Modifier
