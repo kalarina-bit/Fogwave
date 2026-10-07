@@ -11,7 +11,7 @@ IssueTracker: https://git.skysparkle.cc/kalarina/Fogwave/issues
 
 AntiFeatures:
   NonFreeAssets:
-    en-US: Station logos are trademarks of their broadcasters and the background photo is under the Unsplash License.
+    en-US: Station logos are trademarks of their broadcasters.
 
 RepoType: git
 Repo: https://git.skysparkle.cc/kalarina/Fogwave.git

@@ -67,10 +67,10 @@
     <string name="extra_tab_info">Info</string>
     <string name="stream_unavailable">Stream temporarily unavailable</string>
     <string name="licenses_title">Licenses</string>
-    <string name="licenses_subtitle">Libraries, icons, photo &amp; radio stations</string>
-    <string name="licenses_intro">Fogwave is built on the open-source components below, plus the icon set, background photo, and the radio stations it streams from. Tap anything to open its page.</string>
+    <string name="licenses_subtitle">Libraries, icons &amp; radio stations</string>
+    <string name="licenses_intro">Fogwave is built on the open-source components below, plus the icon set and the radio stations it streams from. Tap anything to open its page.</string>
     <string name="licenses_group_libraries">Libraries</string>
-    <string name="licenses_group_assets">Icons &amp; photo</string>
+    <string name="licenses_group_assets">Icons</string>
     <string name="licenses_group_stations">Radio stations</string>
     <string name="licenses_stations_hint">Stations are streamed directly from each broadcaster; Fogwave does not host, redistribute, or otherwise hold rights to their audio.</string>
     <string name="browse_stations">Browse stations</string>

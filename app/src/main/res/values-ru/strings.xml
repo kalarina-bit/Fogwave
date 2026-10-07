@@ -67,10 +67,10 @@
     <string name="battery_opt_confirm">Открыть настройки</string>
     <string name="battery_opt_dismiss">Не сейчас</string>
     <string name="licenses_title">Лицензии</string>
-    <string name="licenses_subtitle">Библиотеки, значки, фото и радиостанции</string>
-    <string name="licenses_intro">Fogwave построен на открытых компонентах ниже, а также на наборе значков, фоновой фотографии и радиостанциях, чьи потоки он воспроизводит. Нажмите на пункт, чтобы открыть его страницу.</string>
+    <string name="licenses_subtitle">Библиотеки, значки и радиостанции</string>
+    <string name="licenses_intro">Fogwave построен на открытых компонентах ниже, а также на наборе значков и радиостанциях, чьи потоки он воспроизводит. Нажмите на пункт, чтобы открыть его страницу.</string>
     <string name="licenses_group_libraries">Библиотеки</string>
-    <string name="licenses_group_assets">Значки и фото</string>
+    <string name="licenses_group_assets">Значки</string>
     <string name="licenses_group_stations">Радиостанции</string>
     <string name="licenses_stations_hint">Станции воспроизводятся напрямую с серверов вещателей; Fogwave не хранит, не распространяет и не имеет прав на их эфир.</string>
     <string name="browse_stations">К станциям</string>

@@ -56,8 +56,7 @@ private val LIBRARIES = listOf(
 )
 
 private val ASSETS = listOf(
-    LicenseRow("MingCute Icon (interface icons)", "MingCute Design, via IconBuddy", APACHE, "https://iconbuddy.com/mingcute"),
-    LicenseRow("Misty mountain background photo", "Federico Bottos, on Unsplash", "Unsplash License", "https://unsplash.com/es/fotos/arboles-verdes-en-la-montana-bajo-nubes-blancas-durante-el-dia-obQacWYxB1I")
+    LicenseRow("MingCute Icon (interface icons)", "MingCute Design, via IconBuddy", APACHE, "https://iconbuddy.com/mingcute")
 )
 
 private val STATIONS = listOf(

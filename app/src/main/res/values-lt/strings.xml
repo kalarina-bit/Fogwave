@@ -67,10 +67,10 @@
     <string name="battery_opt_confirm">Atidaryti nustatymus</string>
     <string name="battery_opt_dismiss">Ne dabar</string>
     <string name="licenses_title">Licencijos</string>
-    <string name="licenses_subtitle">Bibliotekos, piktogramos, nuotrauka ir radijo stotys</string>
-    <string name="licenses_intro">„Fogwave“ sukurta iš žemiau išvardytų atvirojo kodo komponentų, taip pat piktogramų rinkinio, fono nuotraukos ir radijo stočių, kurių transliacijas groja programa. Palieskite elementą, kad atidarytumėte jo puslapį.</string>
+    <string name="licenses_subtitle">Bibliotekos, piktogramos ir radijo stotys</string>
+    <string name="licenses_intro">„Fogwave“ sukurta iš žemiau išvardytų atvirojo kodo komponentų, taip pat piktogramų rinkinio ir radijo stočių, kurių transliacijas groja programa. Palieskite elementą, kad atidarytumėte jo puslapį.</string>
     <string name="licenses_group_libraries">Bibliotekos</string>
-    <string name="licenses_group_assets">Piktogramos ir nuotrauka</string>
+    <string name="licenses_group_assets">Piktogramos</string>
     <string name="licenses_group_stations">Radijo stotys</string>
     <string name="licenses_stations_hint">Stotys transliuojamos tiesiai iš transliuotojų serverių; „Fogwave“ jų garso turinio nesaugo, neplatina ir neturi jam teisių.</string>
     <string name="browse_stations">Naršyti stotis</string>

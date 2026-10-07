@@ -118,21 +118,21 @@ fun AboutPanel(modifier: Modifier = Modifier) {
         )
 
         AboutLinkCard(
-            iconRes = R.drawable.ic_copyright,
-            title = stringResource(R.string.licenses_title),
-            subtitle = stringResource(R.string.licenses_subtitle),
-            trailingIconRes = R.drawable.ic_chevron_right,
-            onClick = { showLicenses = true },
-            modifier = Modifier.testTag("licenses_card")
-        )
-
-        AboutLinkCard(
             iconRes = R.drawable.ic_privacy,
             title = stringResource(R.string.privacy_title),
             subtitle = stringResource(R.string.privacy_subtitle),
             trailingIconRes = R.drawable.ic_open_in_new,
             onClick = { context.openUrl(PRIVACY_POLICY_URL) },
             modifier = Modifier.testTag("privacy_card")
+        )
+
+        AboutLinkCard(
+            iconRes = R.drawable.ic_copyright,
+            title = stringResource(R.string.licenses_title),
+            subtitle = stringResource(R.string.licenses_subtitle),
+            trailingIconRes = R.drawable.ic_chevron_right,
+            onClick = { showLicenses = true },
+            modifier = Modifier.testTag("licenses_card")
         )
     }
 

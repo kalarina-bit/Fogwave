@@ -67,10 +67,10 @@
     <string name="battery_opt_confirm">打开设置</string>
     <string name="battery_opt_dismiss">暂不设置</string>
     <string name="licenses_title">许可证</string>
-    <string name="licenses_subtitle">库、图标、照片与电台</string>
-    <string name="licenses_intro">Fogwave 基于下列开源组件构建，并使用了图标集、背景照片，以及它播放的这些电台。点按任意条目即可打开对应页面。</string>
+    <string name="licenses_subtitle">库、图标与电台</string>
+    <string name="licenses_intro">Fogwave 基于下列开源组件构建，并使用了图标集以及它播放的这些电台。点按任意条目即可打开对应页面。</string>
     <string name="licenses_group_libraries">库</string>
-    <string name="licenses_group_assets">图标与照片</string>
+    <string name="licenses_group_assets">图标</string>
     <string name="licenses_group_stations">电台</string>
     <string name="licenses_stations_hint">电台内容直接来自各广播机构的流媒体；Fogwave 不托管、不转发，也不拥有其音频内容的任何权利。</string>
     <string name="browse_stations">浏览电台</string>
