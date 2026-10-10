@@ -63,11 +63,13 @@ Every APK on the Releases page is signed with the same key. Check the signing ce
 apksigner verify --print-certs Fogwave-v1.0.11.apk
 ```
 
-The `Signer #1 certificate SHA-256 digest` must be:
+The SHA-256 fingerprint of the signing certificate must be:
 
 ```
-1a85af5a0823ded1767c075541fa15877f6e3b999e5e52cf2bc80355f663127f
+1A:85:AF:5A:08:23:DE:D1:76:7C:07:55:41:FA:15:87:7F:6E:3B:99:9E:5E:52:CF:2B:C8:03:55:F6:63:12:7F
 ```
+
+(`apksigner` prints the same value in lowercase without colons.)
 
 On Android you can check it with [AppVerifier](https://github.com/soupslurpr/AppVerifier) (app ID `cc.skysparkle.fogwave`).
 
@@ -93,7 +95,6 @@ For every release: bump `versionCode` and `versionName` in `app/build.gradle.kts
 ├── assets/              # README images and logos
 │   └── screenshots/     # App screenshots
 ├── fastlane/            # F-Droid store listing, screenshots and changelogs
-├── fdroid/              # Build recipe for fdroiddata
 ├── gradle/              # Gradle wrapper and version catalog
 ├── LICENSE              # GNU GPLv3
 └── README.md
@@ -103,4 +104,4 @@ APK builds themselves are published as assets on the [Releases page](https://git
 
 ## License
 
-This project is licensed under the **GNU General Public License v3.0** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU General Public License v3.0 only** (GPL-3.0-only) — see the [LICENSE](LICENSE) file for details.
