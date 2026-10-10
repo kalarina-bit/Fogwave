@@ -50,18 +50,26 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 Or via `adb` (after downloading):
 
 ```sh
-adb install Fogwawe-v1.0.10.apk
+adb install Fogwave-v1.0.11.apk
 ```
 
 ## Verifying a download
 
 <img src="assets/icon-verify.png" width="36" align="left">
 
-Compare the SHA-256 checksum against the value listed in [CHANGELOG.md](CHANGELOG.md):
+Every APK on the Releases page is signed with the same key. Check the signing certificate before installing:
 
 ```sh
-sha256sum Fogwawe-v1.0.10.apk
+apksigner verify --print-certs Fogwave-v1.0.11.apk
 ```
+
+The `Signer #1 certificate SHA-256 digest` must be:
+
+```
+1a85af5a0823ded1767c075541fa15877f6e3b999e5e52cf2bc80355f663127f
+```
+
+On Android you can check it with [AppVerifier](https://github.com/soupslurpr/AppVerifier) (app ID `cc.skysparkle.fogwave`).
 
 ## Building from source
 
@@ -87,7 +95,6 @@ For every release: bump `versionCode` and `versionName` in `app/build.gradle.kts
 ├── fastlane/            # F-Droid store listing, screenshots and changelogs
 ├── fdroid/              # Build recipe for fdroiddata
 ├── gradle/              # Gradle wrapper and version catalog
-├── CHANGELOG.md         # Per-version sizes and checksums (links to GitHub Releases)
 ├── LICENSE              # GNU GPLv3
 └── README.md
 ```
