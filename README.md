@@ -10,6 +10,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwave/latest/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
+  <img src="https://img.shields.io/badge/Android-7.0%2B-2e7d32?logo=android&logoColor=white&labelColor=1b1b1b" alt="Android 7.0+">
 </p>
 
 **A calm, open-source internet radio app for Android.**
@@ -42,6 +43,8 @@ Listen to Lithuania's favorite stations in one tap — with background playback,
 ## Installation
 
 <img src="assets/icon-install.png" width="36" align="left">
+
+Requires **Android 7.0 (API 24) or newer**.
 
 1. Download the APK for the version you want from the [Releases page](https://github.com/kalarina-bit/Fogwave/releases).
 2. On your Android device, allow installs from unknown sources for the app you use to open the file (Settings → Apps → Special access → Install unknown apps).
