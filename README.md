@@ -85,6 +85,10 @@ Release builds are signed only when a keystore is supplied through the `KEYSTORE
 2. Add `fastlane/metadata/android/<locale>/changelogs/<versionCode>.txt`.
 3. Tag the commit as `v<versionName>` (for example `v1.0.11`).
 
+## Contributing
+
+Bug reports, station suggestions, translation fixes and pull requests are welcome on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/issues) and [GitHub](https://github.com/kalarina-bit/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes.
+
 ## License
 
 [GNU General Public License v3.0 only](LICENSE) (GPL-3.0-only).
