@@ -11,7 +11,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/kalarina-bit/Fogwave/latest/total?label=downloads&color=2e7d32&labelColor=1b1b1b" alt="downloads counter">
   <img src="https://img.shields.io/badge/Android-7.0%2B-2e7d32?logo=android&logoColor=white&labelColor=1b1b1b" alt="Android 7.0+">
   <img src="https://img.shields.io/badge/License-GPL--3.0--only-2e7d32?labelColor=1b1b1b" alt="GPL-3.0-only">
 </p>
@@ -87,7 +86,7 @@ Release builds are signed only when a keystore is supplied through the `KEYSTORE
 
 ## Contributing
 
-Bug reports, station suggestions, translation fixes and pull requests are welcome on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/issues) and [GitHub](https://github.com/kalarina-bit/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes.
+Bug reports, station suggestions, translation fixes and pull requests are welcome in the [issue tracker](https://git.skysparkle.cc/kalarina/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes.
 
 ## License
 
