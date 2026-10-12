@@ -44,8 +44,6 @@ Listen to Lithuania's favorite stations in one tap.
 
 <img src="assets/icon-install.png" width="36" align="left">
 
-Requires **Android 7.0 (API 24) or newer**.
-
 1. Download the latest APK from the [Releases page](https://git.skysparkle.cc/kalarina/Fogwave/releases).
 2. Allow installs from unknown sources for the app you open it with (Settings → Apps → Special access → Install unknown apps).
 3. Open the `.apk` file and confirm the install.
@@ -86,8 +84,8 @@ Release builds are signed only when a keystore is supplied through the `KEYSTORE
 
 ## Contributing
 
-Bug reports, station suggestions, translation fixes and pull requests are welcome in the [issue tracker](https://git.skysparkle.cc/kalarina/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes.
+Bug reports, station suggestions, translation fixes and pull requests are welcome in the [issue tracker](https://git.skysparkle.cc/kalarina/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes. To open an issue or a pull request, [create an account](https://git.skysparkle.cc/user/sign_up) on this Gitea.
 
 ## License
 
-[GNU General Public License v3.0 only](LICENSE) (GPL-3.0-only).
+[GNU General Public License v3.0 only](LICENSE).
