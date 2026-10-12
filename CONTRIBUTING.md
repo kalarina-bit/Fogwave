@@ -4,7 +4,7 @@ Thanks for wanting to help! This guide explains where to contribute, what fits t
 
 ## Where to contribute
 
-Issues and pull requests go to the repository on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave). You need an account on git.skysparkle.cc.
+Issues and pull requests go to the repository on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave).
 
 ## Ways to help
 
