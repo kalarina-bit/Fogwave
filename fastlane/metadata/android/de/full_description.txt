@@ -1,20 +1,16 @@
-Fogwave ist ein schlichter, werbefreier Internetradio-Player für litauische Sender.
+<p>Nimm Litauens beliebteste Radiosender mit – ganz ohne Ballast. Mit Fogwave schaltest du einfach ein, hörst im Hintergrund und genießt ein aufgeräumtes, werbefreies Erlebnis ohne Konto und ohne Tracking.</p>
 
-<b>Sender</b>
-ZIP FM, Power Hit Radio, Power Hit Radio Gold, Rock FM, Relax FM, Lietus, M-1, M-1 Plius, Gold FM und RC.
-
-<b>Funktionen</b>
 <ul>
-<li>Wiedergabe im Hintergrund mit Steuerung über Benachrichtigung, Sperrbildschirm, Headset und Bluetooth</li>
-<li>Unterstützung für Android Auto</li>
-<li>Automatische Neuverbindung, wenn der Stream abbricht oder das Netz zurückkommt</li>
-<li>Equalizer mit Voreinstellungen und Bandregelung, Lautheitsverstärker und Dynamikbearbeitung</li>
-<li>Favoriten, zuletzt gehörte und ähnliche Sender</li>
-<li>Vier Ansichten – Liste, Tabelle, Kacheln und Symbole – mit einstellbarer Größe</li>
-<li>Englisch, Russisch, Deutsch, Litauisch, Japanisch und Chinesisch</li>
+<li>Höre 10 litauische Sender, darunter ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1 und Gold FM.</li>
+<li>Hör weiter, während du andere Apps nutzt – mit Steuerung über Sperrbildschirm, Benachrichtigungen, Kopfhörer und Bluetooth.</li>
+<li>Genieße deinen Lieblingsklang mit Equalizer, gespeicherten Einstellungen, Lautstärkeverstärkung und Audio-Presets.</li>
+<li>Hör einfach weiter: Bricht der Stream oder das Netz ab, verbindet sich die App automatisch neu.</li>
+<li>Nimm das Radio mit auf die Straße – mit Android-Auto-Unterstützung.</li>
+<li>Finde Sender auf deine Art: Favoriten, zuletzt gehörte Sender, passende Genres und vier Ansichten.</li>
 </ul>
 
-<b>Datenschutz</b>
-Keine Konten, keine Werbung, keine Analyse. Der Ton kommt direkt von den Servern der Sender; Fogwave speichert oder verbreitet ihn nicht.
+<p>Wähle einen Sender und tippe auf Wiedergabe. Fogwave spielt im Hintergrund weiter und speichert deine Equalizer-Einstellungen für das nächste Mal. Das dunkle, aufgeräumte Design gibt es auf Englisch, Russisch, Deutsch, Japanisch, Litauisch und Chinesisch.</p>
 
-Sendernamen und Logos gehören ihren jeweiligen Inhabern.
+<p>Ob du in Litauen lebst, zu Besuch bist oder einfach litauische Musik und Radio magst – mit Fogwave hörst du ganz unkompliziert zu. Open Source, ohne Werbung, Tracking oder Konto.</p>
+
+<p>Lade Fogwave herunter und schalte Litauen ein.</p>

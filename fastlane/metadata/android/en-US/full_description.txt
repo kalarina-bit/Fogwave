@@ -1,20 +1,16 @@
-Fogwave is a minimal, ad-free internet radio player for Lithuanian stations.
+<p>Bring Lithuania's favorite radio stations along, without the clutter. Fogwave makes it easy to tune in, listen in the background, and enjoy a clean, ad-free experience with no account or tracking required.</p>
 
-<b>Stations</b>
-ZIP FM, Power Hit Radio, Power Hit Radio Gold, Rock FM, Relax FM, Lietus, M-1, M-1 Plius, Gold FM and RC.
-
-<b>Features</b>
 <ul>
-<li>Background playback with notification, lock-screen, headset and Bluetooth controls</li>
-<li>Android Auto support</li>
-<li>Automatic reconnection when the stream drops or the network comes back</li>
-<li>Equalizer with presets and per-band control, loudness enhancer and dynamics processing</li>
-<li>Favorites, recently played and similar stations</li>
-<li>Four layouts — list, table, tiles and icons — with adjustable size</li>
-<li>English, Russian, German, Lithuanian, Japanese and Chinese</li>
+<li>Tune in to 10 Lithuanian stations, including ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, and Gold FM.</li>
+<li>Keep listening while you use other apps, with controls on your lock screen, notifications, headphones, and Bluetooth.</li>
+<li>Enjoy your favorite sound with an equalizer, saved settings, loudness boost, and audio presets.</li>
+<li>Get back to listening easily with auto-reconnect when your stream or network drops.</li>
+<li>Take radio on the road with Android Auto support.</li>
+<li>Find stations your way with favorites, recently played stations, genre matches, and four viewing layouts.</li>
 </ul>
 
-<b>Privacy</b>
-No accounts, no ads, no analytics. Audio is streamed directly from each broadcaster; Fogwave does not host or redistribute it.
+<p>Choose a station and press play. Fogwave keeps audio running in the background and saves your equalizer settings for your next session. Its dark, uncluttered design is available in English, Russian, German, Japanese, Lithuanian, and Chinese.</p>
 
-Station names and logos belong to their respective owners.
+<p>Whether you live in Lithuania, are visiting, or simply enjoy Lithuanian music and radio, Fogwave gives you a straightforward way to listen. It's open source, with no ads, tracking, or account required.</p>
+
+<p>Download Fogwave and tune in to Lithuania.</p>

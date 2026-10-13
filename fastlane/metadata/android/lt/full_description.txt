@@ -1,20 +1,16 @@
-Fogwave – paprastas internetinio radijo grotuvas be reklamų, skirtas Lietuvos radijo stotims.
+<p>Mėgstamiausios Lietuvos radijo stotys visada su jumis – be nereikalingų dalykų. Su Fogwave lengva įsijungti radiją, klausytis fone ir mėgautis švariu klausymu be reklamų, be paskyros ir be sekimo.</p>
 
-<b>Stotys</b>
-ZIP FM, Power Hit Radio, Power Hit Radio Gold, Rock FM, Relax FM, Lietus, M-1, M-1 Plius, Gold FM ir RC.
-
-<b>Galimybės</b>
 <ul>
-<li>Grojimas fone su valdymu iš pranešimo, užrakinto ekrano, ausinių ir per Bluetooth</li>
-<li>Android Auto palaikymas</li>
-<li>Automatinis prisijungimas iš naujo, kai srautas nutrūksta arba grįžta ryšys</li>
-<li>Ekvalaizeris su nustatymais ir juostų valdymu, garsumo stiprintuvas ir dinamikos apdorojimas</li>
-<li>Mėgstamos, neseniai klausytos ir panašios stotys</li>
-<li>Keturi vaizdai – sąrašas, lentelė, plytelės ir piktogramos – su keičiamu dydžiu</li>
-<li>Anglų, rusų, vokiečių, lietuvių, japonų ir kinų kalbos</li>
+<li>Klausykitės 10 Lietuvos stočių, tarp jų ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1 ir Gold FM.</li>
+<li>Klausykitės toliau naudodamiesi kitomis programėlėmis – valdykite atkūrimą iš užrakinimo ekrano, pranešimų, ausinių ir per Bluetooth.</li>
+<li>Mėgaukitės mėgstamu skambėjimu su ekvalaizeriu, išsaugomais nustatymais, garsumo stiprinimu ir garso šablonais.</li>
+<li>Lengvai grįžkite prie klausymo – nutrūkus srautui ar ryšiui programėlė automatiškai prisijungia iš naujo.</li>
+<li>Pasiimkite radiją į kelionę su Android Auto palaikymu.</li>
+<li>Raskite stotis savaip: mėgstamiausios, neseniai klausytos, panašūs žanrai ir keturi rodinio išdėstymai.</li>
 </ul>
 
-<b>Privatumas</b>
-Jokių paskyrų, reklamų ar analitikos. Garsas transliuojamas tiesiai iš radijo stočių serverių; Fogwave jo nesaugo ir neplatina.
+<p>Pasirinkite stotį ir paspauskite grojimo mygtuką. Fogwave toliau groja fone ir išsaugo ekvalaizerio nustatymus kitam kartui. Tamsus, tvarkingas dizainas prieinamas anglų, rusų, vokiečių, japonų, lietuvių ir kinų kalbomis.</p>
 
-Stočių pavadinimai ir logotipai priklauso jų savininkams.
+<p>Nesvarbu, ar gyvenate Lietuvoje, lankotės čia, ar tiesiog mėgstate lietuvišką muziką ir radiją – Fogwave suteikia paprastą būdą klausytis. Atvirasis kodas, jokių reklamų, sekimo ar paskyrų.</p>
+
+<p>Atsisiųskite Fogwave ir klausykitės Lietuvos.</p>
