@@ -1,23 +1,34 @@
 <p align="center">
-  <img src="assets/icon-rounded.png" width="128" alt="Fogwave icon">
+  <img src="assets/icon-rounded.png" width="112" alt="Fogwave icon">
 </p>
 
 <h1 align="center">Fogwave</h1>
 
-<p align="center"><b>A calm, open-source internet radio app for Android.</b></p>
-
 <p align="center">
-  <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="60" alt="Get it on Gitea"></a>
+  <b>A calm, open-source internet radio app for Android.</b><br>
+  Listen to Lithuania's favorite stations in one tap.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Android-7.0%2B-2e7d32?logo=android&logoColor=white&labelColor=1b1b1b" alt="Android 7.0+">
-  <img src="https://img.shields.io/badge/License-GPL--3.0--only-2e7d32?labelColor=1b1b1b" alt="GPL-3.0-only">
+  <a href="https://github.com/kalarina-bit/Fogwave/releases/latest"><img src="https://img.shields.io/github/v/release/kalarina-bit/Fogwave?style=for-the-badge&label=release&labelColor=1b1b1b&color=2e7d32" alt="Latest release"></a>
 </p>
 
-Listen to Lithuania's favorite stations in one tap.
+<p align="center">
+  <a href="https://f-droid.org/packages/cc.skysparkle.fogwave/"><img src="assets/get-it-on%20(1).png" height="56" alt="Get it on F-Droid"></a>
+  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/kalarina-bit/Fogwave"><img src="assets/badge_obtainium.png" height="56" alt="Get it on Obtainium"></a>
+  <a href="https://github.com/kalarina-bit/Fogwave/releases/latest"><img src="assets/get-it-on-github.png" height="56" alt="Get it on GitHub"></a>
+  <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="56" alt="Get it on Gitea"></a>
+</p>
 
-## Features
+<p align="center">
+  <img src="assets/screenshots/5-feel-closer.png" width="160" alt="Feel closer to Lithuania">
+  <img src="assets/screenshots/4-stations.png" width="160" alt="Browse all stations">
+  <img src="assets/screenshots/1-find-station.png" width="160" alt="Find a station, then settle in">
+  <img src="assets/screenshots/2-your-style.png" width="160" alt="Just your style">
+  <img src="assets/screenshots/3-soundtrack.png" width="160" alt="Your soundtrack">
+</p>
+
+## ✨ Features
 
 - 📻 **10 Lithuanian stations** — ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, Gold FM and more
 - 🎧 **Background playback** with lock-screen, notification, headphone and Bluetooth controls
@@ -30,27 +41,13 @@ Listen to Lithuania's favorite stations in one tap.
 - 🌍 **Six languages** — English, Russian, German, Japanese, Lithuanian and Chinese
 - 🔓 **No ads, no tracking, no accounts**
 
-## Screenshots
+## <img src="assets/icon-install.png" width="32" alt=""> Installation
 
-<p align="center">
-  <img src="assets/screenshots/5-feel-closer.png" width="200" alt="Feel closer to Lithuania">
-  <img src="assets/screenshots/4-stations.png" width="200" alt="Browse all stations">
-  <img src="assets/screenshots/1-find-station.png" width="200" alt="Find a station, then settle in">
-  <img src="assets/screenshots/2-your-style.png" width="200" alt="Just your style">
-  <img src="assets/screenshots/3-soundtrack.png" width="200" alt="Your soundtrack">
-</p>
+- **[F-Droid](https://f-droid.org/packages/cc.skysparkle.fogwave/)** — install and update through the F-Droid client.
+- **[Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/kalarina-bit/Fogwave)** — installs the APK straight from GitHub releases and keeps it up to date.
+- **Manually** — download the latest APK from [GitHub](https://github.com/kalarina-bit/Fogwave/releases/latest) or [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/releases), allow installs from unknown sources for the app you open it with (Settings → Apps → Special access → Install unknown apps), then open the `.apk` and confirm.
 
-## Installation
-
-<img src="assets/icon-install.png" width="36" align="left">
-
-1. Download the latest APK from the [Releases page](https://git.skysparkle.cc/kalarina/Fogwave/releases).
-2. Allow installs from unknown sources for the app you open it with (Settings → Apps → Special access → Install unknown apps).
-3. Open the `.apk` file and confirm the install.
-
-## Verifying a download
-
-<img src="assets/icon-verify.png" width="36" align="left">
+## <img src="assets/icon-verify.png" width="32" alt=""> Verifying a download
 
 Every official APK is signed with the same key. Check it before installing:
 
@@ -66,7 +63,7 @@ The SHA-256 fingerprint of the signing certificate must be:
 
 `apksigner` prints the same value in lowercase without colons. On Android you can check it with [AppVerifier](https://github.com/soupslurpr/AppVerifier) (app ID `cc.skysparkle.fogwave`).
 
-## Building from source
+## <img src="assets/icon-structure.png" width="32" alt=""> Building from source
 
 Requires JDK 17+ and Android SDK 37.
 
@@ -82,10 +79,10 @@ Release builds are signed only when a keystore is supplied through the `KEYSTORE
 2. Add `fastlane/metadata/android/<locale>/changelogs/<versionCode>.txt`.
 3. Tag the commit as `v<versionName>` (for example `v1.0.11`).
 
-## Contributing
+## 🤝 Contributing
 
 Bug reports, station suggestions, translation fixes and pull requests are welcome in the [issue tracker](https://git.skysparkle.cc/kalarina/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes. To open an issue or a pull request, [create an account](https://git.skysparkle.cc/user/sign_up) on this Gitea.
 
-## License
+## 📄 License
 
 [GNU General Public License v3.0 only](LICENSE).
