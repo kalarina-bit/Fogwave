@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://f-droid.org/packages/cc.skysparkle.fogwave/"><img src="assets/get-it-on%20(1).png" height="56" alt="Get it on F-Droid"></a>
-  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/kalarina-bit/Fogwave"><img src="assets/badge_obtainium.png" height="56" alt="Get it on Obtainium"></a>
+  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://git.skysparkle.cc/kalarina/Fogwave"><img src="assets/badge_obtainium.png" height="56" alt="Get it on Obtainium"></a>
   <a href="https://github.com/kalarina-bit/Fogwave/releases/latest"><img src="assets/get-it-on-github.png" height="56" alt="Get it on GitHub"></a>
   <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="56" alt="Get it on Gitea"></a>
 </p>
@@ -44,7 +44,7 @@
 ## <img src="assets/icon-install.png" width="32" alt=""> Installation
 
 - **[F-Droid](https://f-droid.org/packages/cc.skysparkle.fogwave/)** — install and update through the F-Droid client.
-- **[Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/kalarina-bit/Fogwave)** — installs the APK straight from GitHub releases and keeps it up to date.
+- **[Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://git.skysparkle.cc/kalarina/Fogwave)** — installs the APK straight from Gitea releases and keeps it up to date.
 - **Manually** — download the latest APK from [GitHub](https://github.com/kalarina-bit/Fogwave/releases/latest) or [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/releases), allow installs from unknown sources for the app you open it with (Settings → Apps → Special access → Install unknown apps), then open the `.apk` and confirm.
 
 ## <img src="assets/icon-verify.png" width="32" alt=""> Verifying a download
