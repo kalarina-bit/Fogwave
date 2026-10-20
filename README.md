@@ -29,7 +29,7 @@
 </p>
 
 > [!TIP]
-> If you find Fogwave useful, please consider giving it a ⭐ on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave) — it helps others discover the project.
+> If you find Fogwave useful, please consider giving it a ⭐ — it helps others discover the project.
 
 ## ✨ Features
 
