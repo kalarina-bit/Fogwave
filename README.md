@@ -28,6 +28,9 @@
   <img src="assets/screenshots/3-soundtrack.png" width="160" alt="Your soundtrack">
 </p>
 
+> [!TIP]
+> If you find Fogwave useful, please consider giving it a ⭐ on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave) — it helps others discover the project.
+
 ## ✨ Features
 
 - 📻 **10 Lithuanian stations** — ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, Gold FM and more
