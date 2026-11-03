@@ -16,6 +16,8 @@ android {
     versionCode = 12
     versionName = "1.0.12"
 
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     // Library versions shown under About -> Licenses, taken from the version catalog so they
     // always match what is actually bundled.
     buildConfigField("String", "COMPOSE_BOM_VERSION", "\"${libs.versions.composeBom.get()}\"")
@@ -53,22 +55,6 @@ android {
       // Keeps release builds reproducible (F-Droid).
       vcsInfo.include = false
       if (canSignRelease) signingConfig = signingConfigs.getByName("release")
-    }
-  }
-  // The app's own languages only, so library strings never mix other languages into the UI.
-  androidResources { localeFilters += listOf("en", "de", "ja", "lt", "ru", "zh") }
-  // Version, Kotlin and license metadata files that nothing reads at runtime.
-  packaging {
-    resources {
-      excludes += listOf(
-        "/META-INF/*.version",
-        "/META-INF/*.kotlin_module",
-        "/META-INF/versions/**",
-        "/META-INF/{AL2.0,LGPL2.1}",
-        "/kotlin/**",
-        "/kotlin-tooling-metadata.json",
-        "/DebugProbesKt.bin"
-      )
     }
   }
   compileOptions {
@@ -111,5 +97,11 @@ dependencies {
   testImplementation(libs.roborazzi)
   testImplementation(libs.roborazzi.compose)
   testImplementation(libs.roborazzi.junit.rule)
+  androidTestImplementation(platform(libs.androidx.compose.bom))
+  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+  androidTestImplementation(libs.androidx.espresso.core)
+  androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.androidx.runner)
   debugImplementation(libs.androidx.compose.ui.test.manifest)
+  debugImplementation(libs.androidx.compose.ui.tooling)
 }

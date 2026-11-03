@@ -38,6 +38,7 @@ data class RadioUiState(
     val isEqualizerPopOpen: Boolean = false,
     val isViewPopOpen: Boolean = false,
     val activeExtraTab: ExtraPlayerTab = ExtraPlayerTab.RECENT,
+    val audioEffects: AudioEffectsState = AudioEffectsState(),
     val isMiniPlayerHidden: Boolean = false,
     val unseenFavoritesCount: Int = 0
 )
@@ -76,9 +77,6 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         _showBatteryOptimizationPrompt.value = false
     }
 
-    // Kept out of uiState: equalizer changes arrive on every slider move and only the sheets need them.
-    val audioEffects: StateFlow<AudioEffectsState> = AudioEffectsController.state
-
     val uiState: StateFlow<RadioUiState> = combine(
         _currentStation,
         playerManager.playerState,
@@ -91,6 +89,7 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         _isEqualizerPopOpen,
         _isViewPopOpen,
         _activeExtraTab,
+        AudioEffectsController.state,
         _isMiniPlayerHidden,
         repository.seenFavoritesFlow,
         _stations
@@ -108,11 +107,12 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         val eqPop = params[8] as Boolean
         val viewPop = params[9] as Boolean
         val extraTab = params[10] as ExtraPlayerTab
-        val miniHidden = params[11] as Boolean
+        val effects = params[11] as AudioEffectsState
+        val miniHidden = params[12] as Boolean
         @Suppress("UNCHECKED_CAST")
-        val seenFavs = params[12] as Set<String>
+        val seenFavs = params[13] as Set<String>
         @Suppress("UNCHECKED_CAST")
-        val orderedStations = params[13] as List<RadioStation>
+        val orderedStations = params[14] as List<RadioStation>
 
         val byId = orderedStations.associateBy { it.id }
         val recentsList = recentsIds.mapNotNull { byId[it] }
@@ -130,6 +130,7 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             isEqualizerPopOpen = eqPop,
             isViewPopOpen = viewPop,
             activeExtraTab = extraTab,
+            audioEffects = effects,
             isMiniPlayerHidden = miniHidden,
             unseenFavoritesCount = favs.count { it !in seenFavs }
         )
@@ -142,6 +143,7 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             favorites = repository.favoritesFlow.value,
             viewMode = repository.viewModeFlow.value,
             sizeStep = repository.sizeStepFlow.value,
+            audioEffects = AudioEffectsController.state.value,
             unseenFavoritesCount = repository.favoritesFlow.value.count { it !in repository.seenFavoritesFlow.value }
         )
     )
@@ -217,11 +219,12 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         selectStation(list[prevIndex])
     }
 
-    fun toggleFavorite() {
-        val stationId = _currentStation.value?.id ?: return
-        repository.toggleFavorite(stationId)
-        if (_selectedTab.value == AppTab.FAVORITES) {
-            repository.markFavoritesSeen()
+    fun toggleFavorite(stationId: String? = _currentStation.value?.id) {
+        if (stationId != null) {
+            repository.toggleFavorite(stationId)
+            if (_selectedTab.value == AppTab.FAVORITES) {
+                repository.markFavoritesSeen(repository.favoritesFlow.value)
+            }
         }
     }
 
@@ -260,6 +263,10 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         AudioEffectsController.setLoudnessEnabled(enabled)
     }
 
+    fun setLoudnessGain(gainMillibel: Float) {
+        AudioEffectsController.setLoudnessGain(gainMillibel)
+    }
+
     fun setDynamicsProcessingEnabled(enabled: Boolean) {
         AudioEffectsController.setDynamicsProcessingEnabled(enabled)
     }
@@ -268,7 +275,7 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         _selectedTab.value = tab
         _isViewPopOpen.value = false
         if (tab == AppTab.FAVORITES) {
-            repository.markFavoritesSeen()
+            repository.markFavoritesSeen(repository.favoritesFlow.value)
         }
     }
 

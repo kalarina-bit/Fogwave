@@ -126,7 +126,7 @@ class RadioPlayerManager(private val context: Context) {
         }
     }
 
-    private fun play() {
+    fun play() {
         val c = controller
         when {
             c == null || c.mediaItemCount == 0 -> currentStation?.let { playStation(it) }
@@ -140,7 +140,7 @@ class RadioPlayerManager(private val context: Context) {
         }
     }
 
-    private fun pause() {
+    fun pause() {
         controller?.pause()
     }
 

@@ -1,4 +1,1 @@
-• Faster start: settings and station logos load in the background
-• Smoother player sheet and equalizer: animations and sliders no longer redraw the whole screen
-• Android Auto shows the station list faster
-• Smaller app: only the six app languages and the audio parts of the player are included
+• Interface icons are now WebP: the app is smaller and looks the same

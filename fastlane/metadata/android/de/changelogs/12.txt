@@ -1,4 +1,1 @@
-• Schnellerer Start: Einstellungen und Senderlogos werden im Hintergrund geladen
-• Flüssigerer Player und Equalizer: Animationen und Regler zeichnen nicht mehr den ganzen Bildschirm neu
-• Android Auto zeigt die Senderliste schneller an
-• Kleinere App: nur die sechs App-Sprachen und nur die Audioteile des Players
+• Oberflächensymbole jetzt im WebP-Format: kleinere App, gleiches Aussehen

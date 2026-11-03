@@ -42,6 +42,11 @@ object AudioEffectsController {
         refresh()
     }
 
+    fun setLoudnessGain(gainMillibel: Float) {
+        engine?.setLoudnessGain(gainMillibel)
+        refresh()
+    }
+
     fun setDynamicsProcessingEnabled(enabled: Boolean) {
         engine?.setDynamicsProcessingEnabled(enabled)
         refresh()

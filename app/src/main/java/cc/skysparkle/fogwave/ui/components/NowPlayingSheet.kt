@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -47,16 +48,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -70,60 +73,10 @@ import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.data.model.ExtraPlayerTab
 import cc.skysparkle.fogwave.data.model.RadioStation
+import cc.skysparkle.fogwave.player.AudioEffectsState
 import cc.skysparkle.fogwave.player.PlayerState
-import cc.skysparkle.fogwave.ui.theme.DarkGeoColors
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
-import cc.skysparkle.fogwave.ui.theme.Typography
 import kotlin.math.roundToInt
-
-// Text styles are built once from the app's only palette, not copied on every recomposition.
-private val SheetLabelStyle = Typography.labelSmall.copy(
-    fontWeight = FontWeight.Bold,
-    fontSize = 11.5.sp,
-    letterSpacing = 1.2.sp,
-    color = DarkGeoColors.primary
-)
-private val SheetTitleStyle = Typography.headlineMedium.copy(
-    fontWeight = FontWeight.ExtraBold,
-    fontSize = 25.sp,
-    letterSpacing = (-0.5).sp,
-    color = DarkGeoColors.deepPurple,
-    textAlign = TextAlign.Center
-)
-private val SheetDescriptionStyle = Typography.bodyMedium.copy(
-    fontSize = 14.sp,
-    color = DarkGeoColors.onSurfaceVariant,
-    textAlign = TextAlign.Center
-)
-private val SheetStatusStyle = Typography.labelSmall.copy(
-    fontWeight = FontWeight.SemiBold,
-    fontSize = 12.sp,
-    color = DarkGeoColors.onSurfaceVariant
-)
-private val SheetStatusLiveStyle = SheetStatusStyle.copy(color = DarkGeoColors.deepPurple)
-private val SheetStatusErrorStyle = SheetStatusStyle.copy(color = DarkGeoColors.redFavorite)
-private val SheetEmptyListStyle = Typography.bodySmall.copy(
-    color = DarkGeoColors.onSurfaceVariant,
-    textAlign = TextAlign.Center
-)
-private val SheetRowNameStyle = Typography.bodyMedium.copy(
-    fontWeight = FontWeight.Bold,
-    color = DarkGeoColors.onSurface
-)
-private val SheetRowNameAccentStyle = SheetRowNameStyle.copy(color = DarkGeoColors.deepPurple)
-private val SheetRowDescriptionStyle = Typography.bodySmall.copy(
-    fontSize = 11.5.sp,
-    color = DarkGeoColors.onSurfaceVariant
-)
-private val InfoKeyStyle = Typography.bodySmall.copy(
-    fontWeight = FontWeight.SemiBold,
-    color = DarkGeoColors.onSurfaceVariant
-)
-private val InfoValueStyle = Typography.bodySmall.copy(
-    fontWeight = FontWeight.Bold,
-    color = DarkGeoColors.deepPurple,
-    textAlign = TextAlign.End
-)
 
 @Composable
 fun NowPlayingSheet(
@@ -136,7 +89,7 @@ fun NowPlayingSheet(
     onNext: () -> Unit,
     onClose: () -> Unit,
     onOpenEqualizer: () -> Unit,
-    equalizerEnabled: Boolean,
+    audioEffects: AudioEffectsState,
     activeExtraTab: ExtraPlayerTab,
     onSelectExtraTab: (ExtraPlayerTab) -> Unit,
     recents: List<RadioStation>,
@@ -219,7 +172,12 @@ fun NowPlayingSheet(
                 // The sheet closes by swiping down, tapping outside it or pressing Back.
                 Text(
                     text = stringResource(R.string.now_playing_label),
-                    style = SheetLabelStyle,
+                    style = MaterialTheme.typography.labelSmall.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.5.sp,
+                        letterSpacing = 1.2.sp,
+                        color = LocalGeoColors.current.primary
+                    ),
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp)
                 )
 
@@ -228,17 +186,18 @@ fun NowPlayingSheet(
                         .padding(horizontal = 44.dp, vertical = 10.dp)
                         .fillMaxWidth()
                         .aspectRatio(1f)
-                        // Scaled in the layer, so the spring does not recompose the sheet every frame.
-                        .graphicsLayer {
-                            scaleX = artScale
-                            scaleY = artScale
-                        }
+                        .scale(artScale)
                         .shadow(8.dp, RoundedCornerShape(32.dp))
                         .clip(RoundedCornerShape(32.dp))
                         .background(stationTileColor(station))
                         .border(1.5.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(32.dp))
                 ) {
-                    StationArtwork(station, Modifier.matchParentSize())
+                    Image(
+                        painter = painterResource(id = station.iconResId),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.matchParentSize()
+                    )
                 }
 
                 Column(
@@ -249,7 +208,13 @@ fun NowPlayingSheet(
                 ) {
                     Text(
                         text = station.name,
-                        style = SheetTitleStyle,
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 25.sp,
+                            letterSpacing = (-0.5).sp,
+                            color = LocalGeoColors.current.deepPurple,
+                            textAlign = TextAlign.Center
+                        ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -258,7 +223,11 @@ fun NowPlayingSheet(
 
                     Text(
                         text = stationDescription(station),
-                        style = SheetDescriptionStyle,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontSize = 14.sp,
+                            color = LocalGeoColors.current.onSurfaceVariant,
+                            textAlign = TextAlign.Center
+                        ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -304,7 +273,11 @@ fun NowPlayingSheet(
                                 isPlaying -> stringResource(R.string.now_playing_live)
                                 else -> stringResource(R.string.player_stopped)
                             },
-                            style = if (isPlaying) SheetStatusLiveStyle else (if (isError) SheetStatusErrorStyle else SheetStatusStyle)
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 12.sp,
+                                color = if (isPlaying) LocalGeoColors.current.deepPurple else (if (isError) LocalGeoColors.current.redFavorite else LocalGeoColors.current.onSurfaceVariant)
+                            )
                         )
                     }
                 }
@@ -340,7 +313,7 @@ fun NowPlayingSheet(
                             AppIcon(
                                 resId = R.drawable.ic_equalizer,
                                 contentDescription = stringResource(R.string.equalizer_content_desc),
-                                tint = if (equalizerEnabled) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant.copy(alpha = 0.5f),
+                                tint = if (audioEffects.equalizerEnabled) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant.copy(alpha = 0.5f),
                                 size = 20.dp
                             )
                         }
@@ -425,10 +398,7 @@ fun NowPlayingSheet(
                                     color = if (isFavorite) LocalGeoColors.current.redFavorite else LocalGeoColors.current.outlineVariant,
                                     shape = CircleShape
                                 )
-                                .graphicsLayer {
-                                    scaleX = favScale
-                                    scaleY = favScale
-                                }
+                                .scale(favScale)
                                 .clickable { onToggleFavorite() }
                                 .testTag("np_favorite_toggle"),
                             contentAlignment = Alignment.Center
@@ -461,12 +431,34 @@ fun NowPlayingSheet(
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         ExtraPlayerTab.entries.forEach { tab ->
-                            ExtraTabChip(
-                                title = stringResource(tab.titleRes),
-                                isSelected = tab == activeExtraTab,
-                                onClick = { onSelectExtraTab(tab) },
-                                modifier = Modifier.weight(1f)
+                            val isSelected = tab == activeExtraTab
+                            val bg by animateColorAsState(
+                                targetValue = if (isSelected) LocalGeoColors.current.primaryContainer else Color.Transparent,
+                                label = "extra_tab_bg"
                             )
+                            val textColor by animateColorAsState(
+                                targetValue = if (isSelected) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant,
+                                label = "extra_tab_text"
+                            )
+
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(bg)
+                                    .clickable { onSelectExtraTab(tab) }
+                                    .padding(vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = stringResource(tab.titleRes),
+                                    style = MaterialTheme.typography.labelSmall.copy(
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                        fontSize = 12.sp,
+                                        color = textColor
+                                    )
+                                )
+                            }
                         }
                     }
 
@@ -475,7 +467,10 @@ fun NowPlayingSheet(
                             if (recents.isEmpty()) {
                                 Text(
                                     text = stringResource(R.string.recent_empty),
-                                    style = SheetEmptyListStyle,
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = LocalGeoColors.current.onSurfaceVariant,
+                                        textAlign = TextAlign.Center
+                                    ),
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(vertical = 16.dp)
@@ -501,7 +496,12 @@ fun NowPlayingSheet(
                                                     .clip(RoundedCornerShape(10.dp))
                                                     .background(stationTileColor(s))
                                             ) {
-                                                StationArtwork(s, Modifier.matchParentSize())
+                                                Image(
+                                                    painter = painterResource(id = s.iconResId),
+                                                    contentDescription = null,
+                                                    contentScale = ContentScale.Crop,
+                                                    modifier = Modifier.matchParentSize()
+                                                )
                                             }
 
                                             Column(modifier = Modifier.weight(1f)) {
@@ -514,14 +514,20 @@ fun NowPlayingSheet(
                                                     }
                                                     Text(
                                                         text = s.name,
-                                                        style = if (isCur) SheetRowNameAccentStyle else SheetRowNameStyle,
+                                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                                            fontWeight = FontWeight.Bold,
+                                                            color = if (isCur) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurface
+                                                        ),
                                                         maxLines = 1,
                                                         overflow = TextOverflow.Ellipsis
                                                     )
                                                 }
                                                 Text(
                                                     text = stationDescription(s),
-                                                    style = SheetRowDescriptionStyle,
+                                                    style = MaterialTheme.typography.bodySmall.copy(
+                                                        fontSize = 11.5.sp,
+                                                        color = LocalGeoColors.current.onSurfaceVariant
+                                                    ),
                                                     maxLines = 1,
                                                     overflow = TextOverflow.Ellipsis
                                                 )
@@ -543,7 +549,10 @@ fun NowPlayingSheet(
                             if (similarStations.isEmpty()) {
                                 Text(
                                     text = stringResource(R.string.similar_empty),
-                                    style = SheetEmptyListStyle,
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = LocalGeoColors.current.onSurfaceVariant,
+                                        textAlign = TextAlign.Center
+                                    ),
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(vertical = 16.dp)
@@ -568,19 +577,30 @@ fun NowPlayingSheet(
                                                     .clip(RoundedCornerShape(10.dp))
                                                     .background(stationTileColor(s))
                                             ) {
-                                                StationArtwork(s, Modifier.matchParentSize())
+                                                Image(
+                                                    painter = painterResource(id = s.iconResId),
+                                                    contentDescription = null,
+                                                    contentScale = ContentScale.Crop,
+                                                    modifier = Modifier.matchParentSize()
+                                                )
                                             }
 
                                             Column(modifier = Modifier.weight(1f)) {
                                                 Text(
                                                     text = s.name,
-                                                    style = SheetRowNameAccentStyle,
+                                                    style = MaterialTheme.typography.bodyMedium.copy(
+                                                        fontWeight = FontWeight.Bold,
+                                                        color = LocalGeoColors.current.deepPurple
+                                                    ),
                                                     maxLines = 1,
                                                     overflow = TextOverflow.Ellipsis
                                                 )
                                                 Text(
                                                     text = "${stationDescription(s)} • ${stationGenres(s)}",
-                                                    style = SheetRowDescriptionStyle,
+                                                    style = MaterialTheme.typography.bodySmall.copy(
+                                                        fontSize = 11.5.sp,
+                                                        color = LocalGeoColors.current.onSurfaceVariant
+                                                    ),
                                                     maxLines = 1,
                                                     overflow = TextOverflow.Ellipsis
                                                 )
@@ -630,42 +650,6 @@ fun NowPlayingSheet(
     }
 }
 
-// A composable of its own, so the color animation recomposes only this chip, not the whole sheet.
-@Composable
-private fun ExtraTabChip(
-    title: String,
-    isSelected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val bg by animateColorAsState(
-        targetValue = if (isSelected) LocalGeoColors.current.primaryContainer else Color.Transparent,
-        label = "extra_tab_bg"
-    )
-    val textColor by animateColorAsState(
-        targetValue = if (isSelected) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant,
-        label = "extra_tab_text"
-    )
-
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
-            .background(bg)
-            .clickable(onClick = onClick)
-            .padding(vertical = 8.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.labelSmall.copy(
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                fontSize = 12.sp,
-                color = textColor
-            )
-        )
-    }
-}
-
 @Composable
 private fun InfoRow(key: String, value: String) {
     Row(
@@ -675,12 +659,19 @@ private fun InfoRow(key: String, value: String) {
     ) {
         Text(
             text = key,
-            style = InfoKeyStyle
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.SemiBold,
+                color = LocalGeoColors.current.onSurfaceVariant
+            )
         )
         // Long values (descriptions, genre lists) wrap on the right instead of pushing the key out.
         Text(
             text = value,
-            style = InfoValueStyle,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.Bold,
+                color = LocalGeoColors.current.deepPurple,
+                textAlign = TextAlign.End
+            ),
             modifier = Modifier.weight(1f)
         )
     }
