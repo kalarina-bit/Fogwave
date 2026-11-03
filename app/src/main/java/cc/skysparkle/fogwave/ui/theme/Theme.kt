@@ -3,7 +3,6 @@ package cc.skysparkle.fogwave.ui.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 
 private val DarkColorScheme = with(DarkGeoColors) {
     darkColorScheme(
@@ -25,9 +24,8 @@ private val DarkColorScheme = with(DarkGeoColors) {
     )
 }
 
+// LocalGeoColors needs no provider: the dark palette is its default and the only one.
 @Composable
 fun FogwaveTheme(content: @Composable () -> Unit) {
-    CompositionLocalProvider(LocalGeoColors provides DarkGeoColors) {
-        MaterialTheme(colorScheme = DarkColorScheme, typography = Typography, content = content)
-    }
+    MaterialTheme(colorScheme = DarkColorScheme, typography = Typography, content = content)
 }

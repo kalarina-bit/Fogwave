@@ -23,7 +23,6 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
@@ -32,6 +31,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -47,9 +47,54 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.player.AudioEffectsState
+import cc.skysparkle.fogwave.player.EqualizerBand
+import cc.skysparkle.fogwave.ui.theme.DarkGeoColors
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
+import cc.skysparkle.fogwave.ui.theme.Typography
 import java.util.Locale
 import kotlin.math.roundToInt
+
+// Text styles are built once from the app's only palette, not copied on every slider move.
+private val EqTitleStyle = Typography.titleLarge.copy(
+    fontWeight = FontWeight.Bold,
+    color = DarkGeoColors.deepPurple
+)
+private val EqStateStyle = Typography.labelMedium.copy(
+    fontWeight = FontWeight.Bold,
+    color = DarkGeoColors.onSurfaceVariant
+)
+private val EqStateOnStyle = EqStateStyle.copy(color = DarkGeoColors.liveGreen)
+private val EqSectionStyle = Typography.labelMedium.copy(
+    color = DarkGeoColors.onSurfaceVariant,
+    fontWeight = FontWeight.Medium
+)
+private val EqUnavailableStyle = Typography.bodyMedium.copy(color = DarkGeoColors.onSurfaceVariant)
+private val EqPresetNameStyle = Typography.titleMedium.copy(
+    fontWeight = FontWeight.SemiBold,
+    color = DarkGeoColors.onSurface
+)
+private val EqPresetChipStyle = Typography.labelLarge.copy(
+    fontWeight = FontWeight.Medium,
+    color = DarkGeoColors.onSurfaceVariant
+)
+private val EqPresetChipSelectedStyle = Typography.labelLarge.copy(
+    fontWeight = FontWeight.Bold,
+    color = DarkGeoColors.deepPurple
+)
+private val EqLevelStyle = Typography.labelSmall.copy(
+    fontSize = 11.sp,
+    fontWeight = FontWeight.SemiBold,
+    color = DarkGeoColors.primary
+)
+private val EqLevelZeroStyle = EqLevelStyle.copy(color = DarkGeoColors.onSurfaceVariant)
+private val EqFrequencyStyle = Typography.labelSmall.copy(
+    fontSize = 11.sp,
+    color = DarkGeoColors.onSurfaceVariant
+)
+private val EqToggleLabelStyle = Typography.bodyMedium.copy(
+    fontWeight = FontWeight.Medium,
+    color = DarkGeoColors.onSurface
+)
 
 @Composable
 fun EqualizerSheet(
@@ -91,18 +136,12 @@ fun EqualizerSheet(
                 }
                 Text(
                     text = stringResource(R.string.equalizer_title),
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = LocalGeoColors.current.deepPurple
-                    ),
+                    style = EqTitleStyle,
                     modifier = Modifier.weight(1f)
                 )
                 Text(
                     text = if (audioEffects.equalizerEnabled) stringResource(R.string.equalizer_on) else stringResource(R.string.equalizer_off),
-                    style = MaterialTheme.typography.labelMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = if (audioEffects.equalizerEnabled) LocalGeoColors.current.liveGreen else LocalGeoColors.current.onSurfaceVariant
-                    ),
+                    style = if (audioEffects.equalizerEnabled) EqStateOnStyle else EqStateStyle,
                     modifier = Modifier.padding(end = 6.dp)
                 )
                 Switch(
@@ -136,10 +175,7 @@ fun EqualizerSheet(
                     )
                     Text(
                         text = stringResource(R.string.equalizer_sound_section),
-                        style = MaterialTheme.typography.labelMedium.copy(
-                            color = LocalGeoColors.current.onSurfaceVariant,
-                            fontWeight = FontWeight.Medium
-                        )
+                        style = EqSectionStyle
                     )
                     Box(
                         modifier = Modifier
@@ -170,54 +206,11 @@ fun EqualizerSheet(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             audioEffects.bands.forEach { band ->
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(6.dp),
-                                    modifier = Modifier.fillMaxHeight()
-                                ) {
-                                    val db = (band.levelMillibel / 100f).roundToInt()
-                                    Text(
-                                        text = if (db > 0) "+$db dB" else "$db dB",
-                                        style = MaterialTheme.typography.labelSmall.copy(
-                                            fontSize = 11.sp,
-                                            fontWeight = FontWeight.SemiBold,
-                                            color = if (db == 0) LocalGeoColors.current.onSurfaceVariant
-                                            else LocalGeoColors.current.primary
-                                        )
-                                    )
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .width(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Slider(
-                                            value = band.levelMillibel.toFloat(),
-                                            onValueChange = { onSetEqualizerBand(band.index, it.roundToInt()) },
-                                            valueRange = band.minLevelMillibel.toFloat()..band.maxLevelMillibel.toFloat(),
-                                            enabled = audioEffects.equalizerEnabled,
-                                            colors = SliderDefaults.colors(
-                                                thumbColor = LocalGeoColors.current.primary,
-                                                activeTrackColor = LocalGeoColors.current.primary,
-                                                inactiveTrackColor = LocalGeoColors.current.outlineVariant
-                                            ),
-                                            modifier = Modifier
-                                                // requiredWidth (not width): the parent is narrower, and width() would be clamped before rotation.
-                                                .requiredWidth(160.dp)
-                                                .graphicsLayer {
-                                                    rotationZ = 270f
-                                                    transformOrigin = TransformOrigin(0.5f, 0.5f)
-                                                }
-                                        )
-                                    }
-                                    Text(
-                                        text = frequencyLabel(band.centerFreqHz),
-                                        style = MaterialTheme.typography.labelSmall.copy(
-                                            fontSize = 11.sp,
-                                            color = LocalGeoColors.current.onSurfaceVariant
-                                        )
-                                    )
-                                }
+                                EqualizerBandColumn(
+                                    band = band,
+                                    enabled = audioEffects.equalizerEnabled,
+                                    onSetEqualizerBand = onSetEqualizerBand
+                                )
                             }
                         }
                     }
@@ -234,7 +227,7 @@ fun EqualizerSheet(
                         )
                         Text(
                             text = stringResource(R.string.equalizer_unavailable),
-                            style = MaterialTheme.typography.bodyMedium.copy(color = LocalGeoColors.current.onSurfaceVariant)
+                            style = EqUnavailableStyle
                         )
                     }
                 }
@@ -256,25 +249,22 @@ fun EqualizerSheet(
                         )
                         Text(
                             text = currentPresetName,
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.SemiBold,
-                                color = LocalGeoColors.current.onSurface
-                            )
+                            style = EqPresetNameStyle
                         )
                     }
 
+                    // Captured instead of audioEffects, so moving a band does not recompose the preset chips.
+                    val presets = audioEffects.presets
+                    val currentPreset = audioEffects.currentPreset
                     LazyRow(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        itemsIndexed(audioEffects.presets) { index, name ->
-                            val selected = audioEffects.currentPreset == index
+                        itemsIndexed(presets) { index, name ->
+                            val selected = currentPreset == index
                             Text(
                                 text = presetLabel(name),
-                                style = MaterialTheme.typography.labelLarge.copy(
-                                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
-                                    color = if (selected) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant
-                                ),
+                                style = if (selected) EqPresetChipSelectedStyle else EqPresetChipStyle,
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(20.dp))
                                     .background(if (selected) LocalGeoColors.current.primaryContainer else LocalGeoColors.current.surfaceContainerHigh)
@@ -324,6 +314,57 @@ fun EqualizerSheet(
     }
 }
 
+// Stable parameters: moving one slider recomposes only that band, not its neighbors.
+@Composable
+private fun EqualizerBandColumn(
+    band: EqualizerBand,
+    enabled: Boolean,
+    onSetEqualizerBand: (Int, Int) -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier.fillMaxHeight()
+    ) {
+        val db = (band.levelMillibel / 100f).roundToInt()
+        Text(
+            text = if (db > 0) "+$db dB" else "$db dB",
+            style = if (db == 0) EqLevelZeroStyle else EqLevelStyle
+        )
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .width(40.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Slider(
+                value = band.levelMillibel.toFloat(),
+                onValueChange = { onSetEqualizerBand(band.index, it.roundToInt()) },
+                valueRange = band.minLevelMillibel.toFloat()..band.maxLevelMillibel.toFloat(),
+                enabled = enabled,
+                colors = SliderDefaults.colors(
+                    thumbColor = LocalGeoColors.current.primary,
+                    activeTrackColor = LocalGeoColors.current.primary,
+                    inactiveTrackColor = LocalGeoColors.current.outlineVariant
+                ),
+                modifier = Modifier
+                    // requiredWidth (not width): the parent is narrower, and width() would be clamped before rotation.
+                    .requiredWidth(160.dp)
+                    .graphicsLayer {
+                        rotationZ = 270f
+                        transformOrigin = TransformOrigin(0.5f, 0.5f)
+                    }
+            )
+        }
+        // The label never changes for a band, so it is formatted once, not on every slider move.
+        val frequency = remember(band.centerFreqHz) { frequencyLabel(band.centerFreqHz) }
+        Text(
+            text = frequency,
+            style = EqFrequencyStyle
+        )
+    }
+}
+
 @Composable
 private fun ToggleRow(
     label: String,
@@ -342,10 +383,7 @@ private fun ToggleRow(
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.bodyMedium.copy(
-                fontWeight = FontWeight.Medium,
-                color = LocalGeoColors.current.onSurface
-            ),
+            style = EqToggleLabelStyle,
             modifier = Modifier.weight(1f)
         )
         Switch(

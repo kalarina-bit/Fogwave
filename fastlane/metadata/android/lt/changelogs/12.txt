@@ -1,0 +1,4 @@
+• Greitesnis paleidimas: nustatymai ir stočių logotipai įkeliami fone
+• Sklandesnis grotuvas ir ekvalaizeris: animacijos ir slankikliai nebeperpiešia viso ekrano
+• Android Auto greičiau parodo stočių sąrašą
+• Mažesnė programa: tik šešios programos kalbos ir tik garso grotuvo dalys

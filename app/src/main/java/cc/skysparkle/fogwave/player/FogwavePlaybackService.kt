@@ -6,6 +6,7 @@ import android.content.Intent
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.Network
+import android.os.LocaleList
 import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.OptIn
@@ -19,6 +20,13 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.Renderer
+import androidx.media3.exoplayer.RenderersFactory
+import androidx.media3.exoplayer.audio.DefaultAudioSink
+import androidx.media3.exoplayer.audio.MediaCodecAudioRenderer
+import androidx.media3.exoplayer.mediacodec.DefaultMediaCodecAdapterFactory
+import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
+import androidx.media3.exoplayer.metadata.MetadataRenderer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.session.LibraryResult
 import androidx.media3.session.MediaLibraryService
@@ -28,7 +36,7 @@ import androidx.media3.session.MediaSession
 import cc.skysparkle.fogwave.BuildConfig
 import cc.skysparkle.fogwave.MainActivity
 import cc.skysparkle.fogwave.R
-import cc.skysparkle.fogwave.data.repository.RadioRepository
+import cc.skysparkle.fogwave.data.repository.RadioStations
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
@@ -43,7 +51,6 @@ import kotlinx.coroutines.launch
 @OptIn(UnstableApi::class)
 class FogwavePlaybackService : MediaLibraryService() {
     private var mediaLibrarySession: MediaLibrarySession? = null
-    private lateinit var repository: RadioRepository
     private lateinit var player: ExoPlayer
     private var audioEffectsEngine: AudioEffectsEngine? = null
 
@@ -75,23 +82,61 @@ class FogwavePlaybackService : MediaLibraryService() {
         .setPrioritizeTimeOverSizeThresholds(true)
         .build()
 
+    // Radio streams carry only audio and ICY/ID3 metadata. Without the default factory R8 can drop
+    // the video, text and image renderers. The audio renderer is configured like the default one,
+    // and two metadata renderers keep ICY titles working next to an in-stream ID3 track.
+    private fun audioOnlyRenderersFactory() = RenderersFactory { handler, _, audioListener, _, metadataOutput ->
+        arrayOf<Renderer>(
+            MediaCodecAudioRenderer(
+                this@FogwavePlaybackService,
+                DefaultMediaCodecAdapterFactory(this@FogwavePlaybackService),
+                MediaCodecSelector.DEFAULT,
+                false,
+                handler,
+                audioListener,
+                DefaultAudioSink.Builder(this@FogwavePlaybackService).build()
+            ),
+            MetadataRenderer(metadataOutput, handler.looper),
+            MetadataRenderer(metadataOutput, handler.looper)
+        )
+    }
+
+    // Browse tree for Android Auto: built once and served from memory, rebuilt only when the app
+    // language changes so station descriptions stay translated.
+    private var browseTreeLocales: LocaleList? = null
+    private lateinit var rootItem: MediaItem
+    private lateinit var stationItems: ImmutableList<MediaItem>
+
+    private fun ensureBrowseTree() {
+        val locales = resources.configuration.locales
+        if (locales == browseTreeLocales) return
+        rootItem = MediaItem.Builder()
+            .setMediaId(ROOT_ID)
+            .setMediaMetadata(
+                MediaMetadata.Builder()
+                    .setTitle(getString(R.string.app_name))
+                    .setIsBrowsable(true)
+                    .setIsPlayable(false)
+                    .setMediaType(MediaMetadata.MEDIA_TYPE_FOLDER_MIXED)
+                    .build()
+            )
+            .build()
+        stationItems = ImmutableList.copyOf(RadioStations.map { it.toMediaItem(this) })
+        browseTreeLocales = locales
+    }
+
+    private fun stationItem(mediaId: String): MediaItem? {
+        ensureBrowseTree()
+        return stationItems.find { it.mediaId == mediaId }
+    }
+
     private val librarySessionCallback = object : MediaLibrarySession.Callback {
         override fun onGetLibraryRoot(
             session: MediaLibrarySession,
             browser: MediaSession.ControllerInfo,
             params: LibraryParams?
         ): ListenableFuture<LibraryResult<MediaItem>> {
-            val rootItem = MediaItem.Builder()
-                .setMediaId(ROOT_ID)
-                .setMediaMetadata(
-                    MediaMetadata.Builder()
-                        .setTitle(getString(R.string.app_name))
-                        .setIsBrowsable(true)
-                        .setIsPlayable(false)
-                        .setMediaType(MediaMetadata.MEDIA_TYPE_FOLDER_MIXED)
-                        .build()
-                )
-                .build()
+            ensureBrowseTree()
             return Futures.immediateFuture(LibraryResult.ofItem(rootItem, params))
         }
 
@@ -106,8 +151,8 @@ class FogwavePlaybackService : MediaLibraryService() {
             if (parentId != ROOT_ID) {
                 return Futures.immediateFuture(LibraryResult.ofError(LibraryResult.RESULT_ERROR_BAD_VALUE))
             }
-            val items = repository.stations.map { it.toMediaItem(this@FogwavePlaybackService) }
-            return Futures.immediateFuture(LibraryResult.ofItemList(ImmutableList.copyOf(items), params))
+            ensureBrowseTree()
+            return Futures.immediateFuture(LibraryResult.ofItemList(stationItems, params))
         }
 
         override fun onGetItem(
@@ -115,9 +160,9 @@ class FogwavePlaybackService : MediaLibraryService() {
             browser: MediaSession.ControllerInfo,
             mediaId: String
         ): ListenableFuture<LibraryResult<MediaItem>> {
-            val station = repository.stations.find { it.id == mediaId }
+            val item = stationItem(mediaId)
                 ?: return Futures.immediateFuture(LibraryResult.ofError(LibraryResult.RESULT_ERROR_BAD_VALUE))
-            return Futures.immediateFuture(LibraryResult.ofItem(station.toMediaItem(this@FogwavePlaybackService), null))
+            return Futures.immediateFuture(LibraryResult.ofItem(item, null))
         }
 
         override fun onAddMediaItems(
@@ -126,13 +171,7 @@ class FogwavePlaybackService : MediaLibraryService() {
             mediaItems: MutableList<MediaItem>
         ): ListenableFuture<MutableList<MediaItem>> {
             val resolved = mediaItems.map { item ->
-                if (item.localConfiguration != null) {
-                    item
-                } else {
-                    repository.stations.find { it.id == item.mediaId }
-                        ?.toMediaItem(this@FogwavePlaybackService)
-                        ?: item
-                }
+                if (item.localConfiguration != null) item else stationItem(item.mediaId) ?: item
             }.toMutableList()
 
             resolved.firstOrNull()?.let { item ->
@@ -270,14 +309,15 @@ class FogwavePlaybackService : MediaLibraryService() {
 
     override fun onCreate() {
         super.onCreate()
-        repository = RadioRepository(applicationContext)
-
         val audioManager = getSystemService(Context.AUDIO_SERVICE) as? AudioManager
         val audioSessionId = audioManager?.generateAudioSessionId()?.takeIf { it != 0 }
             ?: C.AUDIO_SESSION_ID_UNSET
 
-        player = ExoPlayer.Builder(this)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(this).setDataSourceFactory(httpDataSourceFactory))
+        player = ExoPlayer.Builder(
+            this,
+            audioOnlyRenderersFactory(),
+            DefaultMediaSourceFactory(this).setDataSourceFactory(httpDataSourceFactory)
+        )
             .setLoadControl(loadControl)
             .build()
             .apply {

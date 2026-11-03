@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,7 +39,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
@@ -51,8 +49,9 @@ import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.data.model.IconSizeStep
 import cc.skysparkle.fogwave.data.model.RadioStation
 import cc.skysparkle.fogwave.data.model.ViewMode
+import cc.skysparkle.fogwave.ui.theme.DarkGeoColors
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
-import coil.compose.AsyncImage
+import cc.skysparkle.fogwave.ui.theme.Typography
 
 @Composable
 fun LiveOnAirDot(modifier: Modifier = Modifier) {
@@ -80,6 +79,41 @@ fun LiveOnAirDot(modifier: Modifier = Modifier) {
 }
 
 private val GridTextShadow = Shadow(color = Color.Black.copy(alpha = 0.55f), blurRadius = 8f)
+
+// Text styles are built once from the app's only palette, not copied on every recomposition.
+private val IconsNameStyle = Typography.titleSmall.copy(
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.5.sp,
+    lineHeight = 17.sp,
+    color = DarkGeoColors.onSurface,
+    shadow = GridTextShadow
+)
+private val IconsNameCurrentStyle = IconsNameStyle.copy(color = DarkGeoColors.deepPurple)
+private val IconsDescriptionStyle = Typography.bodySmall.copy(
+    fontSize = 11.5.sp,
+    color = DarkGeoColors.onSurface.copy(alpha = 0.82f),
+    shadow = GridTextShadow
+)
+private val TilesNameStyle = Typography.titleSmall.copy(
+    fontWeight = FontWeight.Bold,
+    fontSize = 15.sp,
+    color = DarkGeoColors.onSurface
+)
+private val TilesNameCurrentStyle = TilesNameStyle.copy(color = DarkGeoColors.deepPurple)
+private val TilesDescriptionStyle = Typography.bodySmall.copy(
+    fontSize = 12.sp,
+    color = DarkGeoColors.onSurfaceVariant
+)
+private val RowNameStyle = Typography.bodyMedium.copy(
+    fontWeight = FontWeight.Bold,
+    color = DarkGeoColors.onSurface
+)
+private val RowNameCurrentStyle = RowNameStyle.copy(color = DarkGeoColors.deepPurple)
+private val RowDescriptionStyle = Typography.bodySmall.copy(
+    fontSize = 11.5.sp,
+    color = DarkGeoColors.onSurfaceVariant
+)
+private val RowGenresStyle = RowDescriptionStyle.copy(color = DarkGeoColors.primary)
 
 @Composable
 fun StationItem(
@@ -188,12 +222,7 @@ private fun StationIconsCard(
                     shape = RoundedCornerShape(22.dp)
                 )
         ) {
-            AsyncImage(
-                model = station.iconResId,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.matchParentSize()
-            )
+            StationLogoImage(station, Modifier.matchParentSize())
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -207,13 +236,7 @@ private fun StationIconsCard(
             }
             Text(
                 text = station.name,
-                style = MaterialTheme.typography.titleSmall.copy(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 14.5.sp,
-                    lineHeight = 17.sp,
-                    color = if (isCurrent) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurface,
-                    shadow = GridTextShadow
-                ),
+                style = if (isCurrent) IconsNameCurrentStyle else IconsNameStyle,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
@@ -221,11 +244,7 @@ private fun StationIconsCard(
 
         Text(
             text = stationDescription(station),
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 11.5.sp,
-                color = LocalGeoColors.current.onSurface.copy(alpha = 0.82f),
-                shadow = GridTextShadow
-            ),
+            style = IconsDescriptionStyle,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -270,12 +289,7 @@ private fun StationTilesCard(
                 .background(stationTileColor(station))
                 .border(0.8.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(14.dp))
         ) {
-            AsyncImage(
-                model = station.iconResId,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.matchParentSize()
-            )
+            StationLogoImage(station, Modifier.matchParentSize())
         }
 
         Column(modifier = Modifier.weight(1f)) {
@@ -288,21 +302,14 @@ private fun StationTilesCard(
                 }
                 Text(
                     text = station.name,
-                    style = MaterialTheme.typography.titleSmall.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp,
-                        color = if (isCurrent) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurface
-                    ),
+                    style = if (isCurrent) TilesNameCurrentStyle else TilesNameStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
             Text(
                 text = stationDescription(station),
-                style = MaterialTheme.typography.bodySmall.copy(
-                    fontSize = 12.sp,
-                    color = LocalGeoColors.current.onSurfaceVariant
-                ),
+                style = TilesDescriptionStyle,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -343,12 +350,7 @@ private fun StationListRow(
                 .background(stationTileColor(station))
                 .border(0.8.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(10.dp))
         ) {
-            AsyncImage(
-                model = station.iconResId,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.matchParentSize()
-            )
+            StationLogoImage(station, Modifier.matchParentSize())
         }
 
         Column(modifier = Modifier.weight(1f)) {
@@ -361,10 +363,7 @@ private fun StationListRow(
                 }
                 Text(
                     text = station.name,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = if (isCurrent) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurface
-                    ),
+                    style = if (isCurrent) RowNameCurrentStyle else RowNameStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -411,12 +410,7 @@ private fun StationDetailsRow(
                 .background(stationTileColor(station))
                 .border(0.8.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(10.dp))
         ) {
-            AsyncImage(
-                model = station.iconResId,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.matchParentSize()
-            )
+            StationLogoImage(station, Modifier.matchParentSize())
         }
 
         Column(modifier = Modifier.weight(1.3f)) {
@@ -429,20 +423,14 @@ private fun StationDetailsRow(
                 }
                 Text(
                     text = station.name,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = if (isCurrent) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurface
-                    ),
+                    style = if (isCurrent) RowNameCurrentStyle else RowNameStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
             Text(
                 text = stationDescription(station),
-                style = MaterialTheme.typography.bodySmall.copy(
-                    fontSize = 11.5.sp,
-                    color = LocalGeoColors.current.onSurfaceVariant
-                ),
+                style = RowDescriptionStyle,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -450,10 +438,7 @@ private fun StationDetailsRow(
 
         Text(
             text = stationGenres(station),
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 11.5.sp,
-                color = LocalGeoColors.current.primary
-            ),
+            style = RowGenresStyle,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(0.9f)

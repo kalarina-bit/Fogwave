@@ -4,7 +4,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.Spring
@@ -30,6 +29,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,7 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -59,13 +59,15 @@ import cc.skysparkle.fogwave.ui.components.StationsToolbar
 import cc.skysparkle.fogwave.ui.components.TopBrandBar
 import cc.skysparkle.fogwave.ui.viewmodel.RadioViewModel
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreen(
     viewModel: RadioViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isPlaying = uiState.playerState is PlayerState.Playing
+    // Read only inside the sheets below, so moving an equalizer slider recomposes just those.
+    val audioEffects = viewModel.audioEffects.collectAsStateWithLifecycle()
+    val equalizerEnabled by remember { derivedStateOf { audioEffects.value.equalizerEnabled } }
 
     val favoriteStations = remember(uiState.stations, uiState.favorites) {
         uiState.stations.filter { it.id in uiState.favorites }
@@ -194,8 +196,8 @@ fun HomeScreen(
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
                 // Measured before the inset padding so list content clears the system bar too.
-                .onGloballyPositioned { coordinates ->
-                    val measured = with(density) { coordinates.size.height.toDp() }
+                .onSizeChanged { size ->
+                    val measured = with(density) { size.height.toDp() }
                     if (measured > 0.dp && measured != dockHeight) {
                         dockHeight = measured
                     }
@@ -244,7 +246,7 @@ fun HomeScreen(
                 onNext = { viewModel.nextStation() },
                 onClose = { viewModel.closeNowPlaying() },
                 onOpenEqualizer = { viewModel.toggleEqualizerPop() },
-                audioEffects = uiState.audioEffects,
+                equalizerEnabled = equalizerEnabled,
                 activeExtraTab = uiState.activeExtraTab,
                 onSelectExtraTab = { viewModel.setActiveExtraTab(it) },
                 recents = recentStations,
@@ -271,7 +273,7 @@ fun HomeScreen(
             ) { it / 3 }
         ) {
             EqualizerSheet(
-                audioEffects = uiState.audioEffects,
+                audioEffects = audioEffects.value,
                 onClose = { viewModel.closeEqualizerPop() },
                 onSetEqualizerEnabled = { viewModel.setEqualizerEnabled(it) },
                 onSetEqualizerBand = { band, level -> viewModel.setEqualizerBand(band, level) },

@@ -5,7 +5,6 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,7 +26,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
@@ -40,10 +38,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -53,11 +49,26 @@ import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.data.model.RadioStation
 import cc.skysparkle.fogwave.player.PlayerState
+import cc.skysparkle.fogwave.ui.theme.DarkGeoColors
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
+import cc.skysparkle.fogwave.ui.theme.Typography
 import kotlin.math.roundToInt
 
 private val TABLET_BREAKPOINT_DP = 600.dp
 private val TABLET_MINI_PLAYER_MAX_WIDTH_DP = 640.dp
+
+// Text styles are built once from the app's only palette, not copied on every recomposition.
+private val MiniNameStyle = Typography.bodyMedium.copy(
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.5.sp,
+    color = DarkGeoColors.deepPurple
+)
+private val MiniStatusStyle = Typography.bodySmall.copy(
+    fontSize = 11.5.sp,
+    color = DarkGeoColors.onSurfaceVariant
+)
+private val MiniStatusLiveStyle = MiniStatusStyle.copy(color = DarkGeoColors.liveGreen)
+private val MiniStatusErrorStyle = MiniStatusStyle.copy(color = DarkGeoColors.redFavorite)
 
 @Composable
 fun MiniPlayer(
@@ -162,12 +173,7 @@ fun MiniPlayer(
                         .background(stationTileColor(station))
                         .border(1.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(14.dp))
                 ) {
-                    Image(
-                        painter = painterResource(id = station.iconResId),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.matchParentSize()
-                    )
+                    StationArtwork(station, Modifier.matchParentSize())
                 }
 
                 Column(
@@ -176,21 +182,14 @@ fun MiniPlayer(
                 ) {
                     Text(
                         text = station.name,
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.5.sp,
-                            color = LocalGeoColors.current.deepPurple
-                        ),
+                        style = MiniNameStyle,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
 
                     Text(
                         text = subText,
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            fontSize = 11.5.sp,
-                            color = if (isError) LocalGeoColors.current.redFavorite else (if (isPlaying) LocalGeoColors.current.liveGreen else LocalGeoColors.current.onSurfaceVariant)
-                        ),
+                        style = if (isError) MiniStatusErrorStyle else (if (isPlaying) MiniStatusLiveStyle else MiniStatusStyle),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
