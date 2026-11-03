@@ -21,11 +21,9 @@
 </p>
 
 <p align="center">
-  <img src="assets/screenshots/5-feel-closer.png" width="160" alt="Feel closer to Lithuania">
-  <img src="assets/screenshots/4-stations.png" width="160" alt="Browse all stations">
-  <img src="assets/screenshots/1-find-station.png" width="160" alt="Find a station, then settle in">
-  <img src="assets/screenshots/2-your-style.png" width="160" alt="Just your style">
-  <img src="assets/screenshots/3-soundtrack.png" width="160" alt="Your soundtrack">
+  <img src="assets/screenshots/1-lithuanian-radio-left.png" width="160" alt="Lithuanian radio, live"><img src="assets/screenshots/2-lithuanian-radio-right.png" width="160" alt="Station list">
+  <img src="assets/screenshots/3-favorites.png" width="160" alt="Save your favorites">
+  <img src="assets/screenshots/4-listen-live.png" width="160" alt="Listen live">
 </p>
 
 > [!TIP]
