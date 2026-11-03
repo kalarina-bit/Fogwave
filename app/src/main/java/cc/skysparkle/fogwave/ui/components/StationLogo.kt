@@ -2,9 +2,11 @@ package cc.skysparkle.fogwave.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import cc.skysparkle.fogwave.data.model.RadioStation
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 import coil.compose.AsyncImage
@@ -17,13 +19,18 @@ private val LightLogoBackdrop = Color(0xFFECE8F1)
 fun stationTileColor(station: RadioStation): Color =
     if (station.lightBackdrop) LightLogoBackdrop else LocalGeoColors.current.surfaceContainer
 
-// Every logo goes through Coil with the size of the box it sits in. Logos live in drawable-nodpi, and a
-// full-size decode (painterResource, or Coil with Size.ORIGINAL) leaves them blank or a few pixels wide
-// in release builds, so the mini player and the now-playing sheet load them exactly like the station list.
+// Use the same explicit Android resource URI as the Media3 session metadata. This avoids
+// relying on Coil's implicit Int model handling for drawable-nodpi assets, while still letting
+// Coil decode at the actual target size (important for the mini player and full-size artwork).
 @Composable
 fun StationLogoImage(station: RadioStation, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val artworkUri = remember(context.packageName, station.iconResId) {
+        "android.resource://${context.packageName}/${station.iconResId}"
+    }
+
     AsyncImage(
-        model = station.iconResId,
+        model = artworkUri,
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = modifier
