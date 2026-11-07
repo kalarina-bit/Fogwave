@@ -31,6 +31,8 @@ data class AudioEffectsState(
     val dynamicsProcessingEnabled: Boolean = false
 )
 
+// Effect parameters are cached here: every getter on an AudioEffect is a call into audioserver,
+// and the state is rebuilt on every frame while an equalizer slider is dragged.
 class AudioEffectsEngine(context: Context, audioSessionId: Int) {
     private val prefs: SharedPreferences =
         context.applicationContext.getSharedPreferences("fogwave_audio_effects", Context.MODE_PRIVATE)
@@ -42,37 +44,53 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
     private var loudnessEnhancer: LoudnessEnhancer? = null
     private var dynamicsProcessing: DynamicsProcessing? = null
 
-    private val presetNames = mutableListOf<String>()
+    private var presetNames: List<String> = emptyList()
+    private var centerFreqsHz = IntArray(0)
+    private var bandLevels = IntArray(0)
+    private var minBandLevel = 0
+    private var maxBandLevel = 0
+
+    private var equalizerEnabled = prefs.getBoolean(KEY_EQ_ENABLED, false)
+    private var loudnessEnabled = prefs.getBoolean(KEY_LOUDNESS_ENABLED, false)
+    private var loudnessGain = prefs.getInt(KEY_LOUDNESS_GAIN, 0).coerceIn(0, MAX_LOUDNESS_GAIN)
+    private var dynamicsEnabled = prefs.getBoolean(KEY_DYNAMICS_ENABLED, false)
 
     init {
         try {
             equalizer = Equalizer(0, audioSessionId).apply {
-                for (p in 0 until numberOfPresets) {
-                    presetNames.add(getPresetName(p.toShort()))
-                }
+                presetNames = (0 until numberOfPresets).map { getPresetName(it.toShort()) }
+
+                val bandCount = numberOfBands.toInt()
+                centerFreqsHz = IntArray(bandCount) { getCenterFreq(it.toShort()) / 1000 }
+                val range = bandLevelRange
+                minBandLevel = range[0].toInt()
+                maxBandLevel = range[1].toInt()
 
                 val preset = currentPresetIndex
                 if (preset in 0 until numberOfPresets) {
                     usePreset(preset.toShort())
                 } else {
-                    for (b in 0 until numberOfBands) {
+                    for (b in 0 until bandCount) {
                         val saved = prefs.getInt(KEY_BAND_PREFIX + b, Int.MIN_VALUE)
                         if (saved != Int.MIN_VALUE) setBandLevel(b.toShort(), saved.toShort())
                     }
                 }
-                enabled = prefs.getBoolean(KEY_EQ_ENABLED, false)
+                bandLevels = IntArray(bandCount) { getBandLevel(it.toShort()).toInt() }
+                enabled = equalizerEnabled
             }
         } catch (e: Exception) {
             Log.e(TAG, "Equalizer unavailable", e)
+            equalizer = null
         }
 
         try {
             loudnessEnhancer = LoudnessEnhancer(audioSessionId).apply {
-                setTargetGain(prefs.getInt(KEY_LOUDNESS_GAIN, 0))
-                enabled = prefs.getBoolean(KEY_LOUDNESS_ENABLED, false)
+                setTargetGain(loudnessGain)
+                enabled = loudnessEnabled
             }
         } catch (e: Exception) {
             Log.e(TAG, "LoudnessEnhancer unavailable", e)
+            loudnessEnhancer = null
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -134,94 +152,103 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
             dp.setLimiterByChannelIndex(ch, limiter)
         }
 
-        dp.enabled = prefs.getBoolean(KEY_DYNAMICS_ENABLED, false)
+        dp.enabled = dynamicsEnabled
         return dp
     }
 
     fun currentState(): AudioEffectsState {
-        val eq = equalizer
-        val bands = if (eq != null) {
-            (0 until eq.numberOfBands).map { i ->
-                val idx = i.toShort()
-                val range = eq.bandLevelRange
+        val eqAvailable = equalizer != null
+        val bands = if (eqAvailable) {
+            bandLevels.indices.map { i ->
                 EqualizerBand(
                     index = i,
-                    centerFreqHz = eq.getCenterFreq(idx) / 1000,
-                    levelMillibel = eq.getBandLevel(idx).toInt(),
-                    minLevelMillibel = range[0].toInt(),
-                    maxLevelMillibel = range[1].toInt()
+                    centerFreqHz = centerFreqsHz[i],
+                    levelMillibel = bandLevels[i],
+                    minLevelMillibel = minBandLevel,
+                    maxLevelMillibel = maxBandLevel
                 )
             }
         } else emptyList()
 
         return AudioEffectsState(
-            equalizerAvailable = eq != null,
-            equalizerEnabled = eq?.enabled ?: false,
+            equalizerAvailable = eqAvailable,
+            equalizerEnabled = eqAvailable && equalizerEnabled,
             bands = bands,
             presets = presetNames,
-            currentPreset = if (eq != null) currentPresetIndex else -1,
+            currentPreset = if (eqAvailable) currentPresetIndex else -1,
             loudnessAvailable = loudnessEnhancer != null,
-            loudnessEnabled = loudnessEnhancer?.enabled ?: false,
-            loudnessGainMillibel = try {
-                loudnessEnhancer?.targetGain ?: 0f
-            } catch (_: Exception) {
-                0f
-            },
+            loudnessEnabled = loudnessEnhancer != null && loudnessEnabled,
+            loudnessGainMillibel = if (loudnessEnhancer != null) loudnessGain.toFloat() else 0f,
             dynamicsProcessingAvailable = dynamicsProcessing != null,
-            dynamicsProcessingEnabled = dynamicsProcessing?.enabled ?: false
+            dynamicsProcessingEnabled = dynamicsProcessing != null && dynamicsEnabled
         )
     }
 
     fun setEqualizerEnabled(enabled: Boolean) {
+        val eq = equalizer ?: return
         try {
-            equalizer?.enabled = enabled
+            eq.enabled = enabled
+            equalizerEnabled = enabled
             prefs.edit { putBoolean(KEY_EQ_ENABLED, enabled) }
         } catch (_: Exception) {}
     }
 
     fun setBandLevel(band: Int, levelMillibel: Int) {
+        val eq = equalizer ?: return
+        if (band !in bandLevels.indices) return
+        val level = levelMillibel.coerceIn(minBandLevel, maxBandLevel)
+        if (bandLevels[band] == level && currentPresetIndex == -1) return
         try {
-            equalizer?.setBandLevel(band.toShort(), levelMillibel.toShort())
+            eq.setBandLevel(band.toShort(), level.toShort())
+            bandLevels[band] = level
             currentPresetIndex = -1
             prefs.edit {
-                putInt(KEY_BAND_PREFIX + band, levelMillibel)
+                putInt(KEY_BAND_PREFIX + band, level)
                 putInt(KEY_PRESET, -1)
             }
         } catch (_: Exception) {}
     }
 
     fun setPreset(preset: Int) {
+        val eq = equalizer ?: return
         try {
-            val eq = equalizer ?: return
             eq.usePreset(preset.toShort())
             currentPresetIndex = preset
+            for (b in bandLevels.indices) {
+                bandLevels[b] = eq.getBandLevel(b.toShort()).toInt()
+            }
             prefs.edit {
                 putInt(KEY_PRESET, preset)
-                for (b in 0 until eq.numberOfBands) {
-                    putInt(KEY_BAND_PREFIX + b, eq.getBandLevel(b.toShort()).toInt())
-                }
+                for (b in bandLevels.indices) putInt(KEY_BAND_PREFIX + b, bandLevels[b])
             }
         } catch (_: Exception) {}
     }
 
     fun setLoudnessEnabled(enabled: Boolean) {
+        val le = loudnessEnhancer ?: return
         try {
-            loudnessEnhancer?.enabled = enabled
+            le.enabled = enabled
+            loudnessEnabled = enabled
             prefs.edit { putBoolean(KEY_LOUDNESS_ENABLED, enabled) }
         } catch (_: Exception) {}
     }
 
     fun setLoudnessGain(gainMillibel: Float) {
+        val le = loudnessEnhancer ?: return
+        val gain = gainMillibel.coerceIn(0f, MAX_LOUDNESS_GAIN.toFloat()).toInt()
+        if (gain == loudnessGain) return
         try {
-            val gain = gainMillibel.coerceIn(0f, 2000f).toInt()
-            loudnessEnhancer?.setTargetGain(gain)
+            le.setTargetGain(gain)
+            loudnessGain = gain
             prefs.edit { putInt(KEY_LOUDNESS_GAIN, gain) }
         } catch (_: Exception) {}
     }
 
     fun setDynamicsProcessingEnabled(enabled: Boolean) {
+        val dp = dynamicsProcessing ?: return
         try {
-            dynamicsProcessing?.enabled = enabled
+            dp.enabled = enabled
+            dynamicsEnabled = enabled
             prefs.edit { putBoolean(KEY_DYNAMICS_ENABLED, enabled) }
         } catch (_: Exception) {}
     }
@@ -237,6 +264,7 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
 
     private companion object {
         const val TAG = "AudioEffectsEngine"
+        const val MAX_LOUDNESS_GAIN = 2000
         const val KEY_EQ_ENABLED = "eq_enabled"
         const val KEY_PRESET = "eq_preset"
         const val KEY_BAND_PREFIX = "eq_band_"
