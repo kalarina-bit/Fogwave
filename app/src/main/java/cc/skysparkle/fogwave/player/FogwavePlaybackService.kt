@@ -6,6 +6,10 @@ import android.content.Intent
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.Network
+import android.net.wifi.WifiManager
+import android.os.Handler
+import android.os.Looper
+import android.os.PowerManager
 import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.OptIn
@@ -17,6 +21,7 @@ import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
@@ -60,6 +65,15 @@ class FogwavePlaybackService : MediaLibraryService() {
 
     private var connectivityManager: ConnectivityManager? = null
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
+    private var defaultNetwork: Network? = null
+
+    // ExoPlayer drops its own wake and Wi-Fi locks once the player is idle after an error, so the
+    // backoff delay would stall while the CPU sleeps. These are held only while a reconnect is pending.
+    private var reconnectWakeLock: PowerManager.WakeLock? = null
+    private var reconnectWifiLock: WifiManager.WifiLock? = null
+
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private var destroyed = false
 
     private val httpDataSourceFactory: DefaultHttpDataSource.Factory by lazy {
         DefaultHttpDataSource.Factory()
@@ -71,7 +85,9 @@ class FogwavePlaybackService : MediaLibraryService() {
     }
 
     private val loadControl = DefaultLoadControl.Builder()
-        .setBufferDurationsMs(5_000, 15_000, 500, 1_000)
+        // Quick start (0.5 s), but after a stall wait for 2.5 s of audio so a weak network does not
+        // turn into a play-stall-play stutter.
+        .setBufferDurationsMs(15_000, 50_000, 500, 2_500)
         .setPrioritizeTimeOverSizeThresholds(true)
         .build()
 
@@ -166,6 +182,7 @@ class FogwavePlaybackService : MediaLibraryService() {
                 if (retryAttempt != 0) Log.d(TAG, "Reconnect succeeded - resetting backoff")
                 retryAttempt = 0
                 retryJob?.cancel()
+                releaseReconnectLocks()
             }
         }
 
@@ -179,6 +196,7 @@ class FogwavePlaybackService : MediaLibraryService() {
                     Log.d(TAG, "Reconnect cancelled - playWhenReady=false (reason=$reason)")
                 }
                 retryJob?.cancel()
+                releaseReconnectLocks()
                 pausedAtMs = SystemClock.elapsedRealtime()
                 return
             }
@@ -203,20 +221,39 @@ class FogwavePlaybackService : MediaLibraryService() {
                     "mediaItem=${lastRequestedItem?.localConfiguration?.uri}",
                 error
             )
-            scheduleReconnect()
+            scheduleReconnect(maxAttempts = maxRetryAttemptsFor(error))
         }
     }
 
-    private fun scheduleReconnect(immediate: Boolean = false) {
+    // A missing stream or an unsupported format will not fix itself, so it gets only a couple of
+    // attempts (a stale token or a short server outage can still recover); network errors get the full backoff.
+    private fun maxRetryAttemptsFor(error: PlaybackException): Int {
+        val httpCode = (error.cause as? HttpDataSource.InvalidResponseCodeException)?.responseCode
+        val permanent = when (error.errorCode) {
+            PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS ->
+                httpCode != null && httpCode in 400..499 && httpCode != 408 && httpCode != 429
+            PlaybackException.ERROR_CODE_IO_FILE_NOT_FOUND,
+            PlaybackException.ERROR_CODE_IO_CLEARTEXT_NOT_PERMITTED,
+            PlaybackException.ERROR_CODE_PARSING_CONTAINER_UNSUPPORTED,
+            PlaybackException.ERROR_CODE_PARSING_MANIFEST_UNSUPPORTED,
+            PlaybackException.ERROR_CODE_DECODING_FORMAT_UNSUPPORTED -> true
+            else -> false
+        }
+        return if (permanent) MAX_PERMANENT_ERROR_RETRY_ATTEMPTS else MAX_RETRY_ATTEMPTS
+    }
+
+    private fun scheduleReconnect(immediate: Boolean = false, maxAttempts: Int = MAX_RETRY_ATTEMPTS) {
         retryJob?.cancel()
-        if (!immediate && retryAttempt >= MAX_RETRY_ATTEMPTS) {
+        if (!immediate && retryAttempt >= maxAttempts) {
             // Give up instead of keeping the device busy forever; the error stays visible and a tap
             // on play starts over.
             Log.w(TAG, "Reconnect abandoned after $retryAttempt attempts")
             retryAttempt = 0
+            releaseReconnectLocks()
             player.pause()
             return
         }
+        acquireReconnectLocks()
         val delayMs = if (immediate) 0L else retryDelaysMs.getOrElse(retryAttempt) { retryDelaysMs.last() }
         retryAttempt++
         Log.d(TAG, "Reconnect scheduled in ${delayMs}ms (attempt=$retryAttempt)")
@@ -224,6 +261,7 @@ class FogwavePlaybackService : MediaLibraryService() {
             delay(delayMs)
             if (!player.playWhenReady) {
                 Log.d(TAG, "Reconnect skipped - no longer playWhenReady")
+                releaseReconnectLocks()
                 return@launch
             }
             restartStream()
@@ -247,6 +285,34 @@ class FogwavePlaybackService : MediaLibraryService() {
         }
     }
 
+    @Suppress("DEPRECATION") // WIFI_MODE_FULL_HIGH_PERF is what ExoPlayer itself uses for streaming.
+    private fun acquireReconnectLocks() {
+        try {
+            if (reconnectWakeLock == null) {
+                val pm = getSystemService(Context.POWER_SERVICE) as? PowerManager
+                reconnectWakeLock = pm?.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Fogwave:reconnect")
+                    ?.apply { setReferenceCounted(false) }
+            }
+            // The timeout is a safety net; the lock is released as soon as the stream is back.
+            reconnectWakeLock?.acquire(RECONNECT_LOCK_TIMEOUT_MS)
+
+            if (reconnectWifiLock == null) {
+                val wm = applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+                reconnectWifiLock = wm?.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "Fogwave:reconnect")
+                    ?.apply { setReferenceCounted(false) }
+            }
+            val wifiLock = reconnectWifiLock
+            if (wifiLock != null && !wifiLock.isHeld) wifiLock.acquire()
+        } catch (e: Exception) {
+            Log.w(TAG, "Could not acquire reconnect locks", e)
+        }
+    }
+
+    private fun releaseReconnectLocks() {
+        try { reconnectWakeLock?.takeIf { it.isHeld }?.release() } catch (_: Exception) {}
+        try { reconnectWifiLock?.takeIf { it.isHeld }?.release() } catch (_: Exception) {}
+    }
+
     private fun registerNetworkCallback() {
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager ?: return
         connectivityManager = cm
@@ -254,8 +320,15 @@ class FogwavePlaybackService : MediaLibraryService() {
             // Called on a ConnectivityManager thread; ExoPlayer must only be accessed on the main thread.
             override fun onAvailable(network: Network) {
                 serviceScope.launch {
-                    if (retryJob?.isActive == true && player.playWhenReady && player.playbackState != Player.STATE_READY) {
-                        Log.d(TAG, "Network available again - reconnecting immediately")
+                    val previous = defaultNetwork
+                    defaultNetwork = network
+                    if (!player.playWhenReady || player.playbackState == Player.STATE_READY) return@launch
+                    // After a switch (e.g. Wi-Fi to mobile) a stalled load can sit on a dead socket until
+                    // the read timeout, so reopen right away instead of waiting for the error.
+                    val switchedWhileStalled = previous != null && previous != network &&
+                        player.playbackState == Player.STATE_BUFFERING
+                    if (retryJob?.isActive == true || switchedWhileStalled) {
+                        Log.d(TAG, "Network available - reconnecting immediately")
                         scheduleReconnect(immediate = true)
                     }
                 }
@@ -300,9 +373,7 @@ class FogwavePlaybackService : MediaLibraryService() {
             }
 
         Log.d(TAG, "Audio session id for effects: ${player.audioSessionId}")
-        audioEffectsEngine = AudioEffectsEngine(applicationContext, player.audioSessionId).also {
-            AudioEffectsController.attach(it)
-        }
+        createAudioEffectsAsync(player.audioSessionId)
 
         registerNetworkCallback()
 
@@ -319,6 +390,26 @@ class FogwavePlaybackService : MediaLibraryService() {
             .build()
     }
 
+    // Creating the effects means several calls into audioserver; done off the main thread so the
+    // service, which starts together with the UI, does not delay the first frames.
+    private fun createAudioEffectsAsync(audioSessionId: Int) {
+        Thread({
+            try {
+                val engine = AudioEffectsEngine(applicationContext, audioSessionId)
+                mainHandler.post {
+                    if (destroyed) {
+                        engine.release()
+                    } else {
+                        audioEffectsEngine = engine
+                        AudioEffectsController.attach(engine)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Audio effects init failed", e)
+            }
+        }, "FogwaveEffectsInit").start()
+    }
+
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? = mediaLibrarySession
 
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -329,7 +420,9 @@ class FogwavePlaybackService : MediaLibraryService() {
     }
 
     override fun onDestroy() {
+        destroyed = true
         retryJob?.cancel()
+        releaseReconnectLocks()
         serviceScope.cancel()
         networkCallback?.let { cb ->
             try { connectivityManager?.unregisterNetworkCallback(cb) } catch (_: Exception) {}
@@ -349,6 +442,8 @@ class FogwavePlaybackService : MediaLibraryService() {
         private const val ROOT_ID = "fogwave_root"
         private const val TAG = "FogwavePlaybackService"
         private const val MAX_RETRY_ATTEMPTS = 12
+        private const val MAX_PERMANENT_ERROR_RETRY_ATTEMPTS = 2
+        private const val RECONNECT_LOCK_TIMEOUT_MS = 2 * 60_000L
         private const val LIVE_RESYNC_AFTER_MS = 30_000L
     }
 }
