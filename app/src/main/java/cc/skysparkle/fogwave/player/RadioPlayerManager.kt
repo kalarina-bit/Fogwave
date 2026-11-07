@@ -48,6 +48,17 @@ class RadioPlayerManager(private val context: Context) {
         }
     }
 
+    // Without this a controller whose session went away stays non-null and every command is
+    // silently dropped, leaving the UI stuck on "connecting".
+    private val controllerListener = object : MediaController.Listener {
+        override fun onDisconnected(controller: MediaController) {
+            if (released || controller !== this@RadioPlayerManager.controller) return
+            Log.w(TAG, "MediaController disconnected")
+            dropController()
+            _playerState.value = PlayerState.Idle
+        }
+    }
+
     // Declared after every property it touches so that nothing is read before initialization.
     init {
         connectToPlaybackService()
@@ -56,7 +67,9 @@ class RadioPlayerManager(private val context: Context) {
     private fun connectToPlaybackService() {
         if (released || controllerFuture != null) return
         val sessionToken = SessionToken(context, ComponentName(context, FogwavePlaybackService::class.java))
-        val future = MediaController.Builder(context, sessionToken).buildAsync()
+        val future = MediaController.Builder(context, sessionToken)
+            .setListener(controllerListener)
+            .buildAsync()
         controllerFuture = future
         future.addListener({
             if (released) return@addListener
@@ -81,6 +94,21 @@ class RadioPlayerManager(private val context: Context) {
                 _playerState.value = PlayerState.Error(context.getString(R.string.stream_unavailable))
             }
         }, MoreExecutors.directExecutor())
+    }
+
+    /** The controller if it is still connected; a stale one is dropped so the next call reconnects. */
+    private fun connectedController(): MediaController? {
+        val c = controller ?: return null
+        if (c.isConnected) return c
+        dropController()
+        return null
+    }
+
+    private fun dropController() {
+        controller?.removeListener(playerListener)
+        controller = null
+        controllerFuture?.let { MediaController.releaseFuture(it) }
+        controllerFuture = null
     }
 
     private fun deriveState(p: Player): PlayerState {
@@ -108,7 +136,7 @@ class RadioPlayerManager(private val context: Context) {
     fun playStation(station: RadioStation) {
         Log.d(TAG, "Station requested: ${station.id}")
         currentStation = station
-        val c = controller
+        val c = connectedController()
         if (c == null) {
             pendingStation = station
             _playerState.value = PlayerState.Connecting
@@ -127,7 +155,7 @@ class RadioPlayerManager(private val context: Context) {
     }
 
     fun play() {
-        val c = controller
+        val c = connectedController()
         when {
             c == null || c.mediaItemCount == 0 -> currentStation?.let { playStation(it) }
             // A failed, stopped or finished live stream has to be reopened rather than resumed.
