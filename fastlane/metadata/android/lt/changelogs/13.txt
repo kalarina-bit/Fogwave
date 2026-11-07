@@ -1,0 +1,6 @@
+• Patikimas prisijungimas iš naujo išjungus ekraną ir perjungiant Wi-Fi bei mobiliuosius duomenis
+• Mažiau trūkčiojimų esant silpnam ryšiui
+• Sklandesni ekvalaizerio slankikliai ir greitesnis paleidimas
+• Nepasiekiami srautai nebebandomi prijungti kelias minutes
+
+Naujos versijos taip pat pasiekiamos Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

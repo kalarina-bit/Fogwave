@@ -1,0 +1,6 @@
+• Zuverlässige Neuverbindung bei ausgeschaltetem Bildschirm und beim Wechsel zwischen WLAN und Mobilfunk
+• Weniger Aussetzer bei schwachem Netz
+• Flüssigere Equalizer-Regler und schnellerer App-Start
+• Nicht erreichbare Streams werden nicht mehr minutenlang neu versucht
+
+Neue Versionen gibt es auch auf Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

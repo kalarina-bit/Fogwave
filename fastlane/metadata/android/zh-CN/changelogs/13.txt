@@ -1,0 +1,6 @@
+• 息屏时以及在 Wi-Fi 与移动数据之间切换后能可靠地重新连接
+• 网络较弱时卡顿更少
+• 均衡器滑块更流畅，应用启动更快
+• 无法播放的音频流不再反复重试数分钟
+
+新版本也可在 Gitea 获取：https://git.skysparkle.cc/kalarina/Fogwave/releases
