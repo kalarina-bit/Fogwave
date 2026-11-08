@@ -29,6 +29,9 @@
 > [!TIP]
 > If you find Fogwave useful, please consider giving it a ⭐ — it helps others discover the project.
 
+> [!IMPORTANT]
+> **Fogwave is coming to Google Play!** The app is now in closed testing there ahead of the public release. Ideas, wishes and suggestions for improvement are very welcome — send them wherever is easiest for you: an issue on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/issues) or [GitHub](https://github.com/kalarina-bit/Fogwave/issues), or an email to [cuken107@proton.me](mailto:cuken107@proton.me).
+
 ## ✨ Features
 
 - 📻 **14 stations from Lithuania and Latvia** — ZIP FM, Power Hit Radio, Rock FM, LRT Radijas, Žinių radijas, Latvijas Radio 1 & 2 and more
