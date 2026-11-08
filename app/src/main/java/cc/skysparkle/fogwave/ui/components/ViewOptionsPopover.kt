@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
@@ -62,7 +63,8 @@ fun StationsToolbar(
     onSelectViewMode: (ViewMode) -> Unit,
     sizeStep: IconSizeStep,
     onSelectSizeStep: (IconSizeStep) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showViewOptions: Boolean = true
 ) {
     Column(
         modifier = modifier
@@ -70,7 +72,8 @@ fun StationsToolbar(
             .padding(horizontal = 20.dp, vertical = 6.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            // Same height with or without the view button, so the title does not jump between tabs.
+            modifier = Modifier.fillMaxWidth().heightIn(min = 38.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -89,27 +92,29 @@ fun StationsToolbar(
                     .padding(end = 12.dp)
             )
 
-            Box(
-                modifier = Modifier
-                    .size(38.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(if (isOpen) LocalGeoColors.current.primaryContainer else LocalGeoColors.current.surfaceContainer)
-                    .border(1.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(12.dp))
-                    .clickable(role = Role.Button) { onToggleOpen() }
-                    .testTag("view_options_trigger"),
-                contentAlignment = Alignment.Center
-            ) {
-                AppIcon(
-                    resId = R.drawable.ic_table,
-                    contentDescription = stringResource(R.string.view_mode_content_desc),
-                    tint = if (isOpen) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant,
-                    size = 19.dp
-                )
+            if (showViewOptions) {
+                Box(
+                    modifier = Modifier
+                        .size(38.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(if (isOpen) LocalGeoColors.current.primaryContainer else LocalGeoColors.current.surfaceContainer)
+                        .border(1.dp, LocalGeoColors.current.outlineVariant, RoundedCornerShape(12.dp))
+                        .clickable(role = Role.Button) { onToggleOpen() }
+                        .testTag("view_options_trigger"),
+                    contentAlignment = Alignment.Center
+                ) {
+                    AppIcon(
+                        resId = R.drawable.ic_table,
+                        contentDescription = stringResource(R.string.view_mode_content_desc),
+                        tint = if (isOpen) LocalGeoColors.current.deepPurple else LocalGeoColors.current.onSurfaceVariant,
+                        size = 19.dp
+                    )
+                }
             }
         }
 
         AnimatedVisibility(
-            visible = isOpen,
+            visible = isOpen && showViewOptions,
             enter = expandVertically(
                 animationSpec = spring(dampingRatio = 0.85f, stiffness = Spring.StiffnessMediumLow),
                 expandFrom = Alignment.Top

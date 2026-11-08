@@ -2,5 +2,7 @@
 • 電波の弱い場所での途切れを軽減
 • イコライザーのスライダーがなめらかになり、起動も高速化
 • 再生できないストリームを何分も再試行しなくなりました
+• 新しい局: LRT Radijas、Žinių radijas、Latvijas Radio 1・2
+• 表示オプションは「ラジオ」タブのみに
 
 新しいバージョンは Gitea でも入手できます: https://git.skysparkle.cc/kalarina/Fogwave/releases

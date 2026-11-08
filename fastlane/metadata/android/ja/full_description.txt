@@ -1,7 +1,7 @@
 <p>リトアニアで人気のラジオ局を、すっきりといつでも。Fogwaveなら簡単に選局でき、バックグラウンドで聴けて、広告なしの快適な体験を楽しめます。アカウント登録もトラッキングもありません。</p>
 
 <ul>
-<li>ZIP FM、Power Hit Radio、Rock FM、Relax FM、M-1、Gold FMなど、リトアニアの10局を収録。</li>
+<li>ZIP FM、Power Hit Radio、Rock FM、LRT Radijas、Žinių radijas、Latvijas Radioなど、リトアニアとラトビアの14局を収録。</li>
 <li>他のアプリを使いながら聴き続けられます。ロック画面、通知、ヘッドホン、Bluetoothから操作可能。</li>
 <li>イコライザー、設定の保存、ラウドネスブースト、オーディオプリセットで好みの音に。</li>
 <li>ストリームやネットワークが途切れても自動で再接続し、すぐに再生が戻ります。</li>

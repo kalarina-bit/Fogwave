@@ -31,7 +31,7 @@
 
 ## ✨ Features
 
-- 📻 **10 Lithuanian stations** — ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, Gold FM and more
+- 📻 **14 stations from Lithuania and Latvia** — ZIP FM, Power Hit Radio, Rock FM, LRT Radijas, Žinių radijas, Latvijas Radio 1 & 2 and more
 - 🎧 **Background playback** with lock-screen, notification, headphone and Bluetooth controls
 - 🚗 **Android Auto** support
 - 🔄 **Auto-reconnect** when the stream drops or the network comes back

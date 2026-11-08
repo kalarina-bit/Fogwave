@@ -2,5 +2,7 @@
 • Less stuttering on a weak network
 • Smoother equalizer sliders and faster app start
 • Hopeless streams are no longer retried for minutes
+• New stations: LRT Radijas, Žinių radijas, Latvijas Radio 1 and 2
+• View options are now on the Radio tab only
 
 New versions are also available on Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

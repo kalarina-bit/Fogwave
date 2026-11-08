@@ -1,7 +1,7 @@
 <p>Bring Lithuania's favorite radio stations along, without the clutter. Fogwave makes it easy to tune in, listen in the background, and enjoy a clean, ad-free experience with no account or tracking required.</p>
 
 <ul>
-<li>Tune in to 10 Lithuanian stations, including ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1, and Gold FM.</li>
+<li>Tune in to 14 stations from Lithuania and Latvia, including ZIP FM, Power Hit Radio, Rock FM, LRT Radijas, Žinių radijas, and Latvijas Radio.</li>
 <li>Keep listening while you use other apps, with controls on your lock screen, notifications, headphones, and Bluetooth.</li>
 <li>Enjoy your favorite sound with an equalizer, saved settings, loudness boost, and audio presets.</li>
 <li>Get back to listening easily with auto-reconnect when your stream or network drops.</li>

@@ -46,7 +46,7 @@ private val LIBRARIES = listOf(
     LicenseRow("AndroidX Activity Compose", AOSP, APACHE, "https://developer.android.com/jetpack/androidx/releases/activity", BuildConfig.ACTIVITY_VERSION),
     LicenseRow("AndroidX Core KTX", AOSP, APACHE, "https://developer.android.com/jetpack/androidx/releases/core", BuildConfig.CORE_KTX_VERSION),
     LicenseRow("AndroidX Lifecycle (ViewModel + Runtime Compose)", AOSP, APACHE, "https://developer.android.com/jetpack/androidx/releases/lifecycle", BuildConfig.LIFECYCLE_VERSION),
-    LicenseRow("AndroidX Media3 (ExoPlayer, MediaSession)", AOSP, APACHE, "https://developer.android.com/jetpack/androidx/releases/media3", BuildConfig.MEDIA3_VERSION),
+    LicenseRow("AndroidX Media3 (ExoPlayer, HLS, MediaSession)", AOSP, APACHE, "https://developer.android.com/jetpack/androidx/releases/media3", BuildConfig.MEDIA3_VERSION),
     LicenseRow("AndroidX \u2014 other libraries pulled in by the ones above", AOSP, APACHE, "https://developer.android.com/jetpack/androidx"),
     LicenseRow("Guava (used by Media3)", "Google", APACHE, "https://github.com/google/guava"),
     LicenseRow("kotlinx.coroutines", "JetBrains", APACHE, "https://github.com/Kotlin/kotlinx.coroutines", BuildConfig.COROUTINES_VERSION),

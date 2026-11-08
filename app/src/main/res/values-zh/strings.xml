@@ -88,6 +88,10 @@
     <string name="station_desc_plus">音乐与经典金曲</string>
     <string name="station_desc_goldfm">黄金金曲</string>
     <string name="station_desc_rc">Radiocentras • 立陶宛</string>
+    <string name="station_desc_lrt">立陶宛公共广播 • 新闻</string>
+    <string name="station_desc_ziniu">商业新闻与谈话 • 立陶宛</string>
+    <string name="station_desc_lr1">公共新闻与谈话 • 拉脱维亚</string>
+    <string name="station_desc_lr2">拉脱维亚音乐 • 拉脱维亚</string>
     <string name="genre_hits">热门</string>
     <string name="genre_pop">流行</string>
     <string name="genre_dance">舞曲</string>
@@ -95,6 +99,8 @@
     <string name="genre_rock">摇滚</string>
     <string name="genre_easy_listening">轻音乐</string>
     <string name="genre_lithuanian">立陶宛音乐</string>
+    <string name="genre_news_talk">新闻与谈话</string>
+    <string name="genre_latvian">拉脱维亚音乐</string>
 
     <string name="eq_preset_normal">正常</string>
     <string name="eq_preset_classical">古典</string>

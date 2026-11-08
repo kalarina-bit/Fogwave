@@ -88,6 +88,10 @@
     <string name="station_desc_plus">Музыка и хиты прошлых лет</string>
     <string name="station_desc_goldfm">Золотые хиты</string>
     <string name="station_desc_rc">Radiocentras • Литва</string>
+    <string name="station_desc_lrt">Общественное радио Литвы • Новости</string>
+    <string name="station_desc_ziniu">Деловые новости и ток-шоу • Литва</string>
+    <string name="station_desc_lr1">Общественные новости и ток-шоу • Латвия</string>
+    <string name="station_desc_lr2">Латышская музыка • Латвия</string>
     <string name="genre_hits">Хиты</string>
     <string name="genre_pop">Поп</string>
     <string name="genre_dance">Танцевальная</string>
@@ -95,6 +99,8 @@
     <string name="genre_rock">Рок</string>
     <string name="genre_easy_listening">Лёгкая музыка</string>
     <string name="genre_lithuanian">Литовская музыка</string>
+    <string name="genre_news_talk">Новости и разговорное</string>
+    <string name="genre_latvian">Латышская музыка</string>
 
     <string name="eq_preset_normal">Обычный</string>
     <string name="eq_preset_classical">Классика</string>

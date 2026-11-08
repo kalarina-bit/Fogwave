@@ -1,7 +1,7 @@
 <p>Nimm Litauens beliebteste Radiosender mit – ganz ohne Ballast. Mit Fogwave schaltest du einfach ein, hörst im Hintergrund und genießt ein aufgeräumtes, werbefreies Erlebnis ohne Konto und ohne Tracking.</p>
 
 <ul>
-<li>Höre 10 litauische Sender, darunter ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1 und Gold FM.</li>
+<li>Höre 14 Sender aus Litauen und Lettland, darunter ZIP FM, Power Hit Radio, Rock FM, LRT Radijas, Žinių radijas und Latvijas Radio.</li>
 <li>Hör weiter, während du andere Apps nutzt – mit Steuerung über Sperrbildschirm, Benachrichtigungen, Kopfhörer und Bluetooth.</li>
 <li>Genieße deinen Lieblingsklang mit Equalizer, gespeicherten Einstellungen, Lautstärkeverstärkung und Audio-Presets.</li>
 <li>Hör einfach weiter: Bricht der Stream oder das Netz ab, verbindet sich die App automatisch neu.</li>

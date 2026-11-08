@@ -110,6 +110,43 @@ class RadioRepository(context: Context) {
             genres = listOf(Genre.HITS, Genre.LITHUANIAN),
             bitrate = "MP3 128 kbps",
             lightBackdrop = true
+        ),
+        RadioStation(
+            id = "lrt",
+            name = "LRT Radijas",
+            descriptionRes = R.string.station_desc_lrt,
+            streamUrl = "https://lrt-cast.lrt.lt/lrt_radijas",
+            iconResId = R.drawable.ic_station_lrt,
+            genres = listOf(Genre.NEWS_TALK, Genre.LITHUANIAN),
+            bitrate = "MP3",
+            lightBackdrop = true
+        ),
+        RadioStation(
+            id = "ziniu",
+            name = "Žinių radijas",
+            descriptionRes = R.string.station_desc_ziniu,
+            streamUrl = "https://netradio.ziniur.lt/ziniur.mp3?n=975355",
+            iconResId = R.drawable.ic_station_ziniu,
+            genres = listOf(Genre.NEWS_TALK),
+            bitrate = "MP3"
+        ),
+        RadioStation(
+            id = "lr1",
+            name = "Latvijas Radio 1",
+            descriptionRes = R.string.station_desc_lr1,
+            streamUrl = "https://muste.latvijasradio.lv/shoutcast/mp4:lr1a.stream/playlist.m3u8",
+            iconResId = R.drawable.ic_station_lr1,
+            genres = listOf(Genre.NEWS_TALK),
+            bitrate = "HLS"
+        ),
+        RadioStation(
+            id = "lr2",
+            name = "Latvijas Radio 2",
+            descriptionRes = R.string.station_desc_lr2,
+            streamUrl = "https://muste.latvijasradio.lv/shoutcast/mp4:lr2a.stream/playlist.m3u8",
+            iconResId = R.drawable.ic_station_lr2,
+            genres = listOf(Genre.LATVIAN, Genre.POP),
+            bitrate = "HLS"
         )
     )
 

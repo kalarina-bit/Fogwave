@@ -128,7 +128,9 @@ fun HomeScreen(
                                     viewMode = uiState.viewMode,
                                     onSelectViewMode = { viewModel.setViewMode(it) },
                                     sizeStep = uiState.sizeStep,
-                                    onSelectSizeStep = { viewModel.setSizeStep(it) }
+                                    onSelectSizeStep = { viewModel.setSizeStep(it) },
+                                    // View options live on the Radio tab only; Favorites follows that choice.
+                                    showViewOptions = !isFavorites
                                 )
 
                                 Box(modifier = Modifier.weight(1f)) {

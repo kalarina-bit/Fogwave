@@ -1,7 +1,7 @@
 <p>Mėgstamiausios Lietuvos radijo stotys visada su jumis – be nereikalingų dalykų. Su Fogwave lengva įsijungti radiją, klausytis fone ir mėgautis švariu klausymu be reklamų, be paskyros ir be sekimo.</p>
 
 <ul>
-<li>Klausykitės 10 Lietuvos stočių, tarp jų ZIP FM, Power Hit Radio, Rock FM, Relax FM, M-1 ir Gold FM.</li>
+<li>Klausykitės 14 Lietuvos ir Latvijos stočių, tarp jų ZIP FM, Power Hit Radio, Rock FM, LRT Radijas, Žinių radijas ir Latvijas Radio.</li>
 <li>Klausykitės toliau naudodamiesi kitomis programėlėmis – valdykite atkūrimą iš užrakinimo ekrano, pranešimų, ausinių ir per Bluetooth.</li>
 <li>Mėgaukitės mėgstamu skambėjimu su ekvalaizeriu, išsaugomais nustatymais, garsumo stiprinimu ir garso šablonais.</li>
 <li>Lengvai grįžkite prie klausymo – nutrūkus srautui ar ryšiui programėlė automatiškai prisijungia iš naujo.</li>

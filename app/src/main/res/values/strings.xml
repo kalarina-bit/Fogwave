@@ -88,6 +88,10 @@
     <string name="station_desc_plus">Music &amp; classic hits</string>
     <string name="station_desc_goldfm">Golden hits</string>
     <string name="station_desc_rc">Radiocentras • Lithuania</string>
+    <string name="station_desc_lrt">Lithuanian public radio • News</string>
+    <string name="station_desc_ziniu">Business news & talk • Lithuania</string>
+    <string name="station_desc_lr1">Public news & talk • Latvia</string>
+    <string name="station_desc_lr2">Latvian music • Latvia</string>
     <string name="genre_hits">Hits</string>
     <string name="genre_pop">Pop</string>
     <string name="genre_dance">Dance</string>
@@ -95,6 +99,8 @@
     <string name="genre_rock">Rock</string>
     <string name="genre_easy_listening">Easy listening</string>
     <string name="genre_lithuanian">Lithuanian music</string>
+    <string name="genre_news_talk">News & talk</string>
+    <string name="genre_latvian">Latvian music</string>
 
     <string name="eq_preset_normal">Normal</string>
     <string name="eq_preset_classical">Classical</string>

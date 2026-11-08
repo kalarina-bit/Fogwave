@@ -2,5 +2,7 @@
 • Weniger Aussetzer bei schwachem Netz
 • Flüssigere Equalizer-Regler und schnellerer App-Start
 • Nicht erreichbare Streams werden nicht mehr minutenlang neu versucht
+• Neue Sender: LRT Radijas, Žinių radijas, Latvijas Radio 1 und 2
+• Ansichtsoptionen nur noch im Tab „Radio“
 
 Neue Versionen gibt es auch auf Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

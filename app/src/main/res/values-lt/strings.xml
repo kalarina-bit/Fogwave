@@ -88,6 +88,10 @@
     <string name="station_desc_plus">Muzika ir klasikiniai hitai</string>
     <string name="station_desc_goldfm">Auksiniai hitai</string>
     <string name="station_desc_rc">Radiocentras • Lietuva</string>
+    <string name="station_desc_lrt">Lietuvos visuomeninis radijas • Žinios</string>
+    <string name="station_desc_ziniu">Verslo žinios ir pokalbiai • Lietuva</string>
+    <string name="station_desc_lr1">Visuomeninės žinios ir pokalbiai • Latvija</string>
+    <string name="station_desc_lr2">Latviška muzika • Latvija</string>
     <string name="genre_hits">Hitai</string>
     <string name="genre_pop">Pop</string>
     <string name="genre_dance">Šokių</string>
@@ -95,6 +99,8 @@
     <string name="genre_rock">Rokas</string>
     <string name="genre_easy_listening">Lengvoji muzika</string>
     <string name="genre_lithuanian">Lietuviška muzika</string>
+    <string name="genre_news_talk">Žinios ir pokalbiai</string>
+    <string name="genre_latvian">Latviška muzika</string>
 
     <string name="eq_preset_normal">Įprastas</string>
     <string name="eq_preset_classical">Klasika</string>
