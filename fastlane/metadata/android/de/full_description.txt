@@ -6,7 +6,7 @@
 <li>Genieße deinen Lieblingsklang mit Equalizer, gespeicherten Einstellungen, Lautstärkeverstärkung und Audio-Presets.</li>
 <li>Hör einfach weiter: Bricht der Stream oder das Netz ab, verbindet sich die App automatisch neu.</li>
 <li>Nimm das Radio mit auf die Straße – mit Android-Auto-Unterstützung.</li>
-<li>Finde Sender auf deine Art: Genre-Karten, Suche, Favoriten, zuletzt gehörte und ähnliche Sender – dazu der laufende Song.</li>
+<li>Finde Sender auf deine Art: Suche, Favoriten, zuletzt gehörte und ähnliche Sender – dazu der laufende Song.</li>
 </ul>
 
 <p>Wähle einen Sender und tippe auf Wiedergabe. Fogwave spielt im Hintergrund weiter und speichert deine Equalizer-Einstellungen für das nächste Mal. Das dunkle, aufgeräumte Design gibt es auf Englisch, Russisch, Deutsch, Japanisch, Litauisch und Chinesisch.</p>

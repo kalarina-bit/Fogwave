@@ -107,7 +107,6 @@
     <string name="search_hint">Search stations</string>
     <string name="search_results_title">Search results</string>
     <string name="search_no_results">No stations match “%1$s”</string>
-    <string name="genre_all">All stations</string>
     <plurals name="station_count">
         <item quantity="one">%d station</item>
         <item quantity="other">%d stations</item>

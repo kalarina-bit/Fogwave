@@ -1,4 +1,4 @@
-• New design: genre cards, search and a floating mini player
+• New design with search and a floating mini player
 • Player with a round station disc and the title of the song on air
 • Drifting fog in the color of the playing station
 • Share the station or song you are listening to

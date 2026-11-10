@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -147,7 +148,6 @@ fun NowPlayingSheet(
                     .align(Alignment.TopCenter)
                     .then(sheetModifier)
                     .offset { IntOffset(0, drag.offsetPx.roundToInt()) }
-                    .then(pageWidth)
                     .fillMaxSize()
                     .background(colors.background)
                     // Swallow taps so nothing underneath reacts to them.
@@ -180,7 +180,9 @@ fun NowPlayingSheet(
 
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .align(Alignment.TopCenter)
+                        .then(pageWidth)
+                        .fillMaxHeight()
                         // The page scrolls; drags the content cannot use pull it down to close.
                         .nestedScroll(drag.nestedScrollConnection)
                         .verticalScroll(rememberScrollState())
@@ -195,14 +197,7 @@ fun NowPlayingSheet(
                             .padding(horizontal = 8.dp, vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        IconButton(onClick = onClose, modifier = Modifier.testTag("np_close_btn")) {
-                            AppIcon(
-                                resId = R.drawable.ic_chevron_left,
-                                contentDescription = stringResource(R.string.back_content_desc),
-                                tint = colors.onSurface,
-                                size = 26.dp
-                            )
-                        }
+                        // Closed by swiping down or the system Back gesture.
                         Spacer(modifier = Modifier.weight(1f))
                         IconButton(onClick = onOpenEqualizer, modifier = Modifier.testTag("np_equalizer_toggle")) {
                             AppIcon(

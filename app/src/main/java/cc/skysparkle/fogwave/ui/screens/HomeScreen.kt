@@ -57,14 +57,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.data.model.AppTab
-import cc.skysparkle.fogwave.data.model.Genre
 import cc.skysparkle.fogwave.data.model.RadioStation
 import cc.skysparkle.fogwave.player.PlayerState
 import cc.skysparkle.fogwave.ui.components.AboutPanel
 import cc.skysparkle.fogwave.ui.components.BatteryOptimizationDialog
 import cc.skysparkle.fogwave.ui.components.EqualizerSheet
 import cc.skysparkle.fogwave.ui.components.FavoritesPanel
-import cc.skysparkle.fogwave.ui.components.GenreCarousel
 import cc.skysparkle.fogwave.ui.components.HomeBackdrop
 import cc.skysparkle.fogwave.ui.components.MiniPlayer
 import cc.skysparkle.fogwave.ui.components.NavigationTabs
@@ -88,7 +86,6 @@ fun HomeScreen(
 
     var isSearchOpen by rememberSaveable { mutableStateOf(false) }
     var query by rememberSaveable { mutableStateOf("") }
-    var selectedGenre by rememberSaveable { mutableStateOf<Genre?>(null) }
 
     val favoriteStations = remember(uiState.stations, uiState.favorites) {
         uiState.stations.filter { it.id in uiState.favorites }
@@ -177,8 +174,6 @@ fun HomeScreen(
                             currentStation = uiState.currentStation,
                             isPlaying = isPlaying,
                             query = query.trim(),
-                            selectedGenre = selectedGenre,
-                            onSelectGenre = { selectedGenre = it },
                             onSelectStation = { viewModel.onStationClick(it) },
                             bottomContentPadding = scrollBottomPadding
                         )
@@ -314,7 +309,7 @@ fun HomeScreen(
     }
 }
 
-/** Genre cards on top, then the (filtered) station list. */
+/** Station list, filtered by the search query. */
 @Composable
 private fun RadioTab(
     listState: LazyListState,
@@ -322,44 +317,28 @@ private fun RadioTab(
     currentStation: RadioStation?,
     isPlaying: Boolean,
     query: String,
-    selectedGenre: Genre?,
-    onSelectGenre: (Genre?) -> Unit,
     onSelectStation: (RadioStation) -> Unit,
     bottomContentPadding: Dp
 ) {
     val descriptions = stations.associate { it.id to stationDescription(it) }
-    val visible = remember(stations, query, selectedGenre, descriptions) {
+    val visible = remember(stations, query, descriptions) {
         stations.filter { station ->
-            (selectedGenre == null || selectedGenre in station.genres) &&
-                (query.isEmpty() ||
-                    station.name.contains(query, ignoreCase = true) ||
-                    descriptions[station.id].orEmpty().contains(query, ignoreCase = true))
+            query.isEmpty() ||
+                station.name.contains(query, ignoreCase = true) ||
+                descriptions[station.id].orEmpty().contains(query, ignoreCase = true)
         }
     }
 
     LazyColumn(
         state = listState,
-        contentPadding = PaddingValues(top = 4.dp, bottom = bottomContentPadding),
+        contentPadding = PaddingValues(top = 12.dp, bottom = bottomContentPadding),
         modifier = Modifier.fillMaxSize()
     ) {
-        if (query.isEmpty()) {
-            item(key = "genres") {
-                GenreCarousel(
-                    stations = stations,
-                    selectedGenre = selectedGenre,
-                    onSelectGenre = onSelectGenre,
-                    modifier = Modifier.padding(bottom = 22.dp)
-                )
-            }
-        }
-
         item(key = "header") {
             SectionHeader(
-                title = when {
-                    query.isNotEmpty() -> stringResource(R.string.search_results_title)
-                    selectedGenre != null -> stringResource(selectedGenre.labelRes)
-                    else -> stringResource(R.string.stations_title)
-                },
+                title = stringResource(
+                    if (query.isNotEmpty()) R.string.search_results_title else R.string.stations_title
+                ),
                 trailing = pluralStringResource(R.plurals.station_count, visible.size, visible.size),
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 8.dp)
             )

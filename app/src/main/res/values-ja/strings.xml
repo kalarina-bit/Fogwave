@@ -107,7 +107,6 @@
     <string name="search_hint">局を検索</string>
     <string name="search_results_title">検索結果</string>
     <string name="search_no_results">「%1$s」に一致する局はありません</string>
-    <string name="genre_all">すべての局</string>
     <plurals name="station_count">
         <item quantity="other">%d 局</item>
     </plurals>

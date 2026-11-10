@@ -43,7 +43,7 @@
 - 🔄 **Auto-reconnect** when the stream drops or the network comes back
 - 🎚️ **Equalizer** with presets, loudness boost and dynamics processing
 - ❤️ **Favorites, recently played and similar stations** matched by genre
-- 🗂️ **Genre cards and search** to find a station in a tap
+- 🔍 **Search** to find a station in a tap
 - 🎵 **Song titles** for stations that broadcast them
 - 🌙 **Dark theme**
 - 🌍 **Six languages** — English, Russian, German, Japanese, Lithuanian and Chinese

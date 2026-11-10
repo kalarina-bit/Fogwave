@@ -107,7 +107,6 @@
     <string name="search_hint">Ieškoti stočių</string>
     <string name="search_results_title">Paieškos rezultatai</string>
     <string name="search_no_results">Nėra stočių pagal „%1$s“</string>
-    <string name="genre_all">Visos stotys</string>
     <plurals name="station_count">
         <item quantity="one">%d stotis</item>
         <item quantity="few">%d stotys</item>
