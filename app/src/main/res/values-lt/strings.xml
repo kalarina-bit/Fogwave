@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fogwave</string>
-    <string name="app_subtitle">Interneto radijas</string>
 
     <string name="about_version">Versija %1$s</string>
     <string name="about_description">Greitas ir elegantiškas interneto radijo grotuvas su švariu garsu ir darniu geometriniu dizainu.</string>
@@ -9,9 +8,7 @@
     <string name="fogwave_logo_content_desc">Fogwave logotipas</string>
 
     <string name="player_connecting">Jungiamasi…</string>
-    <string name="player_on_air">Eteryje</string>
     <string name="player_stopped">Sustabdyta</string>
-    <string name="now_playing_live">Dabar skamba • tiesiogiai</string>
     <string name="now_playing_label">DABAR SKAMBA</string>
     <string name="close_content_desc">Uždaryti</string>
     <string name="equalizer_content_desc">Ekvalaizeris</string>
@@ -40,19 +37,11 @@
     <string name="info_status">Būsena</string>
     <string name="status_live">Eteryje • tiesioginė transliacija</string>
 
-    <string name="view_mode_content_desc">Rodymo būdas</string>
-    <string name="display_mode_label">RODYMO BŪDAS</string>
-    <string name="view_mode_list">Sąrašas</string>
-    <string name="view_mode_table">Lentelė</string>
-    <string name="view_mode_tiles">Plytelės</string>
-    <string name="view_mode_icons">Piktogramos</string>
-    <string name="size_label">DYDIS</string>
 
     <string name="favorites_empty_title">Mėgstamų kol kas nėra</string>
     <string name="favorites_empty_subtitle">Atverkite bet kurios stoties grotuvą ir bakstelėkite širdelę, kad pridėtumėte ją prie mėgstamų.</string>
 
     <string name="stations_title">Stotys</string>
-    <string name="favorite_stations_title">Mėgstamos stotys</string>
 
     <string name="tab_radio">Radijas</string>
     <string name="tab_favorites">Mėgstami</string>
@@ -112,4 +101,23 @@
     <string name="eq_preset_jazz">Džiazas</string>
     <string name="eq_preset_pop">Pop</string>
     <string name="eq_preset_rock">Rokas</string>
+
+    <string name="live_label">TIESIOGIAI</string>
+    <string name="search_content_desc">Ieškoti</string>
+    <string name="search_hint">Ieškoti stočių</string>
+    <string name="search_results_title">Paieškos rezultatai</string>
+    <string name="search_no_results">Nėra stočių pagal „%1$s“</string>
+    <string name="genre_all">Visos stotys</string>
+    <plurals name="station_count">
+        <item quantity="one">%d stotis</item>
+        <item quantity="few">%d stotys</item>
+        <item quantity="many">%d stoties</item>
+        <item quantity="other">%d stočių</item>
+    </plurals>
+    <string name="extra_tab_history">Kūriniai</string>
+    <string name="history_empty">Čia bus rodomos dainos, kurias skelbia stotis, kol klausotės.</string>
+    <string name="history_now_playing_tag">Dabar skamba</string>
+    <string name="share_content_desc">Bendrinti</string>
+    <string name="share_text">Klausausi %1$s per Fogwave</string>
+    <string name="share_text_track">Klausausi „%1$s“ per %2$s su Fogwave</string>
 </resources>

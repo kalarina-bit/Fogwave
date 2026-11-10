@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fogwave</string>
-    <string name="app_subtitle">Интернет-радио</string>
 
     <string name="about_version">Версия %1$s</string>
     <string name="about_description">Быстрый и элегантный плеер интернет-радио с чистым звуком и гармоничным геометрическим дизайном.</string>
@@ -9,9 +8,7 @@
     <string name="fogwave_logo_content_desc">Логотип Fogwave</string>
 
     <string name="player_connecting">Подключение…</string>
-    <string name="player_on_air">В эфире</string>
     <string name="player_stopped">Остановлено</string>
-    <string name="now_playing_live">Сейчас играет • прямой эфир</string>
     <string name="now_playing_label">СЕЙЧАС ИГРАЕТ</string>
     <string name="close_content_desc">Закрыть</string>
     <string name="equalizer_content_desc">Эквалайзер</string>
@@ -40,19 +37,11 @@
     <string name="info_status">Статус</string>
     <string name="status_live">В эфире • прямая трансляция</string>
 
-    <string name="view_mode_content_desc">Вид отображения</string>
-    <string name="display_mode_label">РЕЖИМ ОТОБРАЖЕНИЯ</string>
-    <string name="view_mode_list">Список</string>
-    <string name="view_mode_table">Таблица</string>
-    <string name="view_mode_tiles">Плитки</string>
-    <string name="view_mode_icons">Значки</string>
-    <string name="size_label">РАЗМЕР</string>
 
     <string name="favorites_empty_title">В любимых пока ничего нет</string>
     <string name="favorites_empty_subtitle">Откройте плеер любой станции и нажмите на сердечко, чтобы добавить её в список любимых.</string>
 
     <string name="stations_title">Станции</string>
-    <string name="favorite_stations_title">Любимые станции</string>
 
     <string name="tab_radio">Радио</string>
     <string name="tab_favorites">Любимые</string>
@@ -112,4 +101,23 @@
     <string name="eq_preset_jazz">Джаз</string>
     <string name="eq_preset_pop">Поп</string>
     <string name="eq_preset_rock">Рок</string>
+
+    <string name="live_label">В ЭФИРЕ</string>
+    <string name="search_content_desc">Поиск</string>
+    <string name="search_hint">Поиск станций</string>
+    <string name="search_results_title">Результаты поиска</string>
+    <string name="search_no_results">Нет станций по запросу «%1$s»</string>
+    <string name="genre_all">Все станции</string>
+    <plurals name="station_count">
+        <item quantity="one">%d станция</item>
+        <item quantity="few">%d станции</item>
+        <item quantity="many">%d станций</item>
+        <item quantity="other">%d станции</item>
+    </plurals>
+    <string name="extra_tab_history">Треки</string>
+    <string name="history_empty">Здесь появятся песни, которые объявляет станция, пока вы слушаете.</string>
+    <string name="history_now_playing_tag">Сейчас играет</string>
+    <string name="share_content_desc">Поделиться</string>
+    <string name="share_text">Слушаю %1$s в Fogwave</string>
+    <string name="share_text_track">Слушаю «%1$s» на %2$s в Fogwave</string>
 </resources>

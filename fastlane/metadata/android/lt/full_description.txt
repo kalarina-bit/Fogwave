@@ -6,7 +6,7 @@
 <li>Mėgaukitės mėgstamu skambėjimu su ekvalaizeriu, išsaugomais nustatymais, garsumo stiprinimu ir garso šablonais.</li>
 <li>Lengvai grįžkite prie klausymo – nutrūkus srautui ar ryšiui programėlė automatiškai prisijungia iš naujo.</li>
 <li>Pasiimkite radiją į kelionę su Android Auto palaikymu.</li>
-<li>Raskite stotis savaip: mėgstamiausios, neseniai klausytos, panašūs žanrai ir keturi rodinio išdėstymai.</li>
+<li>Raskite stotis savaip: žanrų kortelės, paieška, mėgstamiausios, neseniai klausytos ir panašios stotys, o taip pat dabar skambanti daina ir kūrinių istorija.</li>
 </ul>
 
 <p>Pasirinkite stotį ir paspauskite grojimo mygtuką. Fogwave toliau groja fone ir išsaugo ekvalaizerio nustatymus kitam kartui. Tamsus, tvarkingas dizainas prieinamas anglų, rusų, vokiečių, japonų, lietuvių ir kinų kalbomis.</p>

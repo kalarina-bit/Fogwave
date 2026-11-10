@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fogwave</string>
-    <string name="app_subtitle">网络电台</string>
 
     <string name="about_version">版本 %1$s</string>
     <string name="about_description">音质清晰、几何设计和谐统一的快速优雅网络电台播放器。</string>
@@ -9,9 +8,7 @@
     <string name="fogwave_logo_content_desc">Fogwave 标志</string>
 
     <string name="player_connecting">正在连接…</string>
-    <string name="player_on_air">正在直播</string>
     <string name="player_stopped">已停止</string>
-    <string name="now_playing_live">正在播放 • 直播</string>
     <string name="now_playing_label">正在播放</string>
     <string name="close_content_desc">关闭</string>
     <string name="equalizer_content_desc">均衡器</string>
@@ -40,19 +37,11 @@
     <string name="info_status">状态</string>
     <string name="status_live">正在直播 • 实时音频流</string>
 
-    <string name="view_mode_content_desc">显示模式</string>
-    <string name="display_mode_label">显示模式</string>
-    <string name="view_mode_list">列表</string>
-    <string name="view_mode_table">表格</string>
-    <string name="view_mode_tiles">磁贴</string>
-    <string name="view_mode_icons">图标</string>
-    <string name="size_label">大小</string>
 
     <string name="favorites_empty_title">收藏夹还是空的</string>
     <string name="favorites_empty_subtitle">打开任意电台的播放器，点击心形图标即可将其加入收藏。</string>
 
     <string name="stations_title">电台</string>
-    <string name="favorite_stations_title">收藏的电台</string>
 
     <string name="tab_radio">电台</string>
     <string name="tab_favorites">收藏</string>
@@ -112,4 +101,20 @@
     <string name="eq_preset_jazz">爵士</string>
     <string name="eq_preset_pop">流行</string>
     <string name="eq_preset_rock">摇滚</string>
+
+    <string name="live_label">直播</string>
+    <string name="search_content_desc">搜索</string>
+    <string name="search_hint">搜索电台</string>
+    <string name="search_results_title">搜索结果</string>
+    <string name="search_no_results">没有与“%1$s”匹配的电台</string>
+    <string name="genre_all">全部电台</string>
+    <plurals name="station_count">
+        <item quantity="other">%d 个电台</item>
+    </plurals>
+    <string name="extra_tab_history">曲目</string>
+    <string name="history_empty">收听时，电台播报的歌曲会显示在这里。</string>
+    <string name="history_now_playing_tag">正在播放</string>
+    <string name="share_content_desc">分享</string>
+    <string name="share_text">我正在用 Fogwave 收听 %1$s</string>
+    <string name="share_text_track">我正在用 Fogwave 收听 %2$s 的“%1$s”</string>
 </resources>

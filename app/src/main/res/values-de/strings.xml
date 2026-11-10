@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fogwave</string>
-    <string name="app_subtitle">Internetradio</string>
 
     <string name="about_version">Version %1$s</string>
     <string name="about_description">Ein schneller, eleganter Internetradio-Player mit klarem Klang und ausgewogenem geometrischem Design.</string>
@@ -9,9 +8,7 @@
     <string name="fogwave_logo_content_desc">Fogwave-Logo</string>
 
     <string name="player_connecting">Verbindung wird hergestellt…</string>
-    <string name="player_on_air">Auf Sendung</string>
     <string name="player_stopped">Gestoppt</string>
-    <string name="now_playing_live">Läuft gerade • LIVE</string>
     <string name="now_playing_label">LÄUFT GERADE</string>
     <string name="close_content_desc">Schließen</string>
     <string name="equalizer_content_desc">Equalizer</string>
@@ -40,19 +37,11 @@
     <string name="info_status">Status</string>
     <string name="status_live">Auf Sendung • Livestream</string>
 
-    <string name="view_mode_content_desc">Anzeigemodus</string>
-    <string name="display_mode_label">ANZEIGEMODUS</string>
-    <string name="view_mode_list">Liste</string>
-    <string name="view_mode_table">Tabelle</string>
-    <string name="view_mode_tiles">Kacheln</string>
-    <string name="view_mode_icons">Symbole</string>
-    <string name="size_label">GRÖSSE</string>
 
     <string name="favorites_empty_title">Noch keine Favoriten</string>
     <string name="favorites_empty_subtitle">Öffne den Player eines beliebigen Senders und tippe auf das Herz, um ihn zu den Favoriten hinzuzufügen.</string>
 
     <string name="stations_title">Sender</string>
-    <string name="favorite_stations_title">Lieblingssender</string>
 
     <string name="tab_radio">Radio</string>
     <string name="tab_favorites">Favoriten</string>
@@ -112,4 +101,21 @@
     <string name="eq_preset_jazz">Jazz</string>
     <string name="eq_preset_pop">Pop</string>
     <string name="eq_preset_rock">Rock</string>
+
+    <string name="live_label">LIVE</string>
+    <string name="search_content_desc">Suchen</string>
+    <string name="search_hint">Sender suchen</string>
+    <string name="search_results_title">Suchergebnisse</string>
+    <string name="search_no_results">Keine Sender passend zu „%1$s“</string>
+    <string name="genre_all">Alle Sender</string>
+    <plurals name="station_count">
+        <item quantity="one">%d Sender</item>
+        <item quantity="other">%d Sender</item>
+    </plurals>
+    <string name="extra_tab_history">Titel</string>
+    <string name="history_empty">Songs, die der Sender ansagt, erscheinen hier, während du zuhörst.</string>
+    <string name="history_now_playing_tag">Läuft gerade</string>
+    <string name="share_content_desc">Teilen</string>
+    <string name="share_text">Ich höre %1$s mit Fogwave</string>
+    <string name="share_text_track">Ich höre „%1$s“ auf %2$s mit Fogwave</string>
 </resources>

@@ -30,6 +30,10 @@ class RadioPlayerManager(private val context: Context) {
     private val _currentMediaId = MutableStateFlow<String?>(null)
     val currentMediaId: StateFlow<String?> = _currentMediaId.asStateFlow()
 
+    /** Song announced by the stream (ICY / ID3 metadata), or null when the station sends none. */
+    private val _nowPlayingTitle = MutableStateFlow<String?>(null)
+    val nowPlayingTitle: StateFlow<String?> = _nowPlayingTitle.asStateFlow()
+
     private var currentStation: RadioStation? = null
     private var pendingStation: RadioStation? = null
 
@@ -41,6 +45,7 @@ class RadioPlayerManager(private val context: Context) {
         override fun onEvents(player: Player, events: Player.Events) {
             _playerState.value = deriveState(player)
             _currentMediaId.value = player.currentMediaItem?.mediaId
+            _nowPlayingTitle.value = streamTitle(player)
         }
 
         override fun onPlayerError(error: PlaybackException) {
@@ -85,6 +90,7 @@ class RadioPlayerManager(private val context: Context) {
                 } else {
                     _playerState.value = deriveState(c)
                     _currentMediaId.value = c.currentMediaItem?.mediaId
+                    _nowPlayingTitle.value = streamTitle(c)
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to connect to FogwavePlaybackService", e)
@@ -125,6 +131,14 @@ class RadioPlayerManager(private val context: Context) {
         }
     }
 
+    // Stream metadata replaces the item's own title; the station name itself is not a song.
+    private fun streamTitle(p: Player): String? {
+        val title = p.mediaMetadata.title?.toString()?.trim()
+        if (title.isNullOrEmpty()) return null
+        if (title == p.currentMediaItem?.mediaMetadata?.title?.toString()?.trim()) return null
+        return title
+    }
+
     private fun errorMessage(error: PlaybackException): String = context.getString(
         when (error.errorCode) {
             PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
@@ -144,6 +158,7 @@ class RadioPlayerManager(private val context: Context) {
             return
         }
         _playerState.value = PlayerState.Connecting
+        _nowPlayingTitle.value = null
         try {
             c.setMediaItem(station.toMediaItem(context))
             c.prepare()

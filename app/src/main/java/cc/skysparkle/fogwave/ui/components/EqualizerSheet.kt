@@ -101,7 +101,7 @@ fun EqualizerSheet(
                     text = if (audioEffects.equalizerEnabled) stringResource(R.string.equalizer_on) else stringResource(R.string.equalizer_off),
                     style = MaterialTheme.typography.labelMedium.copy(
                         fontWeight = FontWeight.Bold,
-                        color = if (audioEffects.equalizerEnabled) LocalGeoColors.current.liveGreen else LocalGeoColors.current.onSurfaceVariant
+                        color = if (audioEffects.equalizerEnabled) LocalGeoColors.current.primary else LocalGeoColors.current.onSurfaceVariant
                     ),
                     modifier = Modifier.padding(end = 6.dp)
                 )

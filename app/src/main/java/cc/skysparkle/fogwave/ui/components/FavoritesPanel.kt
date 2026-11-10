@@ -15,9 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -33,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -40,9 +38,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.R
-import cc.skysparkle.fogwave.data.model.IconSizeStep
 import cc.skysparkle.fogwave.data.model.RadioStation
-import cc.skysparkle.fogwave.data.model.ViewMode
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 
 @Composable
@@ -50,8 +46,6 @@ fun FavoritesPanel(
     favorites: List<RadioStation>,
     currentStation: RadioStation?,
     isPlaying: Boolean,
-    viewMode: ViewMode,
-    sizeStep: IconSizeStep,
     onSelectStation: (RadioStation) -> Unit,
     onBrowseStations: () -> Unit,
     modifier: Modifier = Modifier,
@@ -66,68 +60,27 @@ fun FavoritesPanel(
         return
     }
 
-    StationCollection(
-        stations = favorites,
-        currentStation = currentStation,
-        isPlaying = isPlaying,
-        viewMode = viewMode,
-        sizeStep = sizeStep,
-        onSelectStation = onSelectStation,
-        bottomContentPadding = bottomContentPadding,
+    LazyColumn(
+        contentPadding = PaddingValues(start = 10.dp, end = 10.dp, top = 8.dp, bottom = bottomContentPadding),
+        verticalArrangement = Arrangement.spacedBy(2.dp),
         modifier = modifier
-    )
-}
-
-/** The station grid (Icons mode) or list (other modes), shared by the Radio and Favorites tabs. */
-@Composable
-fun StationCollection(
-    stations: List<RadioStation>,
-    currentStation: RadioStation?,
-    isPlaying: Boolean,
-    viewMode: ViewMode,
-    sizeStep: IconSizeStep,
-    onSelectStation: (RadioStation) -> Unit,
-    bottomContentPadding: Dp,
-    modifier: Modifier = Modifier
-) {
-    val contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = bottomContentPadding)
-    when (viewMode) {
-        ViewMode.ICONS -> LazyVerticalGrid(
-            columns = GridCells.Adaptive((sizeStep.sizeDp + 16).dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-            contentPadding = contentPadding,
-            modifier = modifier
-        ) {
-            items(stations, key = { it.id }) { station ->
-                val isCur = station.id == currentStation?.id
-                StationItem(
-                    station = station,
-                    isCurrent = isCur,
-                    isPlaying = isCur && isPlaying,
-                    viewMode = viewMode,
-                    sizeStep = sizeStep,
-                    onClick = { onSelectStation(station) }
-                )
-            }
+    ) {
+        item(key = "header") {
+            SectionHeader(
+                title = stringResource(R.string.tab_favorites),
+                trailing = pluralStringResource(R.plurals.station_count, favorites.size, favorites.size),
+                modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 8.dp)
+            )
         }
-
-        ViewMode.TILES, ViewMode.LIST, ViewMode.DETAILS -> LazyColumn(
-            contentPadding = contentPadding,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = modifier
-        ) {
-            items(stations, key = { it.id }) { station ->
-                val isCur = station.id == currentStation?.id
-                StationItem(
-                    station = station,
-                    isCurrent = isCur,
-                    isPlaying = isCur && isPlaying,
-                    viewMode = viewMode,
-                    sizeStep = sizeStep,
-                    onClick = { onSelectStation(station) }
-                )
-            }
+        items(favorites, key = { it.id }) { station ->
+            val isCur = station.id == currentStation?.id
+            StationRow(
+                station = station,
+                isCurrent = isCur,
+                isPlaying = isCur && isPlaying,
+                onClick = { onSelectStation(station) },
+                modifier = Modifier.animateItem()
+            )
         }
     }
 }

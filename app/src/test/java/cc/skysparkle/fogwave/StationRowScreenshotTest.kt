@@ -3,10 +3,8 @@ package cc.skysparkle.fogwave
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import cc.skysparkle.fogwave.data.model.Genre
-import cc.skysparkle.fogwave.data.model.IconSizeStep
 import cc.skysparkle.fogwave.data.model.RadioStation
-import cc.skysparkle.fogwave.data.model.ViewMode
-import cc.skysparkle.fogwave.ui.components.StationItem
+import cc.skysparkle.fogwave.ui.components.StationRow
 import cc.skysparkle.fogwave.ui.theme.FogwaveTheme
 import com.github.takahirom.roborazzi.RobolectricDeviceQualifiers
 import com.github.takahirom.roborazzi.captureRoboImage
@@ -20,7 +18,7 @@ import org.robolectric.annotation.GraphicsMode
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(qualifiers = RobolectricDeviceQualifiers.Pixel8, sdk = [36])
-class StationItemScreenshotTest {
+class StationRowScreenshotTest {
   @get:Rule val composeTestRule = createComposeRule()
 
   private val station = RadioStation(
@@ -34,20 +32,18 @@ class StationItemScreenshotTest {
   )
 
   @Test
-  fun stationItem_list_screenshot() {
+  fun stationRow_screenshot() {
     composeTestRule.setContent {
       FogwaveTheme {
-        StationItem(
+        StationRow(
           station = station,
           isCurrent = true,
           isPlaying = false,
-          viewMode = ViewMode.LIST,
-          sizeStep = IconSizeStep.M,
           onClick = {}
         )
       }
     }
 
-    composeTestRule.onRoot().captureRoboImage(filePath = "src/test/screenshots/station_item.png")
+    composeTestRule.onRoot().captureRoboImage(filePath = "src/test/screenshots/station_row.png")
   }
 }

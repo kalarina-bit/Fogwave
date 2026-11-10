@@ -12,51 +12,62 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.data.model.AppTab
+import cc.skysparkle.fogwave.data.model.Genre
+import cc.skysparkle.fogwave.data.model.RadioStation
 import cc.skysparkle.fogwave.player.PlayerState
 import cc.skysparkle.fogwave.ui.components.AboutPanel
 import cc.skysparkle.fogwave.ui.components.BatteryOptimizationDialog
 import cc.skysparkle.fogwave.ui.components.EqualizerSheet
 import cc.skysparkle.fogwave.ui.components.FavoritesPanel
+import cc.skysparkle.fogwave.ui.components.GenreCarousel
 import cc.skysparkle.fogwave.ui.components.MiniPlayer
-import cc.skysparkle.fogwave.ui.components.MistyMountainBackground
 import cc.skysparkle.fogwave.ui.components.NavigationTabs
 import cc.skysparkle.fogwave.ui.components.NowPlayingSheet
-import cc.skysparkle.fogwave.ui.components.StationCollection
-import cc.skysparkle.fogwave.ui.components.StationsToolbar
+import cc.skysparkle.fogwave.ui.components.SectionHeader
+import cc.skysparkle.fogwave.ui.components.StationRow
 import cc.skysparkle.fogwave.ui.components.TopBrandBar
+import cc.skysparkle.fogwave.ui.components.stationDescription
+import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 import cc.skysparkle.fogwave.ui.viewmodel.RadioViewModel
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -66,6 +77,10 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isPlaying = uiState.playerState is PlayerState.Playing
+
+    var isSearchOpen by rememberSaveable { mutableStateOf(false) }
+    var query by rememberSaveable { mutableStateOf("") }
+    var selectedGenre by rememberSaveable { mutableStateOf<Genre?>(null) }
 
     val favoriteStations = remember(uiState.stations, uiState.favorites) {
         uiState.stations.filter { it.id in uiState.favorites }
@@ -77,11 +92,16 @@ fun HomeScreen(
         uiState.recents.filter { it.id != uiState.currentStation?.id }
     }
 
+    val closeSearch = {
+        isSearchOpen = false
+        query = ""
+    }
+
     BackHandler(enabled = uiState.isEqualizerPopOpen) { viewModel.closeEqualizerPop() }
     BackHandler(enabled = uiState.isNowPlayingOpen && !uiState.isEqualizerPopOpen) { viewModel.closeNowPlaying() }
-    BackHandler(enabled = uiState.isViewPopOpen && !uiState.isNowPlayingOpen) { viewModel.closeViewPop() }
+    BackHandler(enabled = isSearchOpen && !uiState.isNowPlayingOpen) { closeSearch() }
     BackHandler(
-        enabled = uiState.selectedTab != AppTab.RADIO && !uiState.isNowPlayingOpen && !uiState.isViewPopOpen
+        enabled = uiState.selectedTab != AppTab.RADIO && !uiState.isNowPlayingOpen && !isSearchOpen
     ) { viewModel.setSelectedTab(AppTab.RADIO) }
     val showBatteryOptimizationPrompt by viewModel.showBatteryOptimizationPrompt.collectAsStateWithLifecycle()
 
@@ -90,16 +110,23 @@ fun HomeScreen(
     }
 
     val density = LocalDensity.current
-    var dockHeight by remember { mutableStateOf(140.dp) }
+    var dockHeight by remember { mutableStateOf(160.dp) }
     val scrollBottomPadding = dockHeight + 16.dp
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        MistyMountainBackground()
-
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            TopBrandBar()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(LocalGeoColors.current.background)
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopBrandBar(
+                showSearch = uiState.selectedTab == AppTab.RADIO,
+                isSearchOpen = isSearchOpen,
+                query = query,
+                onQueryChange = { query = it },
+                onOpenSearch = { isSearchOpen = true },
+                onCloseSearch = closeSearch
+            )
 
             Box(modifier = Modifier.weight(1f)) {
                 AnimatedContent(
@@ -116,75 +143,34 @@ fun HomeScreen(
                     label = "tabs"
                 ) { tab ->
                     when (tab) {
-                        AppTab.RADIO, AppTab.FAVORITES -> {
-                            val isFavorites = tab == AppTab.FAVORITES
-                            Column(modifier = Modifier.fillMaxSize()) {
-                                StationsToolbar(
-                                    title = stringResource(
-                                        if (isFavorites) R.string.favorite_stations_title else R.string.stations_title
-                                    ),
-                                    isOpen = uiState.isViewPopOpen,
-                                    onToggleOpen = { viewModel.toggleViewPop() },
-                                    viewMode = uiState.viewMode,
-                                    onSelectViewMode = { viewModel.setViewMode(it) },
-                                    sizeStep = uiState.sizeStep,
-                                    onSelectSizeStep = { viewModel.setSizeStep(it) },
-                                    // View options live on the Radio tab only; Favorites follows that choice.
-                                    showViewOptions = !isFavorites
-                                )
+                        AppTab.RADIO -> RadioTab(
+                            stations = uiState.stations,
+                            currentStation = uiState.currentStation,
+                            isPlaying = isPlaying,
+                            query = query.trim(),
+                            selectedGenre = selectedGenre,
+                            onSelectGenre = { selectedGenre = it },
+                            onSelectStation = { viewModel.onStationClick(it) },
+                            bottomContentPadding = scrollBottomPadding
+                        )
 
-                                Box(modifier = Modifier.weight(1f)) {
-                                    AnimatedContent(
-                                        targetState = uiState.viewMode,
-                                        transitionSpec = {
-                                            (fadeIn(tween(220, delayMillis = 60)) +
-                                                scaleIn(initialScale = 0.985f, animationSpec = tween(260)))
-                                                .togetherWith(fadeOut(tween(120)))
-                                        },
-                                        label = "view_mode"
-                                    ) { mode ->
-                                        if (isFavorites) {
-                                            FavoritesPanel(
-                                                favorites = favoriteStations,
-                                                currentStation = uiState.currentStation,
-                                                isPlaying = isPlaying,
-                                                viewMode = mode,
-                                                sizeStep = uiState.sizeStep,
-                                                onSelectStation = { viewModel.onStationClick(it) },
-                                                onBrowseStations = { viewModel.setSelectedTab(AppTab.RADIO) },
-                                                bottomContentPadding = scrollBottomPadding,
-                                                modifier = Modifier.fillMaxSize()
-                                            )
-                                        } else {
-                                            StationCollection(
-                                                stations = uiState.stations,
-                                                currentStation = uiState.currentStation,
-                                                isPlaying = isPlaying,
-                                                viewMode = mode,
-                                                sizeStep = uiState.sizeStep,
-                                                onSelectStation = { viewModel.onStationClick(it) },
-                                                bottomContentPadding = scrollBottomPadding,
-                                                modifier = Modifier.fillMaxSize()
-                                            )
-                                        }
-                                    }
-                                    PopoverScrim(
-                                        visible = uiState.isViewPopOpen,
-                                        onDismiss = { viewModel.closeViewPop() }
-                                    )
-                                }
-                            }
-                        }
+                        AppTab.FAVORITES -> FavoritesPanel(
+                            favorites = favoriteStations,
+                            currentStation = uiState.currentStation,
+                            isPlaying = isPlaying,
+                            onSelectStation = { viewModel.onStationClick(it) },
+                            onBrowseStations = { viewModel.setSelectedTab(AppTab.RADIO) },
+                            bottomContentPadding = scrollBottomPadding,
+                            modifier = Modifier.fillMaxSize()
+                        )
 
-                        AppTab.ABOUT -> {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .verticalScroll(rememberScrollState())
-                                    .padding(bottom = scrollBottomPadding)
-                            ) {
-                                AboutPanel()
-                            }
+                        AppTab.ABOUT -> Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScroll(rememberScrollState())
+                                .padding(bottom = scrollBottomPadding)
+                        ) {
+                            AboutPanel()
                         }
                     }
                 }
@@ -206,13 +192,6 @@ fun HomeScreen(
                 // even when the mini player is swiped away.
                 .navigationBarsPadding()
         ) {
-            NavigationTabs(
-                selectedTab = uiState.selectedTab,
-                favoritesCount = uiState.unseenFavoritesCount,
-                onTabSelected = { viewModel.setSelectedTab(it) },
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 6.dp)
-            )
-
             AnimatedVisibility(
                 visible = !uiState.isMiniPlayerHidden,
                 enter = fadeIn() + slideInVertically(initialOffsetY = { it }),
@@ -221,13 +200,22 @@ fun HomeScreen(
                 MiniPlayer(
                     station = uiState.currentStation,
                     playerState = uiState.playerState,
+                    trackTitle = uiState.nowPlayingTitle,
                     onTogglePlay = { viewModel.togglePlay() },
-                    onPrevious = { viewModel.previousStation() },
-                    onNext = { viewModel.nextStation() },
                     onOpenNowPlaying = { viewModel.openNowPlaying() },
                     onHide = { viewModel.hideMiniPlayer() }
                 )
             }
+
+            NavigationTabs(
+                selectedTab = uiState.selectedTab,
+                favoritesCount = uiState.unseenFavoritesCount,
+                onTabSelected = {
+                    closeSearch()
+                    viewModel.setSelectedTab(it)
+                },
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 6.dp)
+            )
         }
 
         AnimatedVisibility(
@@ -239,6 +227,8 @@ fun HomeScreen(
             NowPlayingSheet(
                 station = uiState.currentStation,
                 playerState = uiState.playerState,
+                trackTitle = uiState.nowPlayingTitle,
+                trackHistory = uiState.trackHistory,
                 isFavorite = isCurFav,
                 onToggleFavorite = { viewModel.toggleFavorite() },
                 onTogglePlay = { viewModel.togglePlay() },
@@ -286,22 +276,83 @@ fun HomeScreen(
     }
 }
 
+/** Genre cards on top, then the (filtered) station list. */
 @Composable
-private fun PopoverScrim(visible: Boolean, onDismiss: () -> Unit) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = fadeIn(tween(200)),
-        exit = fadeOut(tween(160))
+private fun RadioTab(
+    stations: List<RadioStation>,
+    currentStation: RadioStation?,
+    isPlaying: Boolean,
+    query: String,
+    selectedGenre: Genre?,
+    onSelectGenre: (Genre?) -> Unit,
+    onSelectStation: (RadioStation) -> Unit,
+    bottomContentPadding: Dp
+) {
+    val descriptions = stations.associate { it.id to stationDescription(it) }
+    val visible = remember(stations, query, selectedGenre, descriptions) {
+        stations.filter { station ->
+            (selectedGenre == null || selectedGenre in station.genres) &&
+                (query.isEmpty() ||
+                    station.name.contains(query, ignoreCase = true) ||
+                    descriptions[station.id].orEmpty().contains(query, ignoreCase = true))
+        }
+    }
+
+    LazyColumn(
+        contentPadding = PaddingValues(top = 4.dp, bottom = bottomContentPadding),
+        modifier = Modifier.fillMaxSize()
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.38f))
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null,
-                    onClick = onDismiss
+        if (query.isEmpty()) {
+            item(key = "genres") {
+                GenreCarousel(
+                    stations = stations,
+                    selectedGenre = selectedGenre,
+                    onSelectGenre = onSelectGenre,
+                    modifier = Modifier.padding(bottom = 22.dp)
                 )
-        )
+            }
+        }
+
+        item(key = "header") {
+            SectionHeader(
+                title = when {
+                    query.isNotEmpty() -> stringResource(R.string.search_results_title)
+                    selectedGenre != null -> stringResource(selectedGenre.labelRes)
+                    else -> stringResource(R.string.stations_title)
+                },
+                trailing = pluralStringResource(R.plurals.station_count, visible.size, visible.size),
+                modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 8.dp)
+            )
+        }
+
+        if (visible.isEmpty()) {
+            item(key = "empty") {
+                Text(
+                    text = stringResource(R.string.search_no_results, query),
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        color = LocalGeoColors.current.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 32.dp, vertical = 32.dp)
+                )
+            }
+        }
+
+        items(visible, key = { it.id }) { station ->
+            val isCur = station.id == currentStation?.id
+            StationRow(
+                station = station,
+                isCurrent = isCur,
+                isPlaying = isCur && isPlaying,
+                onClick = { onSelectStation(station) },
+                modifier = Modifier
+                    .padding(horizontal = 10.dp, vertical = 1.dp)
+                    .animateItem()
+            )
+        }
+
+        item(key = "spacer") { Spacer(modifier = Modifier.height(8.dp)) }
     }
 }

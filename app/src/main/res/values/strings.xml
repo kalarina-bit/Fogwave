@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fogwave</string>
-    <string name="app_subtitle">Internet Radio</string>
 
     <string name="about_version">Version %1$s</string>
     <string name="about_description">A fast, elegant internet radio player with clean sound and a balanced geometric design.</string>
@@ -9,9 +8,7 @@
     <string name="fogwave_logo_content_desc">Fogwave logo</string>
 
     <string name="player_connecting">Connecting…</string>
-    <string name="player_on_air">On air</string>
     <string name="player_stopped">Stopped</string>
-    <string name="now_playing_live">Now playing • LIVE</string>
     <string name="now_playing_label">NOW PLAYING</string>
     <string name="close_content_desc">Close</string>
     <string name="equalizer_content_desc">Equalizer</string>
@@ -44,19 +41,11 @@
     <string name="info_status">Status</string>
     <string name="status_live">On air • Live Stream</string>
 
-    <string name="view_mode_content_desc">Display mode</string>
-    <string name="display_mode_label">DISPLAY MODE</string>
-    <string name="view_mode_list">List</string>
-    <string name="view_mode_table">Table</string>
-    <string name="view_mode_tiles">Tiles</string>
-    <string name="view_mode_icons">Icons</string>
-    <string name="size_label">SIZE</string>
 
     <string name="favorites_empty_title">Nothing in favorites yet</string>
     <string name="favorites_empty_subtitle">Open any station\'s player and tap the heart to add it to favorites.</string>
 
     <string name="stations_title">Stations</string>
-    <string name="favorite_stations_title">Favorite Stations</string>
 
     <string name="tab_radio">Radio</string>
     <string name="tab_favorites">Favorites</string>
@@ -112,4 +101,21 @@
     <string name="eq_preset_jazz">Jazz</string>
     <string name="eq_preset_pop">Pop</string>
     <string name="eq_preset_rock">Rock</string>
+
+    <string name="live_label">LIVE</string>
+    <string name="search_content_desc">Search</string>
+    <string name="search_hint">Search stations</string>
+    <string name="search_results_title">Search results</string>
+    <string name="search_no_results">No stations match “%1$s”</string>
+    <string name="genre_all">All stations</string>
+    <plurals name="station_count">
+        <item quantity="one">%d station</item>
+        <item quantity="other">%d stations</item>
+    </plurals>
+    <string name="extra_tab_history">Tracks</string>
+    <string name="history_empty">Songs the station announces will show up here while you listen.</string>
+    <string name="history_now_playing_tag">Now playing</string>
+    <string name="share_content_desc">Share</string>
+    <string name="share_text">I\'m listening to %1$s on Fogwave</string>
+    <string name="share_text_track">I\'m listening to “%1$s” on %2$s with Fogwave</string>
 </resources>

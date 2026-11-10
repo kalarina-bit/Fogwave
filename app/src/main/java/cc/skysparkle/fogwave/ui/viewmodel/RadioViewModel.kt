@@ -8,9 +8,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import cc.skysparkle.fogwave.data.model.AppTab
 import cc.skysparkle.fogwave.data.model.ExtraPlayerTab
-import cc.skysparkle.fogwave.data.model.IconSizeStep
 import cc.skysparkle.fogwave.data.model.RadioStation
-import cc.skysparkle.fogwave.data.model.ViewMode
+import cc.skysparkle.fogwave.data.model.TrackEntry
 import cc.skysparkle.fogwave.data.repository.RadioRepository
 import cc.skysparkle.fogwave.player.AudioEffectsController
 import cc.skysparkle.fogwave.player.AudioEffectsState
@@ -32,15 +31,14 @@ data class RadioUiState(
     val favorites: Set<String> = emptySet(),
     val recents: List<RadioStation> = emptyList(),
     val selectedTab: AppTab = AppTab.RADIO,
-    val viewMode: ViewMode = ViewMode.ICONS,
-    val sizeStep: IconSizeStep = IconSizeStep.M,
     val isNowPlayingOpen: Boolean = false,
     val isEqualizerPopOpen: Boolean = false,
-    val isViewPopOpen: Boolean = false,
-    val activeExtraTab: ExtraPlayerTab = ExtraPlayerTab.RECENT,
+    val activeExtraTab: ExtraPlayerTab = ExtraPlayerTab.HISTORY,
     val audioEffects: AudioEffectsState = AudioEffectsState(),
     val isMiniPlayerHidden: Boolean = false,
-    val unseenFavoritesCount: Int = 0
+    val unseenFavoritesCount: Int = 0,
+    val nowPlayingTitle: String? = null,
+    val trackHistory: List<TrackEntry> = emptyList()
 )
 
 class RadioViewModel(application: Application) : AndroidViewModel(application) {
@@ -60,9 +58,11 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
     private val _selectedTab = MutableStateFlow(AppTab.RADIO)
     private val _isNowPlayingOpen = MutableStateFlow(false)
     private val _isEqualizerPopOpen = MutableStateFlow(false)
-    private val _isViewPopOpen = MutableStateFlow(false)
-    private val _activeExtraTab = MutableStateFlow(ExtraPlayerTab.RECENT)
+    private val _activeExtraTab = MutableStateFlow(ExtraPlayerTab.HISTORY)
     private val _isMiniPlayerHidden = MutableStateFlow(false)
+
+    // Newest first; kept for this session only.
+    private val _trackHistory = MutableStateFlow<List<TrackEntry>>(emptyList())
 
     private val _showBatteryOptimizationPrompt = MutableStateFlow(false)
     val showBatteryOptimizationPrompt: StateFlow<Boolean> = _showBatteryOptimizationPrompt.asStateFlow()
@@ -83,16 +83,15 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         repository.favoritesFlow,
         repository.recentsFlow,
         _selectedTab,
-        repository.viewModeFlow,
-        repository.sizeStepFlow,
         _isNowPlayingOpen,
         _isEqualizerPopOpen,
-        _isViewPopOpen,
         _activeExtraTab,
         AudioEffectsController.state,
         _isMiniPlayerHidden,
         repository.seenFavoritesFlow,
-        _stations
+        _stations,
+        playerManager.nowPlayingTitle,
+        _trackHistory
     ) { params ->
         val current = params[0] as? RadioStation
         val pState = params[1] as PlayerState
@@ -101,18 +100,18 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         @Suppress("UNCHECKED_CAST")
         val recentsIds = params[3] as List<String>
         val tab = params[4] as AppTab
-        val mode = params[5] as ViewMode
-        val size = params[6] as IconSizeStep
-        val nowPlaying = params[7] as Boolean
-        val eqPop = params[8] as Boolean
-        val viewPop = params[9] as Boolean
-        val extraTab = params[10] as ExtraPlayerTab
-        val effects = params[11] as AudioEffectsState
-        val miniHidden = params[12] as Boolean
+        val nowPlaying = params[5] as Boolean
+        val eqPop = params[6] as Boolean
+        val extraTab = params[7] as ExtraPlayerTab
+        val effects = params[8] as AudioEffectsState
+        val miniHidden = params[9] as Boolean
         @Suppress("UNCHECKED_CAST")
-        val seenFavs = params[13] as Set<String>
+        val seenFavs = params[10] as Set<String>
         @Suppress("UNCHECKED_CAST")
-        val orderedStations = params[14] as List<RadioStation>
+        val orderedStations = params[11] as List<RadioStation>
+        val songTitle = params[12] as String?
+        @Suppress("UNCHECKED_CAST")
+        val history = params[13] as List<TrackEntry>
 
         val byId = orderedStations.associateBy { it.id }
         val recentsList = recentsIds.mapNotNull { byId[it] }
@@ -124,15 +123,14 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             favorites = favs,
             recents = recentsList,
             selectedTab = tab,
-            viewMode = mode,
-            sizeStep = size,
             isNowPlayingOpen = nowPlaying,
             isEqualizerPopOpen = eqPop,
-            isViewPopOpen = viewPop,
             activeExtraTab = extraTab,
             audioEffects = effects,
             isMiniPlayerHidden = miniHidden,
-            unseenFavoritesCount = favs.count { it !in seenFavs }
+            unseenFavoritesCount = favs.count { it !in seenFavs },
+            nowPlayingTitle = songTitle,
+            trackHistory = history
         )
     }.stateIn(
         scope = viewModelScope,
@@ -141,8 +139,6 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             stations = stations,
             currentStation = initialStation,
             favorites = repository.favoritesFlow.value,
-            viewMode = repository.viewModeFlow.value,
-            sizeStep = repository.sizeStepFlow.value,
             audioEffects = AudioEffectsController.state.value,
             unseenFavoritesCount = repository.favoritesFlow.value.count { it !in repository.seenFavoritesFlow.value }
         )
@@ -159,6 +155,20 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
                 }
             }
         }
+        viewModelScope.launch {
+            playerManager.nowPlayingTitle.collect { title ->
+                val stationId = playerManager.currentMediaId.value ?: _currentStation.value?.id
+                if (title != null && stationId != null) recordTrack(stationId, title)
+            }
+        }
+    }
+
+    private fun recordTrack(stationId: String, title: String) {
+        val history = _trackHistory.value
+        val last = history.firstOrNull { it.stationId == stationId }
+        if (last?.title == title) return
+        _trackHistory.value = (listOf(TrackEntry(stationId, title, System.currentTimeMillis())) + history)
+            .take(MAX_TRACK_HISTORY)
     }
 
     /** Tap on a station tile: open the player for the station already on air, otherwise tune in. */
@@ -273,18 +283,9 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setSelectedTab(tab: AppTab) {
         _selectedTab.value = tab
-        _isViewPopOpen.value = false
         if (tab == AppTab.FAVORITES) {
             repository.markFavoritesSeen(repository.favoritesFlow.value)
         }
-    }
-
-    fun setViewMode(mode: ViewMode) {
-        repository.setViewMode(mode)
-    }
-
-    fun setSizeStep(step: IconSizeStep) {
-        repository.setSizeStep(step)
     }
 
     fun openNowPlaying() {
@@ -304,14 +305,6 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         _isEqualizerPopOpen.value = false
     }
 
-    fun toggleViewPop() {
-        _isViewPopOpen.value = !_isViewPopOpen.value
-    }
-
-    fun closeViewPop() {
-        _isViewPopOpen.value = false
-    }
-
     fun setActiveExtraTab(tab: ExtraPlayerTab) {
         _activeExtraTab.value = tab
     }
@@ -319,5 +312,9 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
     override fun onCleared() {
         super.onCleared()
         playerManager.release()
+    }
+
+    private companion object {
+        const val MAX_TRACK_HISTORY = 60
     }
 }

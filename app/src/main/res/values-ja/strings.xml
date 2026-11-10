@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fogwave</string>
-    <string name="app_subtitle">インターネットラジオ</string>
 
     <string name="about_version">バージョン %1$s</string>
     <string name="about_description">クリアなサウンドと調和のとれた幾何学的デザインを備えた、高速でエレガントなインターネットラジオプレーヤー。</string>
@@ -9,9 +8,7 @@
     <string name="fogwave_logo_content_desc">Fogwave ロゴ</string>
 
     <string name="player_connecting">接続中…</string>
-    <string name="player_on_air">オンエア中</string>
     <string name="player_stopped">停止中</string>
-    <string name="now_playing_live">再生中 • ライブ</string>
     <string name="now_playing_label">再生中</string>
     <string name="close_content_desc">閉じる</string>
     <string name="equalizer_content_desc">イコライザー</string>
@@ -40,19 +37,11 @@
     <string name="info_status">状態</string>
     <string name="status_live">オンエア中 • ライブストリーム</string>
 
-    <string name="view_mode_content_desc">表示モード</string>
-    <string name="display_mode_label">表示モード</string>
-    <string name="view_mode_list">リスト</string>
-    <string name="view_mode_table">テーブル</string>
-    <string name="view_mode_tiles">タイル</string>
-    <string name="view_mode_icons">アイコン</string>
-    <string name="size_label">サイズ</string>
 
     <string name="favorites_empty_title">お気に入りはまだありません</string>
     <string name="favorites_empty_subtitle">好きな局のプレーヤーを開き、ハートをタップしてお気に入りに追加してください。</string>
 
     <string name="stations_title">ラジオ局</string>
-    <string name="favorite_stations_title">お気に入りの局</string>
 
     <string name="tab_radio">ラジオ</string>
     <string name="tab_favorites">お気に入り</string>
@@ -112,4 +101,20 @@
     <string name="eq_preset_jazz">ジャズ</string>
     <string name="eq_preset_pop">ポップ</string>
     <string name="eq_preset_rock">ロック</string>
+
+    <string name="live_label">ライブ</string>
+    <string name="search_content_desc">検索</string>
+    <string name="search_hint">局を検索</string>
+    <string name="search_results_title">検索結果</string>
+    <string name="search_no_results">「%1$s」に一致する局はありません</string>
+    <string name="genre_all">すべての局</string>
+    <plurals name="station_count">
+        <item quantity="other">%d 局</item>
+    </plurals>
+    <string name="extra_tab_history">曲</string>
+    <string name="history_empty">聴いている間、局が配信する曲名がここに表示されます。</string>
+    <string name="history_now_playing_tag">再生中</string>
+    <string name="share_content_desc">共有</string>
+    <string name="share_text">Fogwaveで%1$sを聴いています</string>
+    <string name="share_text_track">Fogwaveで%2$sの「%1$s」を聴いています</string>
 </resources>

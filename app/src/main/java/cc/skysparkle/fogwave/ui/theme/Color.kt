@@ -26,33 +26,34 @@ data class GeoColors(
     val accentLavender: Color,
     val onAccentLavender: Color,
     val deepPurple: Color,
-    val liveGreen: Color,
+    val liveRed: Color,
     val redFavorite: Color
 )
 
+// Dark take on the "Rad.io" layout: deep navy surfaces with an electric-blue accent.
 val DarkGeoColors = GeoColors(
-    background = Color(0xFF141218),
-    onBackground = Color(0xFFE6E0E9),
-    surface = Color(0xFF141218),
-    onSurface = Color(0xFFE6E0E9),
-    surfaceContainer = Color(0xFF211F26),
-    surfaceContainerHigh = Color(0xFF2B2930),
-    onSurfaceVariant = Color(0xFFCAC4D0),
-    outline = Color(0xFF938F99),
-    outlineVariant = Color(0xFF49454F),
-    primary = Color(0xFFD0BCFF),
-    onPrimary = Color(0xFF381E72),
-    primaryContainer = Color(0xFF4F378B),
-    onPrimaryContainer = Color(0xFFEADDFF),
-    secondary = Color(0xFFCCC2DC),
-    onSecondary = Color(0xFF332D41),
-    secondaryContainer = Color(0xFF4A4458),
-    onSecondaryContainer = Color(0xFFE8DEF8),
-    accentLavender = Color(0xFF4F378B),
-    onAccentLavender = Color(0xFFEADDFF),
-    deepPurple = Color(0xFFD0BCFF),
-    liveGreen = Color(0xFF81C995),
-    redFavorite = Color(0xFFF2B8B5)
+    background = Color(0xFF0D1016),
+    onBackground = Color(0xFFEEF1F7),
+    surface = Color(0xFF0D1016),
+    onSurface = Color(0xFFEEF1F7),
+    surfaceContainer = Color(0xFF161A23),
+    surfaceContainerHigh = Color(0xFF1F2430),
+    onSurfaceVariant = Color(0xFF98A1B3),
+    outline = Color(0xFF5C6577),
+    outlineVariant = Color(0xFF272D3A),
+    primary = Color(0xFF7C9DFF),
+    onPrimary = Color(0xFF0B1A47),
+    primaryContainer = Color(0xFF1F2D5C),
+    onPrimaryContainer = Color(0xFFDCE4FF),
+    secondary = Color(0xFFB2C1E6),
+    onSecondary = Color(0xFF18233F),
+    secondaryContainer = Color(0xFF283350),
+    onSecondaryContainer = Color(0xFFDCE4FF),
+    accentLavender = Color(0xFF3466F6),
+    onAccentLavender = Color(0xFFFFFFFF),
+    deepPurple = Color(0xFFF3F6FF),
+    liveRed = Color(0xFFFF4D5E),
+    redFavorite = Color(0xFFFF6B81)
 )
 
 val LocalGeoColors = staticCompositionLocalOf { DarkGeoColors }

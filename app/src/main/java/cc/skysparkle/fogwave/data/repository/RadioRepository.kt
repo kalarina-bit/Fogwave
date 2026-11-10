@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.core.content.edit
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.data.model.Genre
-import cc.skysparkle.fogwave.data.model.IconSizeStep
 import cc.skysparkle.fogwave.data.model.RadioStation
-import cc.skysparkle.fogwave.data.model.ViewMode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -158,12 +156,6 @@ class RadioRepository(context: Context) {
     private val _recentsFlow = MutableStateFlow<List<String>>(loadRecents())
     val recentsFlow: StateFlow<List<String>> = _recentsFlow.asStateFlow()
 
-    private val _viewModeFlow = MutableStateFlow(loadViewMode())
-    val viewModeFlow: StateFlow<ViewMode> = _viewModeFlow.asStateFlow()
-
-    private val _sizeStepFlow = MutableStateFlow(loadSizeStep())
-    val sizeStepFlow: StateFlow<IconSizeStep> = _sizeStepFlow.asStateFlow()
-
     private val _seenFavoritesFlow = MutableStateFlow(loadSeenFavorites())
     val seenFavoritesFlow: StateFlow<Set<String>> = _seenFavoritesFlow.asStateFlow()
 
@@ -260,34 +252,6 @@ class RadioRepository(context: Context) {
         val arr = JSONArray()
         trimmed.forEach { arr.put(it) }
         prefs.edit { putString("recents", arr.toString()) }
-    }
-
-    private fun loadViewMode(): ViewMode {
-        val mode = prefs.getString("view_mode", ViewMode.ICONS.name) ?: ViewMode.ICONS.name
-        return try {
-            ViewMode.valueOf(mode)
-        } catch (_: Exception) {
-            ViewMode.ICONS
-        }
-    }
-
-    fun setViewMode(mode: ViewMode) {
-        _viewModeFlow.value = mode
-        prefs.edit { putString("view_mode", mode.name) }
-    }
-
-    private fun loadSizeStep(): IconSizeStep {
-        val step = prefs.getString("size_step", IconSizeStep.M.name) ?: IconSizeStep.M.name
-        return try {
-            IconSizeStep.valueOf(step)
-        } catch (_: Exception) {
-            IconSizeStep.M
-        }
-    }
-
-    fun setSizeStep(step: IconSizeStep) {
-        _sizeStepFlow.value = step
-        prefs.edit { putString("size_step", step.name) }
     }
 
     fun hasSeenBatteryOptimizationPrompt(): Boolean {
