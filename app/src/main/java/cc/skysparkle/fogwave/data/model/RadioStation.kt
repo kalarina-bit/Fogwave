@@ -36,20 +36,8 @@ enum class AppTab(@param:StringRes val titleRes: Int) {
 }
 
 enum class ExtraPlayerTab(@param:StringRes val titleRes: Int) {
-    HISTORY(R.string.extra_tab_history),
     RECENT(R.string.extra_tab_recent),
     SIMILAR(R.string.extra_tab_similar),
     INFO(R.string.extra_tab_info)
 }
 
-/** A song the station announced while it was playing during this session. */
-@Immutable
-data class TrackEntry(
-    val stationId: String,
-    val title: String,
-    val startedAtMillis: Long
-) {
-    /** Streams usually send "Artist - Title"; the halves are shown on separate lines. */
-    val song: String get() = title.substringAfter(" - ", title).trim()
-    val artist: String? get() = title.substringBefore(" - ", "").trim().ifEmpty { null }
-}

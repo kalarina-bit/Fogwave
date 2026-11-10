@@ -111,9 +111,6 @@
     <plurals name="station_count">
         <item quantity="other">%d 个电台</item>
     </plurals>
-    <string name="extra_tab_history">曲目</string>
-    <string name="history_empty">收听时，电台播报的歌曲会显示在这里。</string>
-    <string name="history_now_playing_tag">正在播放</string>
     <string name="share_content_desc">分享</string>
     <string name="share_text">我正在用 Fogwave 收听 %1$s</string>
     <string name="share_text_track">我正在用 Fogwave 收听 %2$s 的“%1$s”</string>

@@ -44,6 +44,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.pluralStringResource
@@ -215,6 +217,15 @@ fun HomeScreen(
                         dockHeight = measured
                     }
                 }
+                // Rows (and the current station's highlight) fade out under the dock
+                // instead of peeking through the gaps around the mini player and tabs.
+                .background(
+                    Brush.verticalGradient(
+                        0f to Color.Transparent,
+                        0.22f to LocalGeoColors.current.background.copy(alpha = 0.94f),
+                        1f to LocalGeoColors.current.background
+                    )
+                )
                 // Insets live on the dock itself so the tabs stay clear of the gesture bar
                 // even when the mini player is swiped away.
                 .navigationBarsPadding()
@@ -256,7 +267,6 @@ fun HomeScreen(
                 station = uiState.currentStation,
                 playerState = uiState.playerState,
                 trackTitle = uiState.nowPlayingTitle,
-                trackHistory = uiState.trackHistory,
                 isFavorite = isCurFav,
                 onToggleFavorite = { viewModel.toggleFavorite() },
                 onTogglePlay = { viewModel.togglePlay() },

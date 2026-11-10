@@ -112,9 +112,6 @@
         <item quantity="one">%d station</item>
         <item quantity="other">%d stations</item>
     </plurals>
-    <string name="extra_tab_history">Tracks</string>
-    <string name="history_empty">Songs the station announces will show up here while you listen.</string>
-    <string name="history_now_playing_tag">Now playing</string>
     <string name="share_content_desc">Share</string>
     <string name="share_text">I\'m listening to %1$s on Fogwave</string>
     <string name="share_text_track">I\'m listening to “%1$s” on %2$s with Fogwave</string>

@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import cc.skysparkle.fogwave.data.model.AppTab
 import cc.skysparkle.fogwave.data.model.ExtraPlayerTab
 import cc.skysparkle.fogwave.data.model.RadioStation
-import cc.skysparkle.fogwave.data.model.TrackEntry
 import cc.skysparkle.fogwave.data.repository.RadioRepository
 import cc.skysparkle.fogwave.player.AudioEffectsController
 import cc.skysparkle.fogwave.player.AudioEffectsState
@@ -33,12 +32,11 @@ data class RadioUiState(
     val selectedTab: AppTab = AppTab.RADIO,
     val isNowPlayingOpen: Boolean = false,
     val isEqualizerPopOpen: Boolean = false,
-    val activeExtraTab: ExtraPlayerTab = ExtraPlayerTab.HISTORY,
+    val activeExtraTab: ExtraPlayerTab = ExtraPlayerTab.RECENT,
     val audioEffects: AudioEffectsState = AudioEffectsState(),
     val isMiniPlayerHidden: Boolean = false,
     val unseenFavoritesCount: Int = 0,
-    val nowPlayingTitle: String? = null,
-    val trackHistory: List<TrackEntry> = emptyList()
+    val nowPlayingTitle: String? = null
 )
 
 class RadioViewModel(application: Application) : AndroidViewModel(application) {
@@ -58,11 +56,8 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
     private val _selectedTab = MutableStateFlow(AppTab.RADIO)
     private val _isNowPlayingOpen = MutableStateFlow(false)
     private val _isEqualizerPopOpen = MutableStateFlow(false)
-    private val _activeExtraTab = MutableStateFlow(ExtraPlayerTab.HISTORY)
+    private val _activeExtraTab = MutableStateFlow(ExtraPlayerTab.RECENT)
     private val _isMiniPlayerHidden = MutableStateFlow(false)
-
-    // Newest first; kept for this session only.
-    private val _trackHistory = MutableStateFlow<List<TrackEntry>>(emptyList())
 
     private val _showBatteryOptimizationPrompt = MutableStateFlow(false)
     val showBatteryOptimizationPrompt: StateFlow<Boolean> = _showBatteryOptimizationPrompt.asStateFlow()
@@ -90,8 +85,7 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         _isMiniPlayerHidden,
         repository.seenFavoritesFlow,
         _stations,
-        playerManager.nowPlayingTitle,
-        _trackHistory
+        playerManager.nowPlayingTitle
     ) { params ->
         val current = params[0] as? RadioStation
         val pState = params[1] as PlayerState
@@ -110,8 +104,6 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         @Suppress("UNCHECKED_CAST")
         val orderedStations = params[11] as List<RadioStation>
         val songTitle = params[12] as String?
-        @Suppress("UNCHECKED_CAST")
-        val history = params[13] as List<TrackEntry>
 
         val byId = orderedStations.associateBy { it.id }
         val recentsList = recentsIds.mapNotNull { byId[it] }
@@ -129,8 +121,7 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             audioEffects = effects,
             isMiniPlayerHidden = miniHidden,
             unseenFavoritesCount = favs.count { it !in seenFavs },
-            nowPlayingTitle = songTitle,
-            trackHistory = history
+            nowPlayingTitle = songTitle
         )
     }.stateIn(
         scope = viewModelScope,
@@ -155,20 +146,6 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
                 }
             }
         }
-        viewModelScope.launch {
-            playerManager.nowPlayingTitle.collect { title ->
-                val stationId = playerManager.currentMediaId.value ?: _currentStation.value?.id
-                if (title != null && stationId != null) recordTrack(stationId, title)
-            }
-        }
-    }
-
-    private fun recordTrack(stationId: String, title: String) {
-        val history = _trackHistory.value
-        val last = history.firstOrNull { it.stationId == stationId }
-        if (last?.title == title) return
-        _trackHistory.value = (listOf(TrackEntry(stationId, title, System.currentTimeMillis())) + history)
-            .take(MAX_TRACK_HISTORY)
     }
 
     /** Tap on a station tile: open the player for the station already on air, otherwise tune in. */
@@ -312,9 +289,5 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
     override fun onCleared() {
         super.onCleared()
         playerManager.release()
-    }
-
-    private companion object {
-        const val MAX_TRACK_HISTORY = 60
     }
 }

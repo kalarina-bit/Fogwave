@@ -114,9 +114,6 @@
         <item quantity="many">%d станций</item>
         <item quantity="other">%d станции</item>
     </plurals>
-    <string name="extra_tab_history">Треки</string>
-    <string name="history_empty">Здесь появятся песни, которые объявляет станция, пока вы слушаете.</string>
-    <string name="history_now_playing_tag">Сейчас играет</string>
     <string name="share_content_desc">Поделиться</string>
     <string name="share_text">Слушаю %1$s в Fogwave</string>
     <string name="share_text_track">Слушаю «%1$s» на %2$s в Fogwave</string>

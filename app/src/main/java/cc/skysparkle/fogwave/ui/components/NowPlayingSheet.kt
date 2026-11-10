@@ -2,7 +2,6 @@ package cc.skysparkle.fogwave.ui.components
 
 import android.content.Context
 import android.content.Intent
-import android.text.format.DateFormat
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.Spring
@@ -75,11 +74,9 @@ import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.R
 import cc.skysparkle.fogwave.data.model.ExtraPlayerTab
 import cc.skysparkle.fogwave.data.model.RadioStation
-import cc.skysparkle.fogwave.data.model.TrackEntry
 import cc.skysparkle.fogwave.player.AudioEffectsState
 import cc.skysparkle.fogwave.player.PlayerState
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
-import java.util.Date
 import kotlin.math.roundToInt
 
 @Composable
@@ -87,7 +84,6 @@ fun NowPlayingSheet(
     station: RadioStation?,
     playerState: PlayerState,
     trackTitle: String?,
-    trackHistory: List<TrackEntry>,
     isFavorite: Boolean,
     onToggleFavorite: () -> Unit,
     onTogglePlay: () -> Unit,
@@ -163,6 +159,7 @@ fun NowPlayingSheet(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(620.dp)
+                        .fadeOutBottom(from = 0.5f)
                 ) {
                     FogLayer(
                         tint = accent,
@@ -175,9 +172,7 @@ fun NowPlayingSheet(
                             .background(
                                 Brush.verticalGradient(
                                     0f to colors.background.copy(alpha = 0.35f),
-                                    0.3f to Color.Transparent,
-                                    0.75f to colors.background.copy(alpha = 0.6f),
-                                    1f to colors.background
+                                    0.3f to Color.Transparent
                                 )
                             )
                     )
@@ -407,8 +402,6 @@ fun NowPlayingSheet(
                     ExtraPanel(
                         station = station,
                         playerState = playerState,
-                        trackTitle = trackTitle,
-                        trackHistory = trackHistory,
                         activeExtraTab = activeExtraTab,
                         onSelectExtraTab = onSelectExtraTab,
                         recents = recents,
@@ -421,13 +414,11 @@ fun NowPlayingSheet(
     }
 }
 
-/** Lower card of the player: track history, recent and similar stations, station info. */
+/** Lower card of the player: recent and similar stations, station info. */
 @Composable
 private fun ExtraPanel(
     station: RadioStation,
     playerState: PlayerState,
-    trackTitle: String?,
-    trackHistory: List<TrackEntry>,
     activeExtraTab: ExtraPlayerTab,
     onSelectExtraTab: (ExtraPlayerTab) -> Unit,
     recents: List<RadioStation>,
@@ -435,7 +426,6 @@ private fun ExtraPanel(
     onSelectStation: (RadioStation) -> Unit
 ) {
     val colors = LocalGeoColors.current
-    val isPlaying = playerState is PlayerState.Playing
 
     Column(
         modifier = Modifier
@@ -500,20 +490,6 @@ private fun ExtraPanel(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             when (activeExtraTab) {
-                ExtraPlayerTab.HISTORY -> {
-                    val entries = trackHistory.filter { it.stationId == station.id }
-                    if (entries.isEmpty()) {
-                        EmptyHint(stringResource(R.string.history_empty))
-                    } else {
-                        entries.forEachIndexed { index, entry ->
-                            TrackRow(
-                                entry = entry,
-                                isNowPlaying = index == 0 && isPlaying && entry.title == trackTitle
-                            )
-                        }
-                    }
-                }
-
                 ExtraPlayerTab.RECENT -> {
                     if (recents.isEmpty()) {
                         EmptyHint(stringResource(R.string.recent_empty))
@@ -569,77 +545,6 @@ private fun ExtraPanel(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun TrackRow(entry: TrackEntry, isNowPlaying: Boolean) {
-    val colors = LocalGeoColors.current
-    val context = LocalContext.current
-    val time = remember(entry.startedAtMillis) {
-        DateFormat.getTimeFormat(context).format(Date(entry.startedAtMillis))
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 9.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = entry.song,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = if (isNowPlaying) colors.deepPurple else colors.onSurface
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f, fill = false)
-                )
-                if (isNowPlaying) {
-                    Text(
-                        text = stringResource(R.string.history_now_playing_tag),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 10.sp,
-                            color = colors.primary
-                        ),
-                        maxLines = 1
-                    )
-                }
-            }
-            entry.artist?.let { artist ->
-                Text(
-                    text = artist,
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        fontSize = 12.sp,
-                        color = colors.onSurfaceVariant
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        }
-
-        Text(
-            text = time,
-            style = MaterialTheme.typography.labelMedium.copy(
-                color = if (isNowPlaying) colors.primary else colors.onSurfaceVariant
-            )
-        )
-
-        Box(
-            modifier = Modifier
-                .size(width = 3.dp, height = 28.dp)
-                .clip(CircleShape)
-                .background(if (isNowPlaying) colors.accentLavender else Color.Transparent)
-        )
     }
 }
 

@@ -112,9 +112,6 @@
         <item quantity="one">%d Sender</item>
         <item quantity="other">%d Sender</item>
     </plurals>
-    <string name="extra_tab_history">Titel</string>
-    <string name="history_empty">Songs, die der Sender ansagt, erscheinen hier, während du zuhörst.</string>
-    <string name="history_now_playing_tag">Läuft gerade</string>
     <string name="share_content_desc">Teilen</string>
     <string name="share_text">Ich höre %1$s mit Fogwave</string>
     <string name="share_text_track">Ich höre „%1$s“ auf %2$s mit Fogwave</string>

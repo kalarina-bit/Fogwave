@@ -111,9 +111,6 @@
     <plurals name="station_count">
         <item quantity="other">%d 局</item>
     </plurals>
-    <string name="extra_tab_history">曲</string>
-    <string name="history_empty">聴いている間、局が配信する曲名がここに表示されます。</string>
-    <string name="history_now_playing_tag">再生中</string>
     <string name="share_content_desc">共有</string>
     <string name="share_text">Fogwaveで%1$sを聴いています</string>
     <string name="share_text_track">Fogwaveで%2$sの「%1$s」を聴いています</string>

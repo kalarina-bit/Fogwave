@@ -10,10 +10,15 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import kotlin.math.PI
 import kotlin.math.cos
@@ -63,7 +68,8 @@ fun FogLayer(
         label = "fog_breathe"
     )
 
-    Canvas(modifier = modifier) {
+    // Wisps are larger than the layer; clipping keeps them from leaking past its edges.
+    Canvas(modifier = modifier.clipToBounds()) {
         Wisps.forEach { wisp -> drawWisp(wisp, t, breathe * intensity, tint) }
     }
 }
@@ -90,3 +96,15 @@ private fun DrawScope.drawWisp(wisp: Wisp, time: Float, intensity: Float, tint: 
         center = center
     )
 }
+
+/** Fades the content to transparent towards the bottom, starting at [from] of its height. */
+fun Modifier.fadeOutBottom(from: Float = 0.55f): Modifier = this
+    .clipToBounds()
+    .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+    .drawWithContent {
+        drawContent()
+        drawRect(
+            brush = Brush.verticalGradient(from to Color.Black, 1f to Color.Transparent),
+            blendMode = BlendMode.DstIn
+        )
+    }

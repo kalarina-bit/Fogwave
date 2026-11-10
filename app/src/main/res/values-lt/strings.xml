@@ -114,9 +114,6 @@
         <item quantity="many">%d stoties</item>
         <item quantity="other">%d stočių</item>
     </plurals>
-    <string name="extra_tab_history">Kūriniai</string>
-    <string name="history_empty">Čia bus rodomos dainos, kurias skelbia stotis, kol klausotės.</string>
-    <string name="history_now_playing_tag">Dabar skamba</string>
     <string name="share_content_desc">Bendrinti</string>
     <string name="share_text">Klausausi %1$s per Fogwave</string>
     <string name="share_text_track">Klausausi „%1$s“ per %2$s su Fogwave</string>

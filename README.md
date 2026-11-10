@@ -44,7 +44,7 @@
 - 🎚️ **Equalizer** with presets, loudness boost and dynamics processing
 - ❤️ **Favorites, recently played and similar stations** matched by genre
 - 🗂️ **Genre cards and search** to find a station in a tap
-- 🎵 **Song titles and track history** for stations that broadcast them
+- 🎵 **Song titles** for stations that broadcast them
 - 🌙 **Dark theme**
 - 🌍 **Six languages** — English, Russian, German, Japanese, Lithuanian and Chinese
 - 🔓 **No ads, no tracking, no accounts**

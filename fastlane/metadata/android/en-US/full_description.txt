@@ -6,7 +6,7 @@
 <li>Enjoy your favorite sound with an equalizer, saved settings, loudness boost, and audio presets.</li>
 <li>Get back to listening easily with auto-reconnect when your stream or network drops.</li>
 <li>Take radio on the road with Android Auto support.</li>
-<li>Find stations your way with genre cards, search, favorites, recently played and similar stations, and see the song that is on air with a track history.</li>
+<li>Find stations your way with genre cards, search, favorites, recently played and similar stations, and see the song that is on air.</li>
 </ul>
 
 <p>Choose a station and press play. Fogwave keeps audio running in the background and saves your equalizer settings for your next session. Its dark, uncluttered design is available in English, Russian, German, Japanese, Lithuanian, and Chinese.</p>

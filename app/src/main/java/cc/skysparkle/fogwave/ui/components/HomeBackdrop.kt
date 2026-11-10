@@ -52,6 +52,8 @@ fun HomeBackdrop(
             .fillMaxWidth()
             .height(420.dp)
             .graphicsLayer { alpha = visibility().coerceIn(0f, 1f) }
+            // Everything (photo and fog) melts into the page instead of ending at a hard edge.
+            .fadeOutBottom(from = 0.45f)
     ) {
         AsyncImage(
             model = request,
@@ -63,15 +65,14 @@ fun HomeBackdrop(
             modifier = Modifier.fillMaxSize()
         )
         FogLayer(tint = tint, intensity = 0.6f, modifier = Modifier.fillMaxSize())
+        // Darker top keeps the header readable over the photo.
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
                         0f to background.copy(alpha = 0.45f),
-                        0.35f to background.copy(alpha = 0.15f),
-                        0.7f to background.copy(alpha = 0.7f),
-                        1f to background
+                        0.35f to Color.Transparent
                     )
                 )
         )

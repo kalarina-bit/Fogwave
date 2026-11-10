@@ -1,5 +1,5 @@
 • Neues Design: Genre-Karten, Suche und schwebender Mini-Player
-• Player mit rundem Sender-Cover, Songtiteln und Titelverlauf
+• Player mit rundem Sender-Cover und dem Titel des laufenden Songs
 • Ziehender Nebel in der Farbe des laufenden Senders
 • Teile den Sender oder Song, den du gerade hörst
 
