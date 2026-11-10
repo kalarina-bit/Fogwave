@@ -1,0 +1,6 @@
+• Naujas dizainas: žanrų kortelės, paieška ir plaukiojantis mini grotuvas
+• Grotuvas su apvaliu stoties disku, dainų pavadinimais ir kūrinių istorija
+• Judantis rūkas grojančios stoties spalva
+• Galite pasidalinti klausoma stotimi ar daina
+
+Naujos versijos taip pat pasiekiamos Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

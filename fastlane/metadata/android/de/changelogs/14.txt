@@ -1,0 +1,6 @@
+• Neues Design: Genre-Karten, Suche und schwebender Mini-Player
+• Player mit rundem Sender-Cover, Songtiteln und Titelverlauf
+• Ziehender Nebel in der Farbe des laufenden Senders
+• Teile den Sender oder Song, den du gerade hörst
+
+Neue Versionen gibt es auch auf Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases
