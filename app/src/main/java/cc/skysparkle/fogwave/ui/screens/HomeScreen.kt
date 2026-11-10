@@ -2,6 +2,7 @@ package cc.skysparkle.fogwave.ui.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -28,7 +29,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -60,12 +63,15 @@ import cc.skysparkle.fogwave.ui.components.BatteryOptimizationDialog
 import cc.skysparkle.fogwave.ui.components.EqualizerSheet
 import cc.skysparkle.fogwave.ui.components.FavoritesPanel
 import cc.skysparkle.fogwave.ui.components.GenreCarousel
+import cc.skysparkle.fogwave.ui.components.HomeBackdrop
 import cc.skysparkle.fogwave.ui.components.MiniPlayer
 import cc.skysparkle.fogwave.ui.components.NavigationTabs
 import cc.skysparkle.fogwave.ui.components.NowPlayingSheet
 import cc.skysparkle.fogwave.ui.components.SectionHeader
 import cc.skysparkle.fogwave.ui.components.StationRow
 import cc.skysparkle.fogwave.ui.components.TopBrandBar
+import cc.skysparkle.fogwave.ui.components.accentOr
+import cc.skysparkle.fogwave.ui.components.rememberStationArt
 import cc.skysparkle.fogwave.ui.components.stationDescription
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 import cc.skysparkle.fogwave.ui.viewmodel.RadioViewModel
@@ -109,6 +115,13 @@ fun HomeScreen(
         BatteryOptimizationDialog(onDismiss = { viewModel.dismissBatteryOptimizationPrompt() })
     }
 
+    val radioListState = rememberLazyListState()
+    val accent by animateColorAsState(
+        targetValue = uiState.currentStation?.let { rememberStationArt(it) }.accentOr(LocalGeoColors.current.accentLavender),
+        animationSpec = tween(700),
+        label = "home_accent"
+    )
+
     val density = LocalDensity.current
     var dockHeight by remember { mutableStateOf(160.dp) }
     val scrollBottomPadding = dockHeight + 16.dp
@@ -118,6 +131,19 @@ fun HomeScreen(
             .fillMaxSize()
             .background(LocalGeoColors.current.background)
     ) {
+        HomeBackdrop(
+            tint = accent,
+            visibility = {
+                if (uiState.selectedTab != AppTab.RADIO) {
+                    0.55f
+                } else if (radioListState.firstVisibleItemIndex > 0) {
+                    0.3f
+                } else {
+                    1f - radioListState.firstVisibleItemScrollOffset / with(density) { 420.dp.toPx() } * 0.7f
+                }
+            }
+        )
+
         Column(modifier = Modifier.fillMaxSize()) {
             TopBrandBar(
                 showSearch = uiState.selectedTab == AppTab.RADIO,
@@ -144,6 +170,7 @@ fun HomeScreen(
                 ) { tab ->
                     when (tab) {
                         AppTab.RADIO -> RadioTab(
+                            listState = radioListState,
                             stations = uiState.stations,
                             currentStation = uiState.currentStation,
                             isPlaying = isPlaying,
@@ -202,6 +229,7 @@ fun HomeScreen(
                     playerState = uiState.playerState,
                     trackTitle = uiState.nowPlayingTitle,
                     onTogglePlay = { viewModel.togglePlay() },
+                    onNext = { viewModel.nextStation() },
                     onOpenNowPlaying = { viewModel.openNowPlaying() },
                     onHide = { viewModel.hideMiniPlayer() }
                 )
@@ -279,6 +307,7 @@ fun HomeScreen(
 /** Genre cards on top, then the (filtered) station list. */
 @Composable
 private fun RadioTab(
+    listState: LazyListState,
     stations: List<RadioStation>,
     currentStation: RadioStation?,
     isPlaying: Boolean,
@@ -299,6 +328,7 @@ private fun RadioTab(
     }
 
     LazyColumn(
+        state = listState,
         contentPadding = PaddingValues(top = 4.dp, bottom = bottomContentPadding),
         modifier = Modifier.fillMaxSize()
     ) {

@@ -1,5 +1,6 @@
 package cc.skysparkle.fogwave.ui.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +26,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -38,8 +41,8 @@ private const val ARC_SWEEP = 280f
 private const val TURN_MILLIS = 14_000
 
 /**
- * Round station artwork wrapped in a ring. Live radio has no track progress, so the arc slowly
- * circles while the station plays and rests where it was when playback stops.
+ * Round station artwork wrapped in a ring in the station's own color. Live radio has no track
+ * progress, so the arc slowly circles while the station plays and rests where it was when it stops.
  */
 @Composable
 fun StationDisc(
@@ -51,6 +54,12 @@ fun StationDisc(
     glow: Boolean = true
 ) {
     val colors = LocalGeoColors.current
+    val art = rememberStationArt(station)
+    val accent by animateColorAsState(
+        targetValue = art.accentOr(colors.primary),
+        animationSpec = tween(600),
+        label = "disc_accent"
+    )
     val rotation = remember { Animatable(0f) }
 
     LaunchedEffect(isPlaying) {
@@ -73,7 +82,7 @@ fun StationDisc(
             if (glow) {
                 drawCircle(
                     brush = Brush.radialGradient(
-                        colors = listOf(colors.accentLavender.copy(alpha = 0.28f), Color.Transparent),
+                        colors = listOf(accent.copy(alpha = 0.28f), Color.Transparent),
                         center = center,
                         radius = radius * 1.25f
                     ),
@@ -91,7 +100,7 @@ fun StationDisc(
 
             val start = -90f + rotation.value
             drawArc(
-                color = colors.primary,
+                color = accent,
                 startAngle = start,
                 sweepAngle = ARC_SWEEP,
                 useCenter = false,
@@ -105,7 +114,7 @@ fun StationDisc(
                 center.x + radius * cos(end).toFloat(),
                 center.y + radius * sin(end).toFloat()
             )
-            drawCircle(color = colors.accentLavender, radius = stroke * 1.9f, center = knob)
+            drawCircle(color = accent, radius = stroke * 1.9f, center = knob)
             drawCircle(color = Color.White, radius = stroke * 0.8f, center = knob)
         }
 
@@ -118,12 +127,23 @@ fun StationDisc(
                 .border(1.dp, colors.outlineVariant, CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            // Slightly larger than the inscribed square, so only the logo's corners get clipped.
+            // Wide wordmarks are enlarged and centered so they span the circle instead of
+            // floating small in the middle; square logos fill it edge to edge.
             Image(
                 painter = painterResource(id = station.iconResId),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.fillMaxSize(0.78f)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .graphicsLayer {
+                        val scale = art?.circleScale() ?: 0.78f
+                        scaleX = scale
+                        scaleY = scale
+                        if (art != null) {
+                            translationX = (0.5f - art.centerX) * size.width * scale
+                            translationY = (0.5f - art.centerY) * size.height * scale
+                        }
+                    }
             )
         }
     }

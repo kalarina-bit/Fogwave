@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -61,6 +62,7 @@ fun MiniPlayer(
     playerState: PlayerState,
     trackTitle: String?,
     onTogglePlay: () -> Unit,
+    onNext: () -> Unit,
     onOpenNowPlaying: () -> Unit,
     onHide: () -> Unit,
     modifier: Modifier = Modifier
@@ -146,7 +148,7 @@ fun MiniPlayer(
                             }
                         }
                     )
-                    .padding(start = 8.dp, end = 12.dp, top = 8.dp, bottom = 8.dp)
+                    .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 8.dp)
                     .testTag("mini_player"),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -210,6 +212,20 @@ fun MiniPlayer(
                             size = 22.dp
                         )
                     }
+                }
+
+                IconButton(
+                    onClick = onNext,
+                    modifier = Modifier
+                        .size(40.dp)
+                        .testTag("mini_next_btn")
+                ) {
+                    AppIcon(
+                        resId = R.drawable.ic_skip_next,
+                        contentDescription = stringResource(R.string.next_station_content_desc),
+                        tint = colors.onSurfaceVariant,
+                        size = 22.dp
+                    )
                 }
             }
         }

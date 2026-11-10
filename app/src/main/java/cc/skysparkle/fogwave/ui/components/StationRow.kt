@@ -105,6 +105,7 @@ fun StationThumb(
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 12.dp
 ) {
+    val art = rememberStationArt(station)
     Box(
         modifier = modifier
             .size(size)
@@ -115,7 +116,17 @@ fun StationThumb(
             painter = painterResource(id = station.iconResId),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier
+                .matchParentSize()
+                .graphicsLayer {
+                    if (art != null) {
+                        val scale = art.squareScale()
+                        scaleX = scale
+                        scaleY = scale
+                        translationX = (0.5f - art.centerX) * this.size.width * scale
+                        translationY = (0.5f - art.centerY) * this.size.height * scale
+                    }
+                }
         )
     }
 }

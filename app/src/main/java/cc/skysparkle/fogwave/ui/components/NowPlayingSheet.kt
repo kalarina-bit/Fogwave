@@ -53,6 +53,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -121,6 +122,11 @@ fun NowPlayingSheet(
             onDismiss = { currentOnClose() }
         )
     }
+    val accent by animateColorAsState(
+        targetValue = rememberStationArt(station).accentOr(colors.accentLavender),
+        animationSpec = tween(700),
+        label = "page_accent"
+    )
     val discScale by animateFloatAsState(
         targetValue = if (isPlaying) 1f else 0.94f,
         animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
@@ -140,7 +146,7 @@ fun NowPlayingSheet(
             val isTablet = maxWidth > 600.dp
             val pageWidth = if (isTablet) Modifier.widthIn(max = 560.dp) else Modifier.fillMaxWidth()
 
-            Column(
+            Box(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .then(sheetModifier)
@@ -150,235 +156,266 @@ fun NowPlayingSheet(
                     .background(colors.background)
                     // Swallow taps so nothing underneath reacts to them.
                     .pointerInput(Unit) { detectTapGestures { } }
-                    // The page scrolls; drags the content cannot use pull it down to close.
-                    .nestedScroll(drag.nestedScrollConnection)
-                    .verticalScroll(rememberScrollState())
-                    .statusBarsPadding()
-                    .navigationBarsPadding()
-                    .padding(bottom = 24.dp)
-                    .testTag("now_playing_sheet"),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .testTag("now_playing_sheet")
             ) {
-                Row(
+                // Fog in the station's color drifts behind the disc and fades into the page.
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .height(620.dp)
                 ) {
-                    IconButton(onClick = onClose, modifier = Modifier.testTag("np_close_btn")) {
-                        AppIcon(
-                            resId = R.drawable.ic_chevron_left,
-                            contentDescription = stringResource(R.string.back_content_desc),
-                            tint = colors.onSurface,
-                            size = 26.dp
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(1f))
-                    IconButton(onClick = onOpenEqualizer, modifier = Modifier.testTag("np_equalizer_toggle")) {
-                        AppIcon(
-                            resId = R.drawable.ic_equalizer,
-                            contentDescription = stringResource(R.string.equalizer_content_desc),
-                            tint = if (audioEffects.equalizerEnabled) colors.primary else colors.onSurface,
-                            size = 22.dp
-                        )
-                    }
-                }
-
-                StationDisc(
-                    station = station,
-                    isPlaying = isPlaying,
-                    modifier = Modifier
-                        .padding(top = 12.dp, bottom = 20.dp)
-                        .fillMaxWidth(if (isTablet) 0.6f else 0.74f)
-                        .scale(discScale)
-                )
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                        LiveLabel(active = isPlaying)
-                        Text(
-                            text = station.name,
-                            style = MaterialTheme.typography.headlineSmall.copy(
-                                fontWeight = FontWeight.ExtraBold,
-                                fontSize = 22.sp,
-                                letterSpacing = (-0.4).sp,
-                                color = colors.deepPurple
-                            ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Text(
-                            text = "${station.bitrate} • ${stationGenres(station)}",
-                            style = MaterialTheme.typography.bodySmall.copy(
-                                fontSize = 12.sp,
-                                color = colors.onSurfaceVariant
-                            ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
-                    IconButton(
-                        onClick = { context.shareStation(station, trackTitle) },
-                        modifier = Modifier.testTag("np_share_btn")
-                    ) {
-                        AppIcon(
-                            resId = R.drawable.ic_share,
-                            contentDescription = stringResource(R.string.share_content_desc),
-                            tint = colors.onSurface,
-                            size = 21.dp
-                        )
-                    }
-
-                    val favScale by animateFloatAsState(
-                        targetValue = if (isFavorite) 1.15f else 1f,
-                        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
-                        label = "fav_scale"
+                    FogLayer(
+                        tint = accent,
+                        intensity = if (isPlaying) 0.9f else 0.45f,
+                        modifier = Modifier.matchParentSize()
                     )
-                    IconButton(
-                        onClick = onToggleFavorite,
-                        modifier = Modifier
-                            .scale(favScale)
-                            .testTag("np_favorite_toggle")
-                    ) {
-                        AppIcon(
-                            resId = if (isFavorite) R.drawable.ic_heart_fill else R.drawable.ic_heart_outline,
-                            contentDescription = stringResource(
-                                if (isFavorite) R.string.remove_from_favorites else R.string.add_to_favorites
-                            ),
-                            tint = if (isFavorite) colors.redFavorite else colors.onSurface,
-                            size = 22.dp
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(22.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
-                    AppIcon(resId = R.drawable.ic_music_note, tint = colors.onSurfaceVariant, size = 13.dp)
-                    Text(
-                        text = stringResource(R.string.now_playing_label),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 10.5.sp,
-                            letterSpacing = 1.2.sp,
-                            color = colors.onSurfaceVariant
-                        )
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(6.dp))
-
-                Text(
-                    text = when {
-                        isError -> playerState.message
-                        isConnecting -> stringResource(R.string.player_connecting)
-                        !isPlaying -> stringResource(R.string.player_stopped)
-                        else -> trackTitle ?: stationDescription(station)
-                    },
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 16.sp,
-                        lineHeight = 21.sp,
-                        textAlign = TextAlign.Center,
-                        color = if (isError) colors.redFavorite else colors.onSurface
-                    ),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                        .padding(horizontal = 32.dp)
-                        .heightIn(min = 42.dp)
-                        .testTag("np_track_title")
-                )
-
-                Spacer(modifier = Modifier.height(18.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(28.dp)
-                ) {
-                    IconButton(
-                        onClick = onPrevious,
-                        modifier = Modifier
-                            .size(52.dp)
-                            .testTag("np_prev_btn")
-                    ) {
-                        AppIcon(
-                            resId = R.drawable.ic_skip_previous,
-                            contentDescription = stringResource(R.string.previous_station_content_desc),
-                            tint = colors.onSurface,
-                            size = 28.dp
-                        )
-                    }
-
                     Box(
                         modifier = Modifier
-                            .size(76.dp)
-                            .shadow(14.dp, CircleShape, ambientColor = colors.accentLavender, spotColor = colors.accentLavender)
-                            .clip(CircleShape)
-                            .background(colors.accentLavender)
-                            .clickable { onTogglePlay() }
-                            .testTag("np_play_btn"),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if (isConnecting) {
-                            val connecting = stringResource(R.string.player_connecting)
-                            CircularProgressIndicator(
-                                modifier = Modifier
-                                    .size(32.dp)
-                                    .semantics { contentDescription = connecting },
-                                color = colors.onAccentLavender,
-                                strokeWidth = 3.dp
+                            .matchParentSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    0f to colors.background.copy(alpha = 0.35f),
+                                    0.3f to Color.Transparent,
+                                    0.75f to colors.background.copy(alpha = 0.6f),
+                                    1f to colors.background
+                                )
                             )
-                        } else {
+                    )
+                }
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        // The page scrolls; drags the content cannot use pull it down to close.
+                        .nestedScroll(drag.nestedScrollConnection)
+                        .verticalScroll(rememberScrollState())
+                        .statusBarsPadding()
+                        .navigationBarsPadding()
+                        .padding(bottom = 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconButton(onClick = onClose, modifier = Modifier.testTag("np_close_btn")) {
                             AppIcon(
-                                resId = if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
-                                contentDescription = stringResource(
-                                    if (isPlaying) R.string.pause_content_desc else R.string.play_content_desc
-                                ),
-                                tint = colors.onAccentLavender,
-                                size = 32.dp
+                                resId = R.drawable.ic_chevron_left,
+                                contentDescription = stringResource(R.string.back_content_desc),
+                                tint = colors.onSurface,
+                                size = 26.dp
+                            )
+                        }
+                        Spacer(modifier = Modifier.weight(1f))
+                        IconButton(onClick = onOpenEqualizer, modifier = Modifier.testTag("np_equalizer_toggle")) {
+                            AppIcon(
+                                resId = R.drawable.ic_equalizer,
+                                contentDescription = stringResource(R.string.equalizer_content_desc),
+                                tint = if (audioEffects.equalizerEnabled) colors.primary else colors.onSurface,
+                                size = 22.dp
                             )
                         }
                     }
 
-                    IconButton(
-                        onClick = onNext,
+                    StationDisc(
+                        station = station,
+                        isPlaying = isPlaying,
+                        glow = false,
                         modifier = Modifier
-                            .size(52.dp)
-                            .testTag("np_next_btn")
+                            .padding(top = 12.dp, bottom = 20.dp)
+                            .fillMaxWidth(if (isTablet) 0.6f else 0.74f)
+                            .scale(discScale)
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        AppIcon(
-                            resId = R.drawable.ic_skip_next,
-                            contentDescription = stringResource(R.string.next_station_content_desc),
-                            tint = colors.onSurface,
-                            size = 28.dp
+                        Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                            LiveLabel(active = isPlaying)
+                            Text(
+                                text = station.name,
+                                style = MaterialTheme.typography.headlineSmall.copy(
+                                    fontWeight = FontWeight.ExtraBold,
+                                    fontSize = 22.sp,
+                                    letterSpacing = (-0.4).sp,
+                                    color = colors.deepPurple
+                                ),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            Text(
+                                text = "${station.bitrate} • ${stationGenres(station)}",
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    fontSize = 12.sp,
+                                    color = colors.onSurfaceVariant
+                                ),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+
+                        IconButton(
+                            onClick = { context.shareStation(station, trackTitle) },
+                            modifier = Modifier.testTag("np_share_btn")
+                        ) {
+                            AppIcon(
+                                resId = R.drawable.ic_share,
+                                contentDescription = stringResource(R.string.share_content_desc),
+                                tint = colors.onSurface,
+                                size = 21.dp
+                            )
+                        }
+
+                        val favScale by animateFloatAsState(
+                            targetValue = if (isFavorite) 1.15f else 1f,
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                            label = "fav_scale"
+                        )
+                        IconButton(
+                            onClick = onToggleFavorite,
+                            modifier = Modifier
+                                .scale(favScale)
+                                .testTag("np_favorite_toggle")
+                        ) {
+                            AppIcon(
+                                resId = if (isFavorite) R.drawable.ic_heart_fill else R.drawable.ic_heart_outline,
+                                contentDescription = stringResource(
+                                    if (isFavorite) R.string.remove_from_favorites else R.string.add_to_favorites
+                                ),
+                                tint = if (isFavorite) colors.redFavorite else colors.onSurface,
+                                size = 22.dp
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(22.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        AppIcon(resId = R.drawable.ic_music_note, tint = colors.onSurfaceVariant, size = 13.dp)
+                        Text(
+                            text = stringResource(R.string.now_playing_label),
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 10.5.sp,
+                                letterSpacing = 1.2.sp,
+                                color = colors.onSurfaceVariant
+                            )
                         )
                     }
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = when {
+                            isError -> playerState.message
+                            isConnecting -> stringResource(R.string.player_connecting)
+                            !isPlaying -> stringResource(R.string.player_stopped)
+                            else -> trackTitle ?: stationDescription(station)
+                        },
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 16.sp,
+                            lineHeight = 21.sp,
+                            textAlign = TextAlign.Center,
+                            color = if (isError) colors.redFavorite else colors.onSurface
+                        ),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .padding(horizontal = 32.dp)
+                            .heightIn(min = 42.dp)
+                            .testTag("np_track_title")
+                    )
+
+                    Spacer(modifier = Modifier.height(18.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(28.dp)
+                    ) {
+                        IconButton(
+                            onClick = onPrevious,
+                            modifier = Modifier
+                                .size(52.dp)
+                                .testTag("np_prev_btn")
+                        ) {
+                            AppIcon(
+                                resId = R.drawable.ic_skip_previous,
+                                contentDescription = stringResource(R.string.previous_station_content_desc),
+                                tint = colors.onSurface,
+                                size = 28.dp
+                            )
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .size(76.dp)
+                                .shadow(14.dp, CircleShape, ambientColor = colors.accentLavender, spotColor = colors.accentLavender)
+                                .clip(CircleShape)
+                                .background(colors.accentLavender)
+                                .clickable { onTogglePlay() }
+                                .testTag("np_play_btn"),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (isConnecting) {
+                                val connecting = stringResource(R.string.player_connecting)
+                                CircularProgressIndicator(
+                                    modifier = Modifier
+                                        .size(32.dp)
+                                        .semantics { contentDescription = connecting },
+                                    color = colors.onAccentLavender,
+                                    strokeWidth = 3.dp
+                                )
+                            } else {
+                                AppIcon(
+                                    resId = if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
+                                    contentDescription = stringResource(
+                                        if (isPlaying) R.string.pause_content_desc else R.string.play_content_desc
+                                    ),
+                                    tint = colors.onAccentLavender,
+                                    size = 32.dp
+                                )
+                            }
+                        }
+
+                        IconButton(
+                            onClick = onNext,
+                            modifier = Modifier
+                                .size(52.dp)
+                                .testTag("np_next_btn")
+                        ) {
+                            AppIcon(
+                                resId = R.drawable.ic_skip_next,
+                                contentDescription = stringResource(R.string.next_station_content_desc),
+                                tint = colors.onSurface,
+                                size = 28.dp
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(28.dp))
+
+                    ExtraPanel(
+                        station = station,
+                        playerState = playerState,
+                        trackTitle = trackTitle,
+                        trackHistory = trackHistory,
+                        activeExtraTab = activeExtraTab,
+                        onSelectExtraTab = onSelectExtraTab,
+                        recents = recents,
+                        similarStations = similarStations,
+                        onSelectStation = onSelectStation
+                    )
                 }
-
-                Spacer(modifier = Modifier.height(28.dp))
-
-                ExtraPanel(
-                    station = station,
-                    playerState = playerState,
-                    trackTitle = trackTitle,
-                    trackHistory = trackHistory,
-                    activeExtraTab = activeExtraTab,
-                    onSelectExtraTab = onSelectExtraTab,
-                    recents = recents,
-                    similarStations = similarStations,
-                    onSelectStation = onSelectStation
-                )
             }
         }
     }
