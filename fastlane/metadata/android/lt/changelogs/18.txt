@@ -1,0 +1,8 @@
+• Spalvų stiliai, taip pat Material You; rūkas stoties spalva – pasirinktinai
+• Kita/ankstesnė stotis veikia iš pranešimo, ausinių ir Android Auto
+• Balso komandos iš Assistant ir Android Auto nebestabdo grotuvo
+• Grojimas pats atsinaujina, kai grįžta ryšys
+• Garsumo stiprintuvas dabar tikrai garsina
+• Mažesnė programėlė ir mažesnės baterijos sąnaudos
+
+Naujos versijos taip pat pasiekiamos Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

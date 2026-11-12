@@ -1,0 +1,8 @@
+• 多种配色风格，包括 Material You；电台颜色的雾改为可选
+• 可在通知、耳机和 Android Auto 中切换上一个/下一个电台
+• Assistant 和 Android Auto 的语音指令不再导致播放器停止
+• 网络恢复后自动继续播放
+• 响度增强现在真正提高音量
+• 应用更小，更省电
+
+新版本也可在 Gitea 获取：https://git.skysparkle.cc/kalarina/Fogwave/releases

@@ -1,0 +1,8 @@
+• Color styles, including Material You; fog in the station's color is now optional
+• Next/previous now work from the notification, headphones and Android Auto
+• Voice requests from Assistant and Android Auto no longer stop the player
+• Playback resumes by itself when the network comes back
+• Loudness Enhancer now really makes the sound louder
+• Smaller app and lower battery use
+
+New versions are also available on Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

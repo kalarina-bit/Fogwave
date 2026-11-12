@@ -1,0 +1,8 @@
+• Farbstile, auch Material You; Nebel in Senderfarbe ist jetzt optional
+• Weiter/Zurück funktioniert in der Benachrichtigung, am Kopfhörer und in Android Auto
+• Sprachbefehle über Assistant und Android Auto stoppen den Player nicht mehr
+• Die Wiedergabe läuft von selbst weiter, wenn das Netz zurück ist
+• Der Lautstärke-Booster macht jetzt wirklich lauter
+• Kleinere App, weniger Akkuverbrauch
+
+Neue Versionen gibt es auch auf Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

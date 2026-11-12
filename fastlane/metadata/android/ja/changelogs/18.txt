@@ -1,0 +1,8 @@
+• Material You を含むカラースタイル。局の色の霧はオプションに
+• 通知、ヘッドホン、Android Auto から次/前の局に切り替え可能に
+• Assistant や Android Auto の音声操作でプレーヤーが止まらなくなりました
+• ネットワークが戻ると自動で再生を再開
+• ラウドネス強化が実際に音量を上げるように
+• アプリが軽くなり、電池消費も減少
+
+新しいバージョンは Gitea でも入手できます: https://git.skysparkle.cc/kalarina/Fogwave/releases
