@@ -43,7 +43,7 @@ class RadioPlayerManager(private val context: Context) {
 
     private val playerListener = object : Player.Listener {
         override fun onEvents(player: Player, events: Player.Events) {
-            _playerState.value = deriveState(player)
+            _playerState.value = deriveState(player, ::errorMessage)
             _currentMediaId.value = player.currentMediaItem?.mediaId
             _nowPlayingTitle.value = streamTitle(player)
         }
@@ -88,7 +88,7 @@ class RadioPlayerManager(private val context: Context) {
                 if (station != null) {
                     playStation(station)
                 } else {
-                    _playerState.value = deriveState(c)
+                    _playerState.value = deriveState(c, ::errorMessage)
                     _currentMediaId.value = c.currentMediaItem?.mediaId
                     _nowPlayingTitle.value = streamTitle(c)
                 }
@@ -115,20 +115,6 @@ class RadioPlayerManager(private val context: Context) {
         controller = null
         controllerFuture?.let { MediaController.releaseFuture(it) }
         controllerFuture = null
-    }
-
-    private fun deriveState(p: Player): PlayerState {
-        p.playerError?.let { return PlayerState.Error(errorMessage(it)) }
-        return when (p.playbackState) {
-            Player.STATE_READY -> if (p.playWhenReady) PlayerState.Playing else PlayerState.Paused
-            Player.STATE_BUFFERING, Player.STATE_ENDED ->
-                if (p.playWhenReady) PlayerState.Connecting else PlayerState.Paused
-            else -> when {
-                p.mediaItemCount == 0 -> PlayerState.Idle
-                p.playWhenReady -> PlayerState.Connecting
-                else -> PlayerState.Paused
-            }
-        }
     }
 
     // Stream metadata replaces the item's own title; the station name itself is not a song.

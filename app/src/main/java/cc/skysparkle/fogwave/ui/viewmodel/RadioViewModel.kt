@@ -139,9 +139,12 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             playerManager.currentMediaId.collect { id ->
                 if (id != null && id != _currentStation.value?.id) {
+                    // Switched outside the app (notification, headset, Android Auto): count it like a tap.
                     stations.find { it.id == id }?.let { onAir ->
                         _currentStation.value = onAir
                         repository.setLastStationId(onAir.id)
+                        repository.pushRecent(onAir.id)
+                        repository.recordStationPlayed(onAir.id)
                     }
                 }
             }
@@ -248,10 +251,6 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setLoudnessEnabled(enabled: Boolean) {
         AudioEffectsController.setLoudnessEnabled(enabled)
-    }
-
-    fun setLoudnessGain(gainMillibel: Float) {
-        AudioEffectsController.setLoudnessGain(gainMillibel)
     }
 
     fun setDynamicsProcessingEnabled(enabled: Boolean) {

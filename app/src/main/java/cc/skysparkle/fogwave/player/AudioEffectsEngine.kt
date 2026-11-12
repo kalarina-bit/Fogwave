@@ -25,8 +25,6 @@ data class AudioEffectsState(
     val currentPreset: Int = -1,
     val loudnessAvailable: Boolean = false,
     val loudnessEnabled: Boolean = false,
-    val loudnessGainMillibel: Float = 0f,
-    val loudnessMaxGainMillibel: Float = 2000f,
     val dynamicsProcessingAvailable: Boolean = false,
     val dynamicsProcessingEnabled: Boolean = false
 )
@@ -52,7 +50,10 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
 
     private var equalizerEnabled = prefs.getBoolean(KEY_EQ_ENABLED, false)
     private var loudnessEnabled = prefs.getBoolean(KEY_LOUDNESS_ENABLED, false)
-    private var loudnessGain = prefs.getInt(KEY_LOUDNESS_GAIN, 0).coerceIn(0, MAX_LOUDNESS_GAIN)
+    // There is no gain slider, so the switch applies a fixed, moderate boost. A gain of 0 (the old
+    // default) made the switch do nothing.
+    private val loudnessGain = prefs.getInt(KEY_LOUDNESS_GAIN, DEFAULT_LOUDNESS_GAIN)
+        .takeIf { it > 0 }?.coerceAtMost(MAX_LOUDNESS_GAIN) ?: DEFAULT_LOUDNESS_GAIN
     private var dynamicsEnabled = prefs.getBoolean(KEY_DYNAMICS_ENABLED, false)
 
     init {
@@ -178,7 +179,6 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
             currentPreset = if (eqAvailable) currentPresetIndex else -1,
             loudnessAvailable = loudnessEnhancer != null,
             loudnessEnabled = loudnessEnhancer != null && loudnessEnabled,
-            loudnessGainMillibel = if (loudnessEnhancer != null) loudnessGain.toFloat() else 0f,
             dynamicsProcessingAvailable = dynamicsProcessing != null,
             dynamicsProcessingEnabled = dynamicsProcessing != null && dynamicsEnabled
         )
@@ -233,17 +233,6 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
         } catch (_: Exception) {}
     }
 
-    fun setLoudnessGain(gainMillibel: Float) {
-        val le = loudnessEnhancer ?: return
-        val gain = gainMillibel.coerceIn(0f, MAX_LOUDNESS_GAIN.toFloat()).toInt()
-        if (gain == loudnessGain) return
-        try {
-            le.setTargetGain(gain)
-            loudnessGain = gain
-            prefs.edit { putInt(KEY_LOUDNESS_GAIN, gain) }
-        } catch (_: Exception) {}
-    }
-
     fun setDynamicsProcessingEnabled(enabled: Boolean) {
         val dp = dynamicsProcessing ?: return
         try {
@@ -265,6 +254,7 @@ class AudioEffectsEngine(context: Context, audioSessionId: Int) {
     private companion object {
         const val TAG = "AudioEffectsEngine"
         const val MAX_LOUDNESS_GAIN = 2000
+        const val DEFAULT_LOUDNESS_GAIN = 600
         const val KEY_EQ_ENABLED = "eq_enabled"
         const val KEY_PRESET = "eq_preset"
         const val KEY_BAND_PREFIX = "eq_band_"
