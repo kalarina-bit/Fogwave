@@ -167,7 +167,7 @@ class RadioRepository(context: Context) {
     fun markFavoritesSeen(ids: Set<String>) {
         val copy = ids.toSet()
         _seenFavoritesFlow.value = copy
-        prefs.edit { putStringSet("seen_favorites", copy); remove("last_seen_favorites_count") }
+        prefs.edit { putStringSet("seen_favorites", copy) }
     }
 
     fun getLastStationId(): String? {

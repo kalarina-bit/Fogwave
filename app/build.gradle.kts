@@ -27,7 +27,6 @@ android {
     buildConfigField("String", "MEDIA3_VERSION", "\"${libs.versions.media3.get()}\"")
     buildConfigField("String", "COROUTINES_VERSION", "\"${libs.versions.kotlinxCoroutinesAndroid.get()}\"")
     buildConfigField("String", "KOTLIN_VERSION", "\"${libs.versions.kotlin.get()}\"")
-    buildConfigField("String", "COIL_VERSION", "\"${libs.versions.coilCompose.get()}\"")
   }
 
   // Release signing is applied only when a keystore is available, so anyone (including F-Droid,
@@ -83,7 +82,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-  implementation(libs.coil.compose)
   implementation(libs.androidx.media3.exoplayer)
   implementation(libs.androidx.media3.exoplayer.hls)
   implementation(libs.androidx.media3.common)

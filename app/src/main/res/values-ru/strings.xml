@@ -127,4 +127,8 @@
     <string name="app_style_device_hint">Цвета берутся из обоев (Material You) и меняются вместе с ними.</string>
     <string name="station_fog_title">Туман в цвете станции</string>
     <string name="station_fog_subtitle">Туман и кольцо вокруг диска окрашиваются в цвет играющей станции</string>
+    <!-- Equalizer value labels; %1$s is the formatted number -->
+    <string name="eq_gain_db">%1$s дБ</string>
+    <string name="eq_freq_hz">%1$s Гц</string>
+    <string name="eq_freq_khz">%1$s кГц</string>
 </resources>

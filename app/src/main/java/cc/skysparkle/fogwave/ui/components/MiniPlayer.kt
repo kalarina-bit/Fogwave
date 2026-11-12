@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
@@ -194,7 +195,7 @@ fun MiniPlayer(
                         .shadow(6.dp, CircleShape)
                         .clip(CircleShape)
                         .background(colors.accentLavender)
-                        .clickable { onTogglePlay() }
+                        .clickable(role = Role.Button) { onTogglePlay() }
                         .testTag("mini_play_btn"),
                     contentAlignment = Alignment.Center
                 ) {

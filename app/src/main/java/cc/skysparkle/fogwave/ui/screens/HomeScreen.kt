@@ -136,6 +136,8 @@ fun HomeScreen(
     ) {
         HomeBackdrop(
             tint = accent,
+            // Covered by the open player; no need to keep animating fog nobody sees.
+            animate = !uiState.isNowPlayingOpen,
             visibility = {
                 if (uiState.selectedTab != AppTab.RADIO) {
                     0.55f

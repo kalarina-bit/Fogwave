@@ -177,7 +177,7 @@ fun EqualizerSheet(
                                 ) {
                                     val db = (band.levelMillibel / 100f).roundToInt()
                                     Text(
-                                        text = if (db > 0) "+$db dB" else "$db dB",
+                                        text = stringResource(R.string.eq_gain_db, if (db > 0) "+$db" else "$db"),
                                         style = MaterialTheme.typography.labelSmall.copy(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.SemiBold,
@@ -356,10 +356,11 @@ private fun ToggleRow(
     }
 }
 
+@Composable
 private fun frequencyLabel(hz: Int): String = when {
-    hz < 1000 -> "$hz Hz"
-    hz % 1000 == 0 -> "${hz / 1000} kHz"
-    else -> String.format(Locale.getDefault(), "%.1f kHz", hz / 1000f)
+    hz < 1000 -> stringResource(R.string.eq_freq_hz, hz.toString())
+    hz % 1000 == 0 -> stringResource(R.string.eq_freq_khz, (hz / 1000).toString())
+    else -> stringResource(R.string.eq_freq_khz, String.format(Locale.getDefault(), "%.1f", hz / 1000f))
 }
 
 // Preset names come from the device's audio framework in English; translate the standard ones.

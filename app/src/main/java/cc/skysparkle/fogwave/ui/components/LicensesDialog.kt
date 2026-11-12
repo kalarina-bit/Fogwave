@@ -50,9 +50,7 @@ private val LIBRARIES = listOf(
     LicenseRow("AndroidX \u2014 other libraries pulled in by the ones above", AOSP, APACHE, "https://developer.android.com/jetpack/androidx"),
     LicenseRow("Guava (used by Media3)", "Google", APACHE, "https://github.com/google/guava"),
     LicenseRow("kotlinx.coroutines", "JetBrains", APACHE, "https://github.com/Kotlin/kotlinx.coroutines", BuildConfig.COROUTINES_VERSION),
-    LicenseRow("Kotlin Standard Library", "JetBrains", APACHE, "https://github.com/JetBrains/kotlin", BuildConfig.KOTLIN_VERSION),
-    LicenseRow("Coil", "Coil Contributors", APACHE, "https://github.com/coil-kt/coil", BuildConfig.COIL_VERSION),
-    LicenseRow("OkHttp & Okio (used by Coil)", "Square, Inc.", APACHE, "https://square.github.io/okhttp/")
+    LicenseRow("Kotlin Standard Library", "JetBrains", APACHE, "https://github.com/JetBrains/kotlin", BuildConfig.KOTLIN_VERSION)
 )
 
 private val ASSETS = listOf(
@@ -69,7 +67,11 @@ private val STATIONS = listOf(
     LicenseRow("M-1", "M-1 group", BROADCASTER, "https://www.m-1.fm/"),
     LicenseRow("M-1 Plius", "M-1 group", BROADCASTER, "https://www.m-1.fm/"),
     LicenseRow("Gold FM", "Gold FM", BROADCASTER, "https://www.goldfm.lt/"),
-    LicenseRow("RC", "Radiocentras group", BROADCASTER, "https://www.rc.lt/")
+    LicenseRow("RC", "Radiocentras group", BROADCASTER, "https://www.rc.lt/"),
+    LicenseRow("LRT Radijas", "Lietuvos nacionalinis radijas ir televizija (LRT)", BROADCASTER, "https://www.lrt.lt/"),
+    LicenseRow("\u017Dini\u0173 radijas", "\u017Dini\u0173 radijas, UAB", BROADCASTER, "https://www.ziniuradijas.lt/"),
+    LicenseRow("Latvijas Radio 1", "Latvijas Sabiedriskais medijs (LSM)", BROADCASTER, "https://latvijasradio.lsm.lv/"),
+    LicenseRow("Latvijas Radio 2", "Latvijas Sabiedriskais medijs (LSM)", BROADCASTER, "https://latvijasradio.lsm.lv/")
 )
 
 @Composable

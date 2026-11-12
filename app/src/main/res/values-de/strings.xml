@@ -125,4 +125,8 @@
     <string name="app_style_device_hint">Die Farben kommen aus deinem Hintergrundbild (Material You) und ändern sich mit ihm.</string>
     <string name="station_fog_title">Nebel in Senderfarbe</string>
     <string name="station_fog_subtitle">Der Nebel und der Ring um das Cover nehmen die Farbe des laufenden Senders an</string>
+    <!-- Equalizer value labels; %1$s is the formatted number -->
+    <string name="eq_gain_db">%1$s dB</string>
+    <string name="eq_freq_hz">%1$s Hz</string>
+    <string name="eq_freq_khz">%1$s kHz</string>
 </resources>

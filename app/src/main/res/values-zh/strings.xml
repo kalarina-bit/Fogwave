@@ -124,4 +124,8 @@
     <string name="app_style_device_hint">颜色取自壁纸（Material You），并随壁纸变化。</string>
     <string name="station_fog_title">电台颜色的雾</string>
     <string name="station_fog_subtitle">雾和唱片周围的圆环会变成正在播放电台的颜色</string>
+    <!-- Equalizer value labels; %1$s is the formatted number -->
+    <string name="eq_gain_db">%1$s dB</string>
+    <string name="eq_freq_hz">%1$s Hz</string>
+    <string name="eq_freq_khz">%1$s kHz</string>
 </resources>

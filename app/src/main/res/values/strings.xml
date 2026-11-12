@@ -126,4 +126,8 @@
     <string name="app_style_device_hint">Colors are taken from your wallpaper (Material You) and change with it.</string>
     <string name="station_fog_title">Fog in station color</string>
     <string name="station_fog_subtitle">The fog and the ring around the disc take the color of the playing station</string>
+    <!-- Equalizer value labels; %1$s is the formatted number -->
+    <string name="eq_gain_db">%1$s dB</string>
+    <string name="eq_freq_hz">%1$s Hz</string>
+    <string name="eq_freq_khz">%1$s kHz</string>
 </resources>

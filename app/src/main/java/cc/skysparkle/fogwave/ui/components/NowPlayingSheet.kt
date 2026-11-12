@@ -63,6 +63,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -353,7 +354,7 @@ fun NowPlayingSheet(
                                 .shadow(14.dp, CircleShape, ambientColor = colors.accentLavender, spotColor = colors.accentLavender)
                                 .clip(CircleShape)
                                 .background(colors.accentLavender)
-                                .clickable { onTogglePlay() }
+                                .clickable(role = Role.Button) { onTogglePlay() }
                                 .testTag("np_play_btn"),
                             contentAlignment = Alignment.Center
                         ) {

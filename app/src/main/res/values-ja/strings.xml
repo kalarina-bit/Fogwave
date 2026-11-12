@@ -124,4 +124,8 @@
     <string name="app_style_device_hint">色は壁紙から取得され（Material You）、壁紙に合わせて変わります。</string>
     <string name="station_fog_title">局の色の霧</string>
     <string name="station_fog_subtitle">霧とディスクの周りのリングが再生中の局の色になります</string>
+    <!-- Equalizer value labels; %1$s is the formatted number -->
+    <string name="eq_gain_db">%1$s dB</string>
+    <string name="eq_freq_hz">%1$s Hz</string>
+    <string name="eq_freq_khz">%1$s kHz</string>
 </resources>
