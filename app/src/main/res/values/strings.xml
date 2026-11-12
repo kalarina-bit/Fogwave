@@ -114,4 +114,16 @@
     <string name="share_content_desc">Share</string>
     <string name="share_text">I\'m listening to %1$s on Fogwave</string>
     <string name="share_text_track">I\'m listening to “%1$s” on %2$s with Fogwave</string>
+    <string name="about_appearance">Appearance</string>
+    <string name="about_more">More</string>
+    <string name="app_style_title">App colors</string>
+    <string name="app_style_fogwave" translatable="false">Fogwave</string>
+    <string name="app_style_lavender">Lavender</string>
+    <string name="app_style_peach">Peach</string>
+    <string name="app_style_mint">Mint</string>
+    <string name="app_style_sky">Sky</string>
+    <string name="app_style_device">Device</string>
+    <string name="app_style_device_hint">Colors are taken from your wallpaper (Material You) and change with it.</string>
+    <string name="station_fog_title">Fog in station color</string>
+    <string name="station_fog_subtitle">The fog and the ring around the disc take the color of the playing station</string>
 </resources>

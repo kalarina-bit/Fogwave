@@ -116,4 +116,15 @@
     <string name="share_content_desc">Bendrinti</string>
     <string name="share_text">Klausausi %1$s per Fogwave</string>
     <string name="share_text_track">Klausausi „%1$s“ per %2$s su Fogwave</string>
+    <string name="about_appearance">Išvaizda</string>
+    <string name="about_more">Daugiau</string>
+    <string name="app_style_title">Programėlės spalvos</string>
+    <string name="app_style_lavender">Levanda</string>
+    <string name="app_style_peach">Persikas</string>
+    <string name="app_style_mint">Mėta</string>
+    <string name="app_style_sky">Dangus</string>
+    <string name="app_style_device">Fonas</string>
+    <string name="app_style_device_hint">Spalvos paimamos iš ekrano fono („Material You“) ir keičiasi kartu su juo.</string>
+    <string name="station_fog_title">Rūkas stoties spalva</string>
+    <string name="station_fog_subtitle">Rūkas ir žiedas aplink diską nusidažo grojančios stoties spalva</string>
 </resources>

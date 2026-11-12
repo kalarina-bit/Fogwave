@@ -113,4 +113,15 @@
     <string name="share_content_desc">共有</string>
     <string name="share_text">Fogwaveで%1$sを聴いています</string>
     <string name="share_text_track">Fogwaveで%2$sの「%1$s」を聴いています</string>
+    <string name="about_appearance">外観</string>
+    <string name="about_more">その他</string>
+    <string name="app_style_title">アプリの色</string>
+    <string name="app_style_lavender">ラベンダー</string>
+    <string name="app_style_peach">ピーチ</string>
+    <string name="app_style_mint">ミント</string>
+    <string name="app_style_sky">スカイ</string>
+    <string name="app_style_device">端末</string>
+    <string name="app_style_device_hint">色は壁紙から取得され（Material You）、壁紙に合わせて変わります。</string>
+    <string name="station_fog_title">局の色の霧</string>
+    <string name="station_fog_subtitle">霧とディスクの周りのリングが再生中の局の色になります</string>
 </resources>

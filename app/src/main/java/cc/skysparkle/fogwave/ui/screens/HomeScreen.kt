@@ -73,6 +73,7 @@ import cc.skysparkle.fogwave.ui.components.TopBrandBar
 import cc.skysparkle.fogwave.ui.components.accentOr
 import cc.skysparkle.fogwave.ui.components.rememberStationArt
 import cc.skysparkle.fogwave.ui.components.stationDescription
+import cc.skysparkle.fogwave.ui.theme.AppThemeState
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 import cc.skysparkle.fogwave.ui.viewmodel.RadioViewModel
 
@@ -116,7 +117,10 @@ fun HomeScreen(
 
     val radioListState = rememberLazyListState()
     val accent by animateColorAsState(
-        targetValue = uiState.currentStation?.let { rememberStationArt(it) }.accentOr(LocalGeoColors.current.accentLavender),
+        // The style's colour unless the user asked for each station's own
+        targetValue = uiState.currentStation?.let { rememberStationArt(it) }
+            .takeIf { AppThemeState.stationFog }
+            .accentOr(LocalGeoColors.current.accentLavender),
         animationSpec = tween(700),
         label = "home_accent"
     )

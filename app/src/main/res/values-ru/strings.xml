@@ -116,4 +116,15 @@
     <string name="share_content_desc">Поделиться</string>
     <string name="share_text">Слушаю %1$s в Fogwave</string>
     <string name="share_text_track">Слушаю «%1$s» на %2$s в Fogwave</string>
+    <string name="about_appearance">Оформление</string>
+    <string name="about_more">Ещё</string>
+    <string name="app_style_title">Цвета приложения</string>
+    <string name="app_style_lavender">Лаванда</string>
+    <string name="app_style_peach">Персик</string>
+    <string name="app_style_mint">Мята</string>
+    <string name="app_style_sky">Небо</string>
+    <string name="app_style_device">Обои</string>
+    <string name="app_style_device_hint">Цвета берутся из обоев (Material You) и меняются вместе с ними.</string>
+    <string name="station_fog_title">Туман в цвете станции</string>
+    <string name="station_fog_subtitle">Туман и кольцо вокруг диска окрашиваются в цвет играющей станции</string>
 </resources>

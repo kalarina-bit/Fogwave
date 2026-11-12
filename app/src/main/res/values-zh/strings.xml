@@ -113,4 +113,15 @@
     <string name="share_content_desc">分享</string>
     <string name="share_text">我正在用 Fogwave 收听 %1$s</string>
     <string name="share_text_track">我正在用 Fogwave 收听 %2$s 的“%1$s”</string>
+    <string name="about_appearance">外观</string>
+    <string name="about_more">更多</string>
+    <string name="app_style_title">应用配色</string>
+    <string name="app_style_lavender">薰衣草</string>
+    <string name="app_style_peach">蜜桃</string>
+    <string name="app_style_mint">薄荷</string>
+    <string name="app_style_sky">天空</string>
+    <string name="app_style_device">设备</string>
+    <string name="app_style_device_hint">颜色取自壁纸（Material You），并随壁纸变化。</string>
+    <string name="station_fog_title">电台颜色的雾</string>
+    <string name="station_fog_subtitle">雾和唱片周围的圆环会变成正在播放电台的颜色</string>
 </resources>

@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cc.skysparkle.fogwave.data.model.RadioStation
+import cc.skysparkle.fogwave.ui.theme.AppThemeState
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 import kotlin.math.cos
 import kotlin.math.min
@@ -56,7 +57,7 @@ fun StationDisc(
     val colors = LocalGeoColors.current
     val art = rememberStationArt(station)
     val accent by animateColorAsState(
-        targetValue = art.accentOr(colors.primary),
+        targetValue = art.takeIf { AppThemeState.stationFog }.accentOr(colors.primary),
         animationSpec = tween(600),
         label = "disc_accent"
     )

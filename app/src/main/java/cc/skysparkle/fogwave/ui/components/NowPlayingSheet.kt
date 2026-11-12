@@ -77,6 +77,7 @@ import cc.skysparkle.fogwave.data.model.ExtraPlayerTab
 import cc.skysparkle.fogwave.data.model.RadioStation
 import cc.skysparkle.fogwave.player.AudioEffectsState
 import cc.skysparkle.fogwave.player.PlayerState
+import cc.skysparkle.fogwave.ui.theme.AppThemeState
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 import kotlin.math.roundToInt
 
@@ -120,7 +121,7 @@ fun NowPlayingSheet(
         )
     }
     val accent by animateColorAsState(
-        targetValue = rememberStationArt(station).accentOr(colors.accentLavender),
+        targetValue = rememberStationArt(station).takeIf { AppThemeState.stationFog }.accentOr(colors.accentLavender),
         animationSpec = tween(700),
         label = "page_accent"
     )

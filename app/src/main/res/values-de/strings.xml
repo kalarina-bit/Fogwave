@@ -114,4 +114,15 @@
     <string name="share_content_desc">Teilen</string>
     <string name="share_text">Ich höre %1$s mit Fogwave</string>
     <string name="share_text_track">Ich höre „%1$s“ auf %2$s mit Fogwave</string>
+    <string name="about_appearance">Darstellung</string>
+    <string name="about_more">Mehr</string>
+    <string name="app_style_title">App-Farben</string>
+    <string name="app_style_lavender">Lavendel</string>
+    <string name="app_style_peach">Pfirsich</string>
+    <string name="app_style_mint">Minze</string>
+    <string name="app_style_sky">Himmel</string>
+    <string name="app_style_device">Gerät</string>
+    <string name="app_style_device_hint">Die Farben kommen aus deinem Hintergrundbild (Material You) und ändern sich mit ihm.</string>
+    <string name="station_fog_title">Nebel in Senderfarbe</string>
+    <string name="station_fog_subtitle">Der Nebel und der Ring um das Cover nehmen die Farbe des laufenden Senders an</string>
 </resources>
