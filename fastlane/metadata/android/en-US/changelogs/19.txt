@@ -1,0 +1,3 @@
+• Info tab: FM frequencies in Vilnius, Kaunas, Klaipėda and Riga, and a link to the station's website with its shows and schedule
+• Support card with a Ko-fi button on the About screen
+• Source code links now lead to GitHub

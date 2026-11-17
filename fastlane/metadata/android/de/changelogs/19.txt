@@ -1,0 +1,3 @@
+• Info-Tab: UKW-Frequenzen in Vilnius, Kaunas, Klaipėda und Riga sowie ein Link zur Website des Senders mit Sendungen und Programm
+• Unterstützungskarte mit Ko-fi-Button auf dem Info-Bildschirm
+• Links zum Quellcode führen jetzt zu GitHub
