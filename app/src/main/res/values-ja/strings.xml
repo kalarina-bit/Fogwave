@@ -140,4 +140,21 @@
     <string name="support_title">Fogwave を応援する</string>
     <string name="support_text">Fogwave は無料・オープンソースで、広告もありません。気に入っていただけたら、少額の寄付がプロジェクトの継続を支えます。</string>
     <string name="support_button">Ko-fi で寄付する</string>
+
+    <!-- first-launch guide -->
+    <string name="guide_skip">スキップ</string>
+    <string name="guide_next">次へ</string>
+    <string name="guide_start">聴きはじめる</string>
+    <string name="guide_page_of">%2$dページ中%1$dページ</string>
+    <string name="guide_welcome_title">Fogwaveへようこそ</string>
+    <string name="guide_welcome_text">リトアニアとラトビアのラジオをひとつのアプリで。無料・オープンソースで、広告もトラッキングもありません。</string>
+    <string name="guide_listen_title">局をタップして聴く</string>
+    <string name="guide_listen_text">プレーヤーが全画面で開きます。下にスワイプすると、聴きながら他の局を探せます。ハートでお気に入りに保存、検索ですばやく見つけられます。</string>
+    <string name="guide_info_title">各局のことを知る</string>
+    <string name="guide_info_text">プレーヤーの「情報」タブにはFM周波数と、番組・放送スケジュールへのリンクがあります。イコライザーでヘッドホンや車に合わせて音を調整できます。</string>
+    <string name="guide_background_title">音楽を止めない</string>
+    <string name="guide_background_text">通知、ヘッドホン、Android Autoから操作できます。画面オフで止まる場合は、Fogwaveをバッテリーの制限なしで動作させてください。</string>
+    <string name="guide_battery_button">バッテリー設定</string>
+    <string name="guide_show">ガイドを表示</string>
+    <string name="guide_show_subtitle">アプリのかんたんな紹介</string>
 </resources>

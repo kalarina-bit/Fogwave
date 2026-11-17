@@ -1,3 +1,4 @@
-• Skiltyje „Informacija“: FM dažniai Vilniuje, Kaune, Klaipėdoje ir Rygoje bei nuoroda į stoties svetainę su laidomis ir programa
+• Skiltyje „Info“: FM dažniai Vilniuje, Kaune, Klaipėdoje ir Rygoje bei nuoroda į stoties svetainę su laidomis ir programa
 • Paramos kortelė su Ko-fi mygtuku ekrane „Apie“
 • Nuorodos į išeitinį kodą dabar veda į GitHub
+• Trumpas gidas pirmą kartą paleidus; jį vėl rasite skiltyje „Apie“

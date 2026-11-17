@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cc.skysparkle.fogwave.BuildConfig
 import cc.skysparkle.fogwave.R
+import cc.skysparkle.fogwave.ui.screens.Onboarding
 import cc.skysparkle.fogwave.ui.theme.AppStyle
 import cc.skysparkle.fogwave.ui.theme.AppThemeState
 import cc.skysparkle.fogwave.ui.theme.GeoColors
@@ -76,6 +77,15 @@ fun AboutPanel(modifier: Modifier = Modifier) {
 
         SectionLabel(stringResource(R.string.about_more))
         GroupCard {
+            LinkRow(
+                iconRes = R.drawable.ic_mc_check,
+                title = stringResource(R.string.guide_show),
+                subtitle = stringResource(R.string.guide_show_subtitle),
+                external = false,
+                onClick = { Onboarding.show() },
+                modifier = Modifier.testTag("guide_card")
+            )
+            CardDivider()
             LinkRow(
                 iconRes = R.drawable.ic_mc_code,
                 title = stringResource(R.string.about_my_repository),

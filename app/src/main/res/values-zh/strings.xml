@@ -140,4 +140,21 @@
     <string name="support_title">支持 Fogwave</string>
     <string name="support_text">Fogwave 免费、开源且无广告。如果你喜欢它，一笔小小的捐助能帮助项目持续下去。</string>
     <string name="support_button">通过 Ko-fi 捐助</string>
+
+    <!-- first-launch guide -->
+    <string name="guide_skip">跳过</string>
+    <string name="guide_next">下一步</string>
+    <string name="guide_start">开始收听</string>
+    <string name="guide_page_of">第 %1$d 页，共 %2$d 页</string>
+    <string name="guide_welcome_title">欢迎使用 Fogwave</string>
+    <string name="guide_welcome_text">立陶宛和拉脱维亚电台尽在一处。免费、开源、无广告、无追踪。</string>
+    <string name="guide_listen_title">点按电台即可收听</string>
+    <string name="guide_listen_text">播放器会全屏打开。向下滑动即可一边收听一边浏览。点按爱心把电台加入收藏，或用搜索快速找到电台。</string>
+    <string name="guide_info_title">了解每个电台</string>
+    <string name="guide_info_text">播放器的“信息”标签页显示FM频率以及电台节目与时间表的链接。均衡器可按耳机或汽车调整音效。</string>
+    <string name="guide_background_title">音乐不停歇</string>
+    <string name="guide_background_text">可通过通知、耳机或 Android Auto 控制电台。如果熄屏后停止播放，请允许 Fogwave 不受电池限制地运行。</string>
+    <string name="guide_battery_button">电池设置</string>
+    <string name="guide_show">显示使用指南</string>
+    <string name="guide_show_subtitle">快速了解本应用</string>
 </resources>

@@ -141,4 +141,21 @@
     <string name="support_title">Fogwave unterstützen</string>
     <string name="support_text">Fogwave ist kostenlos, quelloffen und werbefrei. Wenn dir die App gefällt, hilft eine kleine Spende, das Projekt weiterzuführen.</string>
     <string name="support_button">Auf Ko-fi spenden</string>
+
+    <!-- first-launch guide -->
+    <string name="guide_skip">Überspringen</string>
+    <string name="guide_next">Weiter</string>
+    <string name="guide_start">Jetzt hören</string>
+    <string name="guide_page_of">Seite %1$d von %2$d</string>
+    <string name="guide_welcome_title">Willkommen bei Fogwave</string>
+    <string name="guide_welcome_text">Litauisches und lettisches Radio an einem Ort. Kostenlos, quelloffen, ohne Werbung und ohne Tracking.</string>
+    <string name="guide_listen_title">Sender antippen und hören</string>
+    <string name="guide_listen_text">Der Player öffnet sich im Vollbild. Wische ihn nach unten, um beim Stöbern weiterzuhören. Mit dem Herz landet ein Sender in den Favoriten, mit der Suche findest du ihn schnell.</string>
+    <string name="guide_info_title">Lerne die Sender kennen</string>
+    <string name="guide_info_text">Der Info-Tab im Player zeigt UKW-Frequenzen und einen Link zu Sendungen und Programm des Senders. Der Equalizer passt den Klang an Kopfhörer oder Auto an.</string>
+    <string name="guide_background_title">Die Musik läuft weiter</string>
+    <string name="guide_background_text">Steuere das Radio über die Benachrichtigung, deine Kopfhörer oder Android Auto. Bricht es bei ausgeschaltetem Bildschirm ab, erlaube Fogwave, ohne Akku-Einschränkungen zu laufen.</string>
+    <string name="guide_battery_button">Akku-Einstellungen</string>
+    <string name="guide_show">Anleitung anzeigen</string>
+    <string name="guide_show_subtitle">Ein kurzer Rundgang durch die App</string>
 </resources>

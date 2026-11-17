@@ -142,4 +142,21 @@
     <string name="support_title">Support Fogwave</string>
     <string name="support_text">Fogwave is free, open source and has no ads. If you enjoy it, a small donation helps keep the project going.</string>
     <string name="support_button">Donate on Ko-fi</string>
+
+    <!-- first-launch guide -->
+    <string name="guide_skip">Skip</string>
+    <string name="guide_next">Next</string>
+    <string name="guide_start">Start listening</string>
+    <string name="guide_page_of">Page %1$d of %2$d</string>
+    <string name="guide_welcome_title">Welcome to Fogwave</string>
+    <string name="guide_welcome_text">Lithuanian and Latvian radio in one place. Free, open source, with no ads and no tracking.</string>
+    <string name="guide_listen_title">Tap a station to listen</string>
+    <string name="guide_listen_text">The player opens full screen. Swipe it down to keep listening while you browse. Tap the heart to save a station to Favorites, or use search to find one fast.</string>
+    <string name="guide_info_title">Get to know each station</string>
+    <string name="guide_info_text">The Info tab in the player shows FM frequencies and a link to the station\'s shows and schedule. The equalizer tunes the sound for your headphones or car.</string>
+    <string name="guide_background_title">Keep the music playing</string>
+    <string name="guide_background_text">Control the radio from the notification, your headphones or Android Auto. If it stops when the screen is off, let Fogwave run without battery restrictions.</string>
+    <string name="guide_battery_button">Battery settings</string>
+    <string name="guide_show">Show the guide</string>
+    <string name="guide_show_subtitle">A quick tour of the app</string>
 </resources>
