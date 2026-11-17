@@ -131,4 +131,7 @@
     <string name="eq_gain_db">%1$s дБ</string>
     <string name="eq_freq_hz">%1$s Гц</string>
     <string name="eq_freq_khz">%1$s кГц</string>
+    <string name="support_title">Поддержать Fogwave</string>
+    <string name="support_text">Fogwave бесплатное, с открытым кодом и без рекламы. Если приложение нравится, небольшое пожертвование помогает проекту развиваться.</string>
+    <string name="support_button">Пожертвовать через Ko-fi</string>
 </resources>

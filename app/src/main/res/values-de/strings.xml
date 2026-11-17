@@ -129,4 +129,7 @@
     <string name="eq_gain_db">%1$s dB</string>
     <string name="eq_freq_hz">%1$s Hz</string>
     <string name="eq_freq_khz">%1$s kHz</string>
+    <string name="support_title">Fogwave unterstützen</string>
+    <string name="support_text">Fogwave ist kostenlos, quelloffen und werbefrei. Wenn dir die App gefällt, hilft eine kleine Spende, das Projekt weiterzuführen.</string>
+    <string name="support_button">Auf Ko-fi spenden</string>
 </resources>

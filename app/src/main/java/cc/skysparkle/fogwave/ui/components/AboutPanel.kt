@@ -49,7 +49,8 @@ import cc.skysparkle.fogwave.ui.theme.AppThemeState
 import cc.skysparkle.fogwave.ui.theme.GeoColors
 import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 
-private const val REPOSITORY_URL = "https://git.skysparkle.cc/kalarina/Fogwave"
+private const val REPOSITORY_URL = "https://github.com/kalarina-bit/Fogwave"
+private const val DONATE_URL = "https://ko-fi.com/skysparkle"
 private const val PRIVACY_POLICY_URL = "https://skysparkle.cc/privacy?lang=en"
 
 @Composable
@@ -64,6 +65,7 @@ fun AboutPanel(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         AppHeader()
+        SupportCard(onDonate = { context.openUrl(DONATE_URL) })
 
         SectionLabel(stringResource(R.string.about_appearance))
         GroupCard {
@@ -165,6 +167,57 @@ private fun AppHeader() {
             ),
             modifier = Modifier.padding(top = 12.dp)
         )
+    }
+}
+
+/** Asks for a donation: the app icon, a short note and one button. */
+@Composable
+private fun SupportCard(onDonate: () -> Unit) {
+    val colors = LocalGeoColors.current
+    GroupCard(contentPadding = 16.dp) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(colors.primaryContainer),
+                contentAlignment = Alignment.Center
+            ) {
+                AppIcon(resId = R.drawable.ic_fogwave_logo, size = 32.dp)
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                RowTitle(stringResource(R.string.support_title))
+                RowSubtitle(stringResource(R.string.support_text), maxLines = 4)
+            }
+        }
+        Row(
+            modifier = Modifier
+                .padding(top = 14.dp)
+                .fillMaxWidth()
+                .height(46.dp)
+                .clip(CircleShape)
+                .background(colors.accentLavender)
+                .clickable(
+                    onClickLabel = stringResource(R.string.about_open_in_browser),
+                    role = Role.Button,
+                    onClick = onDonate
+                )
+                .testTag("donate_button"),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+        ) {
+            AppIcon(resId = R.drawable.ic_heart_fill, tint = colors.onAccentLavender, size = 18.dp)
+            Text(
+                text = stringResource(R.string.support_button),
+                style = MaterialTheme.typography.labelLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = colors.onAccentLavender
+                )
+            )
+        }
     }
 }
 

@@ -131,4 +131,7 @@
     <string name="eq_gain_db">%1$s dB</string>
     <string name="eq_freq_hz">%1$s Hz</string>
     <string name="eq_freq_khz">%1$s kHz</string>
+    <string name="support_title">Paremti Fogwave</string>
+    <string name="support_text">Fogwave nemokama, atvirojo kodo ir be reklamų. Jei programėlė patinka, nedidelė auka padeda projektui gyvuoti.</string>
+    <string name="support_button">Paaukoti per Ko-fi</string>
 </resources>

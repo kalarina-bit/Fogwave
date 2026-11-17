@@ -9,8 +9,12 @@
   Listen to Lithuania's favorite stations in one tap.
 </p>
 
+<p align="center">
+  <a href="https://ko-fi.com/skysparkle"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi"></a>
+</p>
+
 > [!IMPORTANT]
-> **Fogwave is coming to Google Play!** The app is now in closed testing there ahead of the public release. Ideas, wishes and suggestions for improvement are very welcome — send them wherever is easiest for you: an issue on [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/issues) or [GitHub](https://github.com/kalarina-bit/Fogwave/issues), or an email to [cuken107@proton.me](mailto:cuken107@proton.me).
+> **Fogwave is coming to Google Play!** The app is now in closed testing there ahead of the public release. Ideas, wishes and suggestions for improvement are very welcome — send them wherever is easiest for you: an [issue on GitHub](https://github.com/kalarina-bit/Fogwave/issues), or an email to [cuken107@proton.me](mailto:cuken107@proton.me).
 
 > [!NOTE]
 > **Looking for designers!** Fogwave is looking for volunteer designers to help with icons, logos, animations, cover art (store graphics) and UI design. This is unpaid help for an open-source project. If you're interested, write to [cuken107@proton.me](mailto:cuken107@proton.me).
@@ -23,7 +27,6 @@
   <a href="https://f-droid.org/packages/cc.skysparkle.fogwave/"><img src="assets/get-it-on%20(1).png" height="56" alt="Get it on F-Droid"></a>
   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/kalarina-bit/Fogwave"><img src="assets/badge_obtainium.png" height="56" alt="Get it on Obtainium"></a>
   <a href="https://github.com/kalarina-bit/Fogwave/releases/latest"><img src="assets/get-it-on-github.png" height="56" alt="Get it on GitHub"></a>
-  <a href="https://git.skysparkle.cc/kalarina/Fogwave/releases"><img src="assets/get-it-on-gitea.png" height="56" alt="Get it on Gitea"></a>
 </p>
 
 <p align="center">
@@ -52,7 +55,7 @@
 
 - **[F-Droid](https://f-droid.org/packages/cc.skysparkle.fogwave/)** — install and update through the F-Droid client.
 - **[Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/kalarina-bit/Fogwave)** — installs the APK straight from GitHub releases and keeps it up to date.
-- **Manually** — download the latest APK from [GitHub](https://github.com/kalarina-bit/Fogwave/releases/latest) or [Gitea](https://git.skysparkle.cc/kalarina/Fogwave/releases), allow installs from unknown sources for the app you open it with (Settings → Apps → Special access → Install unknown apps), then open the `.apk` and confirm.
+- **Manually** — download the latest APK from [GitHub Releases](https://github.com/kalarina-bit/Fogwave/releases/latest), allow installs from unknown sources for the app you open it with (Settings → Apps → Special access → Install unknown apps), then open the `.apk` and confirm.
 
 ## <img src="assets/icon-verify.png" width="32" alt=""> Verifying a download
 
@@ -88,7 +91,13 @@ Release builds are signed only when a keystore is supplied through the `KEYSTORE
 
 ## 🤝 Contributing
 
-Bug reports, station suggestions, translation fixes and pull requests are welcome in the [issue tracker](https://git.skysparkle.cc/kalarina/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes. To open an issue or a pull request, [create an account](https://git.skysparkle.cc/user/sign_up) on this Gitea.
+Bug reports, station suggestions, translation fixes and pull requests are welcome in the [issue tracker](https://github.com/kalarina-bit/Fogwave/issues). Please read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains what fits the project and how to send changes.
+
+## ☕ Support
+
+Fogwave is free, open source and has no ads. If it is useful to you, you can support the project on [Ko-fi](https://ko-fi.com/skysparkle) — donations pay for the Skysparkle server and the time spent on the apps.
+
+<a href="https://ko-fi.com/skysparkle"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi"></a>
 
 ## 📄 License
 

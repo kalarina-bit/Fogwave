@@ -128,4 +128,7 @@
     <string name="eq_gain_db">%1$s dB</string>
     <string name="eq_freq_hz">%1$s Hz</string>
     <string name="eq_freq_khz">%1$s kHz</string>
+    <string name="support_title">Fogwave を応援する</string>
+    <string name="support_text">Fogwave は無料・オープンソースで、広告もありません。気に入っていただけたら、少額の寄付がプロジェクトの継続を支えます。</string>
+    <string name="support_button">Ko-fi で寄付する</string>
 </resources>

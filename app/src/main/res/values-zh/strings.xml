@@ -128,4 +128,7 @@
     <string name="eq_gain_db">%1$s dB</string>
     <string name="eq_freq_hz">%1$s Hz</string>
     <string name="eq_freq_khz">%1$s kHz</string>
+    <string name="support_title">支持 Fogwave</string>
+    <string name="support_text">Fogwave 免费、开源且无广告。如果你喜欢它，一笔小小的捐助能帮助项目持续下去。</string>
+    <string name="support_button">通过 Ko-fi 捐助</string>
 </resources>
