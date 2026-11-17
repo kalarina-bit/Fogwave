@@ -34,6 +34,15 @@
     <string name="info_description">Beschreibung</string>
     <string name="info_genre">Genre</string>
     <string name="info_quality">Qualität</string>
+    <string name="info_fm">UKW</string>
+    <string name="info_fm_line">%1$s · %2$s MHz</string>
+    <string name="info_fm_online_only">Nur online</string>
+    <string name="info_schedule">Sendungen &amp; Programm</string>
+    <string name="info_open_website">Website des Senders öffnen</string>
+    <string name="city_vilnius">Vilnius</string>
+    <string name="city_kaunas">Kaunas</string>
+    <string name="city_klaipeda">Klaipėda</string>
+    <string name="city_riga">Riga</string>
     <string name="info_status">Status</string>
     <string name="status_live">Auf Sendung • Livestream</string>
 

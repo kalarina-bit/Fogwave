@@ -34,6 +34,15 @@
     <string name="info_description">Aprašymas</string>
     <string name="info_genre">Žanras</string>
     <string name="info_quality">Kokybė</string>
+    <string name="info_fm">FM</string>
+    <string name="info_fm_line">%1$s · %2$s MHz</string>
+    <string name="info_fm_online_only">Tik internetu</string>
+    <string name="info_schedule">Laidos ir programa</string>
+    <string name="info_open_website">Atidaryti stoties svetainę</string>
+    <string name="city_vilnius">Vilnius</string>
+    <string name="city_kaunas">Kaunas</string>
+    <string name="city_klaipeda">Klaipėda</string>
+    <string name="city_riga">Ryga</string>
     <string name="info_status">Būsena</string>
     <string name="status_live">Eteryje • tiesioginė transliacija</string>
 

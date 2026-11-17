@@ -3,6 +3,8 @@ package cc.skysparkle.fogwave.data.repository
 import android.content.Context
 import androidx.core.content.edit
 import cc.skysparkle.fogwave.R
+import cc.skysparkle.fogwave.data.model.City
+import cc.skysparkle.fogwave.data.model.FmFrequency
 import cc.skysparkle.fogwave.data.model.Genre
 import cc.skysparkle.fogwave.data.model.RadioStation
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +15,8 @@ import org.json.JSONArray
 class RadioRepository(context: Context) {
     private val prefs = context.getSharedPreferences("fogwave_prefs", Context.MODE_PRIVATE)
 
+    // FM frequencies: Lithuanian stations from the RRT broadcasting licence list (Vilnius, Kaunas,
+    // Klaipėda), Latvian ones for Riga. Other towns are listed on each station's website.
     val stations: List<RadioStation> = listOf(
         RadioStation(
             id = "zip",
@@ -21,7 +25,13 @@ class RadioRepository(context: Context) {
             streamUrl = "https://stream4.radijas.lt/zipfm",
             iconResId = R.drawable.ic_station_zipfm,
             genres = listOf(Genre.HITS, Genre.POP, Genre.LITHUANIAN),
-            bitrate = "MP3"
+            bitrate = "MP3",
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 100.1),
+                FmFrequency(City.KAUNAS, 104.1),
+                FmFrequency(City.KLAIPEDA, 92.5)
+            ),
+            website = "https://www.zipfm.lt"
         ),
         RadioStation(
             id = "powerhit",
@@ -31,7 +41,13 @@ class RadioRepository(context: Context) {
             streamUrl = "https://stream.rcs.revma.com/f31w7e0fveuvv",
             iconResId = R.drawable.ic_station_powerhit,
             genres = listOf(Genre.DANCE, Genre.POP, Genre.HITS),
-            bitrate = "AAC"
+            bitrate = "AAC",
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 95.9),
+                FmFrequency(City.KAUNAS, 91.0),
+                FmFrequency(City.KLAIPEDA, 96.7)
+            ),
+            website = "https://powerhitradio.tv3.lt"
         ),
         RadioStation(
             id = "powerhitgold",
@@ -40,7 +56,8 @@ class RadioRepository(context: Context) {
             streamUrl = "https://stream.rcs.revma.com/asdpz3qfbhuvv",
             iconResId = R.drawable.ic_station_powerhitgold,
             genres = listOf(Genre.DANCE, Genre.OLDIES, Genre.HITS),
-            bitrate = "AAC"
+            bitrate = "AAC",
+            website = "https://powerhitradio.tv3.lt"
         ),
         RadioStation(
             id = "rock",
@@ -50,7 +67,13 @@ class RadioRepository(context: Context) {
             iconResId = R.drawable.ic_station_rockfm,
             genres = listOf(Genre.ROCK, Genre.LITHUANIAN),
             bitrate = "MP3",
-            lightBackdrop = true
+            lightBackdrop = true,
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 87.8),
+                FmFrequency(City.KAUNAS, 90.3),
+                FmFrequency(City.KLAIPEDA, 100.2)
+            ),
+            website = "https://rockfm.lt"
         ),
         RadioStation(
             id = "relax",
@@ -59,7 +82,13 @@ class RadioRepository(context: Context) {
             streamUrl = "https://stream4.radijas.lt/relaxfm",
             iconResId = R.drawable.ic_station_relaxfm,
             genres = listOf(Genre.EASY_LISTENING),
-            bitrate = "MP3"
+            bitrate = "MP3",
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 96.4),
+                FmFrequency(City.KAUNAS, 98.5),
+                FmFrequency(City.KLAIPEDA, 87.5)
+            ),
+            website = "https://www.relaxfm.lt"
         ),
         RadioStation(
             id = "lietus",
@@ -69,7 +98,13 @@ class RadioRepository(context: Context) {
             iconResId = R.drawable.ic_station_lietus,
             genres = listOf(Genre.LITHUANIAN, Genre.POP),
             bitrate = "AAC 64 kbps",
-            lightBackdrop = true
+            lightBackdrop = true,
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 103.1),
+                FmFrequency(City.KAUNAS, 103.5),
+                FmFrequency(City.KLAIPEDA, 103.7)
+            ),
+            website = "https://www.lietus.fm"
         ),
         RadioStation(
             id = "m1",
@@ -78,7 +113,13 @@ class RadioRepository(context: Context) {
             streamUrl = "https://stream.m-1.fm/m1/aacp64",
             iconResId = R.drawable.ic_station_m1,
             genres = listOf(Genre.POP, Genre.HITS),
-            bitrate = "AAC 64 kbps"
+            bitrate = "AAC 64 kbps",
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 106.8),
+                FmFrequency(City.KAUNAS, 106.6),
+                FmFrequency(City.KLAIPEDA, 106.5)
+            ),
+            website = "https://www.m-1.fm"
         ),
         RadioStation(
             id = "plus",
@@ -88,7 +129,13 @@ class RadioRepository(context: Context) {
             iconResId = R.drawable.ic_station_m1plus,
             genres = listOf(Genre.POP, Genre.OLDIES),
             bitrate = "AAC 64 kbps",
-            lightBackdrop = true
+            lightBackdrop = true,
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 106.2),
+                FmFrequency(City.KAUNAS, 97.6),
+                FmFrequency(City.KLAIPEDA, 98.3)
+            ),
+            website = "https://www.pliusas.fm"
         ),
         RadioStation(
             id = "goldfm",
@@ -97,7 +144,13 @@ class RadioRepository(context: Context) {
             streamUrl = "https://stream.goldfm.lt/goldfm.aac",
             iconResId = R.drawable.ic_station_goldfm,
             genres = listOf(Genre.OLDIES, Genre.HITS, Genre.LITHUANIAN),
-            bitrate = "AAC"
+            bitrate = "AAC",
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 102.6),
+                FmFrequency(City.KAUNAS, 104.5),
+                FmFrequency(City.KLAIPEDA, 104.1)
+            ),
+            website = "https://goldfm.lt"
         ),
         RadioStation(
             id = "rc",
@@ -107,7 +160,13 @@ class RadioRepository(context: Context) {
             iconResId = R.drawable.ic_station_rc,
             genres = listOf(Genre.HITS, Genre.LITHUANIAN),
             bitrate = "MP3 128 kbps",
-            lightBackdrop = true
+            lightBackdrop = true,
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 89.6),
+                FmFrequency(City.KAUNAS, 107.1),
+                FmFrequency(City.KLAIPEDA, 101.5)
+            ),
+            website = "https://rc.lt"
         ),
         RadioStation(
             id = "lrt",
@@ -117,7 +176,13 @@ class RadioRepository(context: Context) {
             iconResId = R.drawable.ic_station_lrt,
             genres = listOf(Genre.NEWS_TALK, Genre.LITHUANIAN),
             bitrate = "MP3",
-            lightBackdrop = true
+            lightBackdrop = true,
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 89.0),
+                FmFrequency(City.KAUNAS, 102.1),
+                FmFrequency(City.KLAIPEDA, 102.8)
+            ),
+            website = "https://www.lrt.lt"
         ),
         RadioStation(
             id = "ziniu",
@@ -126,7 +191,13 @@ class RadioRepository(context: Context) {
             streamUrl = "https://netradio.ziniur.lt/ziniur.mp3?n=975355",
             iconResId = R.drawable.ic_station_ziniu,
             genres = listOf(Genre.NEWS_TALK),
-            bitrate = "MP3"
+            bitrate = "MP3",
+            frequencies = listOf(
+                FmFrequency(City.VILNIUS, 97.3),
+                FmFrequency(City.KAUNAS, 104.9),
+                FmFrequency(City.KLAIPEDA, 102.2)
+            ),
+            website = "https://www.ziniuradijas.lt"
         ),
         RadioStation(
             id = "lr1",
@@ -135,7 +206,9 @@ class RadioRepository(context: Context) {
             streamUrl = "https://muste.latvijasradio.lv/shoutcast/mp4:lr1a.stream/playlist.m3u8",
             iconResId = R.drawable.ic_station_lr1,
             genres = listOf(Genre.NEWS_TALK),
-            bitrate = "HLS"
+            bitrate = "HLS",
+            frequencies = listOf(FmFrequency(City.RIGA, 90.7)),
+            website = "https://lr1.lsm.lv"
         ),
         RadioStation(
             id = "lr2",
@@ -144,7 +217,9 @@ class RadioRepository(context: Context) {
             streamUrl = "https://muste.latvijasradio.lv/shoutcast/mp4:lr2a.stream/playlist.m3u8",
             iconResId = R.drawable.ic_station_lr2,
             genres = listOf(Genre.LATVIAN, Genre.POP),
-            bitrate = "HLS"
+            bitrate = "HLS",
+            frequencies = listOf(FmFrequency(City.RIGA, 91.5)),
+            website = "https://lr2.lsm.lv"
         )
     )
 

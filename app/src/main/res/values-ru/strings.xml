@@ -34,6 +34,15 @@
     <string name="info_description">Описание</string>
     <string name="info_genre">Жанр</string>
     <string name="info_quality">Качество</string>
+    <string name="info_fm">FM</string>
+    <string name="info_fm_line">%1$s · %2$s МГц</string>
+    <string name="info_fm_online_only">Только онлайн</string>
+    <string name="info_schedule">Передачи и расписание</string>
+    <string name="info_open_website">Открыть сайт станции</string>
+    <string name="city_vilnius">Вильнюс</string>
+    <string name="city_kaunas">Каунас</string>
+    <string name="city_klaipeda">Клайпеда</string>
+    <string name="city_riga">Рига</string>
     <string name="info_status">Статус</string>
     <string name="status_live">В эфире • прямая трансляция</string>
 

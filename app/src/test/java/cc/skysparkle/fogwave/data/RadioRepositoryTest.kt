@@ -65,4 +65,15 @@ class RadioRepositoryTest {
     assertEquals(listOf("lr2", "rc"), sorted.take(2).map { it.id })
     assertEquals(repository.stations.size, sorted.size)
   }
+
+  @Test
+  fun everyStationHasAWebsiteAndValidFmFrequencies() {
+    RadioRepository(context).stations.forEach { station ->
+      assertTrue("${station.id} website", station.website?.startsWith("https://") == true)
+      station.frequencies.forEach { f ->
+        assertTrue("${station.id} ${f.mhz}", f.mhz in 87.5..108.0)
+      }
+      assertEquals("${station.id} cities", station.frequencies.size, station.frequencies.map { it.city }.toSet().size)
+    }
+  }
 }

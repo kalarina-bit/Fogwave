@@ -14,8 +14,23 @@ data class RadioStation(
     @param:DrawableRes val iconResId: Int,
     val genres: List<Genre>,
     val bitrate: String,
-    val lightBackdrop: Boolean = false
+    val lightBackdrop: Boolean = false,
+    /** FM frequencies in the biggest cities; empty for stations that are only online. */
+    val frequencies: List<FmFrequency> = emptyList(),
+    /** Station website with its shows and schedule. */
+    val website: String? = null
 )
+
+/** One FM transmitter: the city and the frequency in MHz. */
+@Immutable
+data class FmFrequency(val city: City, val mhz: Double)
+
+enum class City(@param:StringRes val labelRes: Int) {
+    VILNIUS(R.string.city_vilnius),
+    KAUNAS(R.string.city_kaunas),
+    KLAIPEDA(R.string.city_klaipeda),
+    RIGA(R.string.city_riga)
+}
 
 enum class Genre(@param:StringRes val labelRes: Int) {
     HITS(R.string.genre_hits),

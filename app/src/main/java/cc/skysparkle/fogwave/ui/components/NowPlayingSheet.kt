@@ -68,6 +68,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.Velocity
@@ -529,6 +530,16 @@ private fun ExtraPanel(
                         InfoRow(key = stringResource(R.string.info_description), value = stationDescription(station))
                         InfoRow(key = stringResource(R.string.info_genre), value = stationGenres(station))
                         InfoRow(key = stringResource(R.string.info_quality), value = station.bitrate)
+                        InfoRow(key = stringResource(R.string.info_fm), value = stationFrequencies(station))
+                        station.website?.let { url ->
+                            val context = LocalContext.current
+                            InfoLinkRow(
+                                key = stringResource(R.string.info_schedule),
+                                label = displayHost(url),
+                                description = stringResource(R.string.info_open_website),
+                                onClick = { context.openUrl(url) }
+                            )
+                        }
                         InfoRow(
                             key = stringResource(R.string.info_status),
                             value = when (playerState) {
@@ -580,6 +591,39 @@ private fun InfoRow(key: String, value: String) {
                 fontWeight = FontWeight.Bold,
                 color = LocalGeoColors.current.deepPurple,
                 textAlign = TextAlign.End
+            ),
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+/** Like [InfoRow], but the value is a link that opens in the browser. */
+@Composable
+private fun InfoLinkRow(key: String, label: String, description: String, onClick: () -> Unit) {
+    val colors = LocalGeoColors.current
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(role = Role.Button, onClickLabel = description, onClick = onClick)
+            .testTag("info_website"),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = key,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.SemiBold,
+                color = colors.onSurfaceVariant
+            )
+        )
+        Text(
+            text = "$label \u2197",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.Bold,
+                color = colors.accentLavender,
+                textAlign = TextAlign.End,
+                textDecoration = TextDecoration.Underline
             ),
             modifier = Modifier.weight(1f)
         )

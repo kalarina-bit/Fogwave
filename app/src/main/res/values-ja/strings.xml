@@ -34,6 +34,15 @@
     <string name="info_description">説明</string>
     <string name="info_genre">ジャンル</string>
     <string name="info_quality">音質</string>
+    <string name="info_fm">FM</string>
+    <string name="info_fm_line">%1$s · %2$s MHz</string>
+    <string name="info_fm_online_only">オンラインのみ</string>
+    <string name="info_schedule">番組と放送スケジュール</string>
+    <string name="info_open_website">局のウェブサイトを開く</string>
+    <string name="city_vilnius">ヴィリニュス</string>
+    <string name="city_kaunas">カウナス</string>
+    <string name="city_klaipeda">クライペダ</string>
+    <string name="city_riga">リガ</string>
     <string name="info_status">状態</string>
     <string name="status_live">オンエア中 • ライブストリーム</string>
 

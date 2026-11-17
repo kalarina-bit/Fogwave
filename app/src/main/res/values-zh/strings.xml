@@ -34,6 +34,15 @@
     <string name="info_description">简介</string>
     <string name="info_genre">类型</string>
     <string name="info_quality">音质</string>
+    <string name="info_fm">FM</string>
+    <string name="info_fm_line">%1$s · %2$s MHz</string>
+    <string name="info_fm_online_only">仅限在线</string>
+    <string name="info_schedule">节目与时间表</string>
+    <string name="info_open_website">打开电台网站</string>
+    <string name="city_vilnius">维尔纽斯</string>
+    <string name="city_kaunas">考纳斯</string>
+    <string name="city_klaipeda">克莱佩达</string>
+    <string name="city_riga">里加</string>
     <string name="info_status">状态</string>
     <string name="status_live">正在直播 • 实时音频流</string>
 

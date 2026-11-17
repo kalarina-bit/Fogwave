@@ -38,6 +38,15 @@
     <string name="info_description">Description</string>
     <string name="info_genre">Genre</string>
     <string name="info_quality">Quality</string>
+    <string name="info_fm">FM</string>
+    <string name="info_fm_line">%1$s · %2$s MHz</string>
+    <string name="info_fm_online_only">Online only</string>
+    <string name="info_schedule">Shows &amp; schedule</string>
+    <string name="info_open_website">Open the station\'s website</string>
+    <string name="city_vilnius">Vilnius</string>
+    <string name="city_kaunas">Kaunas</string>
+    <string name="city_klaipeda">Klaipėda</string>
+    <string name="city_riga">Riga</string>
     <string name="info_status">Status</string>
     <string name="status_live">On air • Live Stream</string>
 
