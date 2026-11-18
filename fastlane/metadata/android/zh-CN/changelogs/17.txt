@@ -2,5 +2,3 @@
 • 播放器带圆形电台唱片并显示正在播放的歌曲名称
 • 随正在播放电台颜色飘动的雾
 • 可分享正在收听的电台或歌曲
-
-新版本也可在 Gitea 获取：https://git.skysparkle.cc/kalarina/Fogwave/releases

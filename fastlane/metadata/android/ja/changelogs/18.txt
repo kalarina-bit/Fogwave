@@ -4,5 +4,3 @@
 • ネットワークが戻ると自動で再生を再開
 • ラウドネス強化が実際に音量を上げるように
 • アプリが軽くなり、電池消費も減少
-
-新しいバージョンは Gitea でも入手できます: https://git.skysparkle.cc/kalarina/Fogwave/releases

@@ -4,5 +4,3 @@
 • 网络恢复后自动继续播放
 • 响度增强现在真正提高音量
 • 应用更小，更省电
-
-新版本也可在 Gitea 获取：https://git.skysparkle.cc/kalarina/Fogwave/releases

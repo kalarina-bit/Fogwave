@@ -2,5 +2,3 @@
 • Grotuvas su apvaliu stoties disku ir eteryje skambančios dainos pavadinimu
 • Judantis rūkas grojančios stoties spalva
 • Galite pasidalinti klausoma stotimi ar daina
-
-Naujos versijos taip pat pasiekiamos Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases

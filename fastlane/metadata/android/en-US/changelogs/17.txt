@@ -2,5 +2,3 @@
 • Player with a round station disc and the title of the song on air
 • Drifting fog in the color of the playing station
 • Share the station or song you are listening to
-
-New versions are also available on Gitea: https://git.skysparkle.cc/kalarina/Fogwave/releases
