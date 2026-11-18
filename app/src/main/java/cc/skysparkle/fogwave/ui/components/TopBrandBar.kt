@@ -50,6 +50,7 @@ import cc.skysparkle.fogwave.ui.theme.LocalGeoColors
 @Composable
 fun TopBrandBar(
     modifier: Modifier = Modifier,
+    showLogo: Boolean = true,
     showSearch: Boolean = false,
     isSearchOpen: Boolean = false,
     query: String = "",
@@ -69,11 +70,16 @@ fun TopBrandBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        AppIcon(
-            resId = R.drawable.ic_fogwave_logo,
-            contentDescription = stringResource(R.string.fogwave_logo_content_desc),
-            size = 30.dp
-        )
+        if (showLogo) {
+            AppIcon(
+                resId = R.drawable.ic_fogwave_logo,
+                contentDescription = stringResource(R.string.fogwave_logo_content_desc),
+                size = 30.dp
+            )
+        } else {
+            // Keeps the title centered where it is on the other tabs
+            Box(modifier = Modifier.size(30.dp))
+        }
 
         Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
             AnimatedContent(

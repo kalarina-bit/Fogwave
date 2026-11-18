@@ -180,7 +180,7 @@ private fun AppHeader() {
     }
 }
 
-/** Asks for a donation: the app icon, a short note and one button. */
+/** Asks for a donation: a heart, a short note and one button. */
 @Composable
 private fun SupportCard(onDonate: () -> Unit) {
     val colors = LocalGeoColors.current
@@ -196,7 +196,7 @@ private fun SupportCard(onDonate: () -> Unit) {
                     .background(colors.primaryContainer),
                 contentAlignment = Alignment.Center
             ) {
-                AppIcon(resId = R.drawable.ic_fogwave_logo, size = 32.dp)
+                AppIcon(resId = R.drawable.ic_heart_fill, tint = colors.primary, size = 22.dp)
             }
             Column(modifier = Modifier.weight(1f)) {
                 RowTitle(stringResource(R.string.support_title))

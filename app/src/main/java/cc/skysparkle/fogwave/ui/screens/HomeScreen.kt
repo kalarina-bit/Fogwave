@@ -151,6 +151,8 @@ fun HomeScreen(
 
         Column(modifier = Modifier.fillMaxSize()) {
             TopBrandBar(
+                // The About tab already shows the logo in its header card
+                showLogo = uiState.selectedTab != AppTab.ABOUT,
                 showSearch = uiState.selectedTab == AppTab.RADIO,
                 isSearchOpen = isSearchOpen,
                 query = query,
